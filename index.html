@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meniu Ground Zero</title>
+    <style>
+        /* Setari de baza pentru a arata bine pe mobil */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a1a; /* Un fundal inchis, stil pub */
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header si Logo */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo-placeholder {
+            width: 150px;
+            height: 150px;
+            background-color: #333;
+            border: 2px dashed #666;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px auto;
+            font-weight: bold;
+            color: #888;
+        }
+
+        /* Comutator Limba */
+        .language-switcher {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .language-switcher a {
+            color: #fff;
+            text-decoration: none;
+            padding: 5px 15px;
+            border: 1px solid #fff;
+            border-radius: 20px;
+            margin: 0 5px;
+            font-size: 14px;
+        }
+        
+        .language-switcher a.active {
+            background-color: #fff;
+            color: #000;
+        }
+
+        /* Titluri sectiuni */
+        h1, h2 {
+            text-align: center;
+            color: #e6b800; /* Un galben/auriu specific berii */
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+
+        /* Lista produse */
+        .menu-category {
+            margin-bottom: 30px;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 10px;
+        }
+
+        .item-name {
+            font-weight: bold;
+            flex-grow: 1; /* Numele va ocupa spatiul din stanga */
+        }
+
+        .item-dots {
+            flex-grow: 2;
+            border-bottom: 1px dotted #555;
+            margin: 0 10px;
+            position: relative;
+            top: -4px; /* Ridica putin punctele */
+        }
+
+        .item-price {
+            font-weight: bold;
+            color: #e6b800;
+        }
+
+        .item-description {
+            font-size: 12px;
+            color: #aaa;
+            margin-top: -5px;
+            margin-bottom: 15px;
+        }
+
+        /* Butoane Pliante */
+        .flyer-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 40px 0;
+        }
+
+        .btn-flyer {
+            display: block;
+            text-align: center;
+            background-color: #333;
+            color: white;
+            text-decoration: none;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #555;
+            font-weight: bold;
+        }
+
+        /* Butonul de Review */
+        .review-section {
+            text-align: center;
+            margin: 50px 0 30px 0;
+            padding: 20px;
+            background-color: #222;
+            border-radius: 10px;
+        }
+
+        .btn-review {
+            display: inline-block;
+            background-color: #4285F4; /* Albastrul de la Google */
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 16px;
+            margin-top: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- HEADER & LOGO -->
+    <div class="header">
+        <div class="logo-placeholder">
+            [LOGO Ground Zero]
+        </div>
+        <h2>GROUND ZERO TAPROOM</h2>
+    </div>
+
+    <!-- COMUTATOR LIMBA -->
+    <div class="language-switcher">
+        <a href="#" class="active">RO</a>
+        <a href="en.html">EN</a>
+    </div>
+
+    <!-- SECTIUNE BAUTURI -->
+    <h1>BĂUTURI</h1>
+
+    <div class="menu-category">
+        <h2>BERE LA DRAFT</h2>
+        
+        <div class="menu-item">
+            <span class="item-name">URSUS PREMIUM</span>
+            <div class="item-dots"></div>
+            <span class="item-price">12 RON</span>
+        </div>
+        
+        <div class="menu-item">
+            <span class="item-name">URSUS IPA</span>
+            <div class="item-dots"></div>
+            <span class="item-price">18 RON</span>
+        </div>
+
+        <div class="menu-item">
+            <span class="item-name">URSUS WEISSBEER</span>
+            <div class="item-dots"></div>
+            <span class="item-price">18 RON</span>
+        </div>
+        <div class="item-description">(Bere de grâu nefiltrată)</div>
+    </div>
+
+    <div class="menu-category">
+        <h2>LONG DRINKS (240ML)</h2>
+        
+        <div class="menu-item">
+            <span class="item-name">CUBA LIBRE</span>
+            <div class="item-dots"></div>
+            <span class="item-price">19 RON</span>
+        </div>
+        
+        <div class="menu-item">
+            <span class="item-name">GIN TONIC</span>
+            <div class="item-dots"></div>
+            <span class="item-price">22 RON</span>
+        </div>
+        <div class="item-description">(Bombay Sapphire)</div>
+    </div>
+
+
+    <!-- SECTIUNE MANCARE -->
+    <h1>MÂNCARE</h1>
+    <div class="menu-category">
+        <h2>THE BEST WE CAN OFF-ER</h2>
+        
+        <div class="menu-item">
+            <span class="item-name">PORC TĂIAT (5 BUC)</span>
+            <div class="item-dots"></div>
+            <span class="item-price">15 RON</span>
+        </div>
+        <div class="item-description">Inlocuieste cu ingredientele reale</div>
+
+        <div class="menu-item">
+            <span class="item-name">BULANGA (5 BUC)</span>
+            <div class="item-dots"></div>
+            <span class="item-price">15 RON</span>
+        </div>
+    </div>
+
+
+    <!-- SECTIUNE PLIANTE -->
+    <h1>INFORMAȚII</h1>
+    <div class="flyer-buttons">
+        <a href="#" class="btn-flyer">📄 Vezi Pliant Ground Zero</a>
+        <a href="#" class="btn-flyer">📄 Vezi Pliant Deranj</a>
+    </div>
+
+
+    <!-- BUTON REVIEW GOOGLE -->
+    <div class="review-section">
+        <h3>Ți-a plăcut la noi?</h3>
+        <p>Părerea ta ne ajută să creștem!</p>
+        <a href="https://g.page/r/CQDxRjrBVDAmEAE/review" class="btn-review" target="_blank">
+            ⭐ Lasă-ne un review pe Google!
+        </a>
+    </div>
+
+</div>
+
+</body>
+</html>
