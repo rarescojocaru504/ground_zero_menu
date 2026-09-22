@@ -5,7 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meniu Ground Zero</title>
     <link rel="icon" type="image/png" href="assets/img/logo.png">
-    <link rel="stylesheet" href="css/styles.css">
+    
+    <style>
+        /* BASE DESIGN */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #1a1a1a; color: #ffffff; margin: 0; padding: 0; line-height: 1.6; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; transition: opacity 0.2s ease-in-out; }
+        .container.fade-out { opacity: 0; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .logo { width: 150px; height: auto; display: block; margin: 0 auto 15px auto; }
+        
+        /* LANG SWITCHER */
+        .language-switcher { text-align: center; margin-bottom: 20px; }
+        .language-switcher a { color: #fff; text-decoration: none; padding: 5px 15px; border: 1px solid #fff; border-radius: 20px; margin: 0 5px; font-size: 14px; }
+        .language-switcher a.active { background-color: #fff; color: #000; }
+        
+        /* MENU TABS */
+        .menu-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; margin-top: 20px; position: sticky; top: 0; background-color: #1a1a1a; padding: 15px 0; z-index: 100; }
+        .tab-btn { background-color: #333; color: #fff; border: 1px solid #555; padding: 10px 25px; border-radius: 25px; font-size: 16px; font-weight: bold; cursor: pointer; transition: all 0.3s ease; }
+        .tab-btn.active { background-color: #e6b800; color: #000; border-color: #e6b800; }
+        
+        /* SECTION TITLES & ITEMS */
+        h1, h2 { text-align: center; color: #e6b800; border-bottom: 1px solid #333; padding-bottom: 10px; margin-top: 40px; }
+        .menu-category { margin-bottom: 30px; }
+        .menu-item { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+        .item-name { font-weight: bold; flex-grow: 1; }
+        .item-dots { flex-grow: 2; border-bottom: 1px dotted #555; margin: 0 10px; position: relative; top: -4px; }
+        .item-price { font-weight: bold; color: #e6b800; }
+        .btn-details { background-color: #333; border: 1px solid #555; color: #e6b800; padding: 3px 10px; border-radius: 4px; font-size: 11px; font-weight: bold; cursor: pointer; margin-left: 10px; white-space: nowrap; }
+        .btn-details:active { transform: scale(0.95); transition: transform 0.1s; }
+
+        /* VISIBILITY ANIMATIONS */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .content-section { display: block; }
+        .content-section:not(.hidden) { animation: fadeIn 0.4s ease-out forwards; }
+        .content-section.hidden { display: none; }
+
+        /* BUTTONS & REVIEW CTA */
+        .flyer-buttons { display: flex; flex-direction: column; gap: 15px; margin: 40px 0; }
+        .btn-flyer { display: block; text-align: center; background-color: #333; color: white; text-decoration: none; padding: 15px; border-radius: 8px; border: 1px solid #555; font-weight: bold; }
+        .review-section { text-align: center; margin: 50px 0 30px 0; padding: 20px; background-color: #222; border-radius: 10px; }
+        .btn-review { display: inline-block; background-color: #4285F4; color: white; text-decoration: none; padding: 15px 30px; border-radius: 25px; font-weight: bold; font-size: 16px; margin-top: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
+        .btn-flyer:active, .btn-review:active { transform: scale(0.95); }
+
+        /* POPUP TOAST & MODAL */
+        .review-popup { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background-color: #333; border: 1px solid #555; color: #fff; padding: 8px 15px; border-radius: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.7); display: flex; align-items: center; gap: 10px; z-index: 1000; transition: opacity 0.5s ease, bottom 0.5s ease; font-size: 13px; white-space: nowrap; width: max-content; }
+        .review-popup.hidden-popup { opacity: 0; bottom: -50px; pointer-events: none; }
+        .review-popup p { margin: 0; }
+        .popup-link { color: #e6b800; text-decoration: none; font-weight: bold; }
+        .close-btn { background: none; border: none; color: #aaa; font-size: 20px; cursor: pointer; padding: 0; margin-right: 5px; line-height: 1; }
+        
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.85); display: flex; justify-content: center; align-items: center; z-index: 2000; opacity: 1; transition: opacity 0.3s ease; }
+        .modal.hidden-modal { opacity: 0; pointer-events: none; }
+        .modal-content { background-color: #1a1a1a; border: 1px solid #333; padding: 25px; border-radius: 12px; width: 85%; max-width: 400px; position: relative; text-align: center; transform: translateY(0); transition: transform 0.3s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .modal.hidden-modal .modal-content { transform: translateY(30px); }
+        .close-modal { position: absolute; top: 5px; right: 15px; font-size: 28px; cursor: pointer; color: #aaa; }
+        .modal-img { width: 100%; height: 160px; background-color: #333; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: #666; font-weight: bold; border: 1px dashed #555; }
+        #modal-title { color: #e6b800; margin-top: 0; margin-bottom: 10px; font-size: 18px; }
+        #modal-desc { font-size: 14px; color: #ccc; margin-bottom: 15px; }
+        #modal-details { font-size: 14px; font-weight: bold; color: #fff; background: #222; padding: 10px; border-radius: 6px; border: 1px solid #444; }
+    </style>
 </head>
 <body>
 
@@ -32,199 +90,47 @@
         <div class="menu-category">
             <h2 data-i18n="cat_gz_beers">GROUND ZERO BEERS</h2>
             
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_easy_rider">EASY RIDER</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_easy_rider">De la 15 RON</span>
-                <button class="btn-details" data-title-key="name_easy_rider" data-desc-key="desc_easy_rider" data-details-key="details_easy_rider" data-i18n="btn_details">Detalii</button>
-            </div>
-
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_morning_glory">MORNING GLORY</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_morning_glory">De la 16 RON</span>
-                <button class="btn-details" data-title-key="name_morning_glory" data-desc-key="desc_morning_glory" data-details-key="details_morning_glory" data-i18n="btn_details">Detalii</button>
-            </div>
-
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_split_pot">SPLIT THE POT</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_split_pot">De la 17 RON</span>
-                <button class="btn-details" data-title-key="name_split_pot" data-desc-key="desc_split_pot" data-details-key="details_split_pot" data-i18n="btn_details">Detalii</button>
-            </div>
-
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_imperial_fuck">IMPERIAL FUCK</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_imperial_fuck">De la 18 RON</span>
-                <button class="btn-details" data-title-key="name_imperial_fuck" data-desc-key="desc_imperial_fuck" data-details-key="details_imperial_fuck" data-i18n="btn_details">Detalii</button>
-            </div>
-
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_amber_guerre">AMBER GUERRE</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_amber_guerre">De la 15 RON</span>
-                <button class="btn-details" data-title-key="name_amber_guerre" data-desc-key="desc_amber_guerre" data-details-key="details_amber_guerre" data-i18n="btn_details">Detalii</button>
-            </div>
-
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_black_hole">BLACK HOLE</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_black_hole">De la 15 RON</span>
-                <button class="btn-details" data-title-key="name_black_hole" data-desc-key="desc_black_hole" data-details-key="details_black_hole" data-i18n="btn_details">Detalii</button>
-            </div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_easy_rider">EASY RIDER</span><div class="item-dots"></div><span class="item-price" data-i18n="price_easy_rider">De la 15 RON</span><button class="btn-details" data-title-key="name_easy_rider" data-desc-key="desc_easy_rider" data-details-key="details_easy_rider" data-i18n="btn_details">Detalii</button></div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_morning_glory">MORNING GLORY</span><div class="item-dots"></div><span class="item-price" data-i18n="price_morning_glory">De la 16 RON</span><button class="btn-details" data-title-key="name_morning_glory" data-desc-key="desc_morning_glory" data-details-key="details_morning_glory" data-i18n="btn_details">Detalii</button></div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_split_pot">SPLIT THE POT</span><div class="item-dots"></div><span class="item-price" data-i18n="price_split_pot">De la 17 RON</span><button class="btn-details" data-title-key="name_split_pot" data-desc-key="desc_split_pot" data-details-key="details_split_pot" data-i18n="btn_details">Detalii</button></div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_imperial_fuck">IMPERIAL FUCK</span><div class="item-dots"></div><span class="item-price" data-i18n="price_imperial_fuck">De la 18 RON</span><button class="btn-details" data-title-key="name_imperial_fuck" data-desc-key="desc_imperial_fuck" data-details-key="details_imperial_fuck" data-i18n="btn_details">Detalii</button></div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_amber_guerre">AMBER GUERRE</span><div class="item-dots"></div><span class="item-price" data-i18n="price_amber_guerre">De la 15 RON</span><button class="btn-details" data-title-key="name_amber_guerre" data-desc-key="desc_amber_guerre" data-details-key="details_amber_guerre" data-i18n="btn_details">Detalii</button></div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_black_hole">BLACK HOLE</span><div class="item-dots"></div><span class="item-price" data-i18n="price_black_hole">De la 15 RON</span><button class="btn-details" data-title-key="name_black_hole" data-desc-key="desc_black_hole" data-details-key="details_black_hole" data-i18n="btn_details">Detalii</button></div>
         </div>
 
         <div class="menu-category">
             <h2 data-i18n="cat_deranj_beers">DERANJ BEERS</h2>
             
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_deranj_blonda">DERANJ BLONDĂ</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_deranj_blonda">De la 15 RON</span>
-                <button class="btn-details" data-title-key="name_deranj_blonda" data-desc-key="desc_deranj_blonda" data-details-key="details_deranj_blonda" data-i18n="btn_details">Detalii</button>
-            </div>
-
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_deranj_oranj">DERANJ ORANJ</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_deranj_oranj">De la 15 RON</span>
-                <button class="btn-details" data-title-key="name_deranj_oranj" data-desc-key="desc_deranj_oranj" data-details-key="details_deranj_oranj" data-i18n="btn_details">Detalii</button>
-            </div>
-
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_deranj_ipa">DERANJ IPA</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_deranj_ipa">De la 16 RON</span>
-                <button class="btn-details" data-title-key="name_deranj_ipa" data-desc-key="desc_deranj_ipa" data-details-key="details_deranj_ipa" data-i18n="btn_details">Detalii</button>
-            </div>
-
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_deranj_doar">DOAR O BERE</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_deranj_doar">De la 15 RON</span>
-                <button class="btn-details" data-title-key="name_deranj_doar" data-desc-key="desc_deranj_doar" data-details-key="details_deranj_doar" data-i18n="btn_details">Detalii</button>
-            </div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_deranj_blonda">DERANJ BLONDĂ</span><div class="item-dots"></div><span class="item-price" data-i18n="price_deranj_blonda">De la 15 RON</span><button class="btn-details" data-title-key="name_deranj_blonda" data-desc-key="desc_deranj_blonda" data-details-key="details_deranj_blonda" data-i18n="btn_details">Detalii</button></div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_deranj_oranj">DERANJ ORANJ</span><div class="item-dots"></div><span class="item-price" data-i18n="price_deranj_oranj">De la 15 RON</span><button class="btn-details" data-title-key="name_deranj_oranj" data-desc-key="desc_deranj_oranj" data-details-key="details_deranj_oranj" data-i18n="btn_details">Detalii</button></div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_deranj_ipa">DERANJ IPA</span><div class="item-dots"></div><span class="item-price" data-i18n="price_deranj_ipa">De la 16 RON</span><button class="btn-details" data-title-key="name_deranj_ipa" data-desc-key="desc_deranj_ipa" data-details-key="details_deranj_ipa" data-i18n="btn_details">Detalii</button></div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_deranj_doar">DOAR O BERE</span><div class="item-dots"></div><span class="item-price" data-i18n="price_deranj_doar">De la 15 RON</span><button class="btn-details" data-title-key="name_deranj_doar" data-desc-key="desc_deranj_doar" data-details-key="details_deranj_doar" data-i18n="btn_details">Detalii</button></div>
         </div>
 
         <div class="menu-category">
             <h2 data-i18n="cat_special">SPECIAL BEERS & PACKS</h2>
 
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_x029">XPERIMENTALE 029</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_x029">De la 22 RON</span>
-                <button class="btn-details" data-title-key="name_x029" data-desc-key="desc_x029" data-details-key="details_x029" data-i18n="btn_details">Detalii</button>
-            </div>
-
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_x030">XPERIMENTALE 030</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_x030">De la 17 RON</span>
-                <button class="btn-details" data-title-key="name_x030" data-desc-key="desc_x030" data-details-key="details_x030" data-i18n="btn_details">Detalii</button>
-            </div>
-
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_pachet">PACHET DEGUSTARE</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_pachet">59 RON</span>
-                <button class="btn-details" data-title-key="name_pachet" data-desc-key="desc_pachet" data-details-key="details_pachet" data-i18n="btn_details">Detalii</button>
-            </div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_x029">XPERIMENTALE 029</span><div class="item-dots"></div><span class="item-price" data-i18n="price_x029">De la 22 RON</span><button class="btn-details" data-title-key="name_x029" data-desc-key="desc_x029" data-details-key="details_x029" data-i18n="btn_details">Detalii</button></div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_x030">XPERIMENTALE 030</span><div class="item-dots"></div><span class="item-price" data-i18n="price_x030">De la 17 RON</span><button class="btn-details" data-title-key="name_x030" data-desc-key="desc_x030" data-details-key="details_x030" data-i18n="btn_details">Detalii</button></div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_pachet">PACHET DEGUSTARE</span><div class="item-dots"></div><span class="item-price" data-i18n="price_pachet">59 RON</span><button class="btn-details" data-title-key="name_pachet" data-desc-key="desc_pachet" data-details-key="details_pachet" data-i18n="btn_details">Detalii</button></div>
         </div>
 
         <div class="menu-category">
             <h2 data-i18n="cat_guest">GUEST BEERS & EXTRA</h2>
 
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_tap1">SCHNEIDER TAP 1</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_tap1">22 RON</span>
-                <button class="btn-details" data-title-key="name_tap1" data-desc-key="desc_tap1" data-details-key="details_tap1" data-i18n="btn_details">Detalii</button>
-            </div>
-
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_tap3">SCHNEIDER TAP 3</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_tap3">25 RON</span>
-                <button class="btn-details" data-title-key="name_tap3" data-desc-key="desc_tap3" data-details-key="details_tap3" data-i18n="btn_details">Detalii</button>
-            </div>
-
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_tap5">SCHNEIDER TAP 5</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_tap5">27 RON</span>
-                <button class="btn-details" data-title-key="name_tap5" data-desc-key="desc_tap5" data-details-key="details_tap5" data-i18n="btn_details">Detalii</button>
-            </div>
-
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_sprit">ȘPRIȚ CAII DE LA LETEA</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_sprit">De la 19 RON</span>
-                <button class="btn-details" data-title-key="name_sprit" data-desc-key="desc_sprit" data-details-key="details_sprit" data-i18n="btn_details">Detalii</button>
-            </div>
-
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_socata">SOCATĂ</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_socata">21 RON</span>
-                <button class="btn-details" data-title-key="name_socata" data-desc-key="desc_socata" data-details-key="details_socata" data-i18n="btn_details">Detalii</button>
-            </div>
-
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_lemonaid_lime">LEMONAID LIME ECO</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_lemonaid_lime">23 RON</span>
-                <button class="btn-details" data-title-key="name_lemonaid_lime" data-desc-key="desc_lemonaid_lime" data-details-key="details_lemonaid_lime" data-i18n="btn_details">Detalii</button>
-            </div>
-
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_lemonaid_blood">LEMONAID BLOOD ORANGE ECO</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_lemonaid_blood">23 RON</span>
-                <button class="btn-details" data-title-key="name_lemonaid_blood" data-desc-key="desc_lemonaid_blood" data-details-key="details_lemonaid_blood" data-i18n="btn_details">Detalii</button>
-            </div>
-
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_lemonaid_passion">LEMONAID PASSION FRUIT ECO</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_lemonaid_passion">23 RON</span>
-                <button class="btn-details" data-title-key="name_lemonaid_passion" data-desc-key="desc_lemonaid_passion" data-details-key="details_lemonaid_passion" data-i18n="btn_details">Detalii</button>
-            </div>
-
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_lemonaid_ginger">LEMONAID GINGER ECO</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_lemonaid_ginger">23 RON</span>
-                <button class="btn-details" data-title-key="name_lemonaid_ginger" data-desc-key="desc_lemonaid_ginger" data-details-key="details_lemonaid_ginger" data-i18n="btn_details">Detalii</button>
-            </div>
-
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_apple">SUC MERE APPLE SPRITZER</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_apple">23 RON</span>
-                <button class="btn-details" data-title-key="name_apple" data-desc-key="desc_apple" data-details-key="details_apple" data-i18n="btn_details">Detalii</button>
-            </div>
-            
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_cidru_brut">CIDRU BRUT MERE/PERE</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_cidru_brut">22 RON</span>
-                <button class="btn-details" data-title-key="name_cidru_brut" data-desc-key="desc_cidru_brut" data-details-key="details_cidru_brut" data-i18n="btn_details">Detalii</button>
-            </div>
-
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_cidru_extra">CIDRU EXTRA BRUT MERE</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_cidru_extra">22 RON</span>
-                <button class="btn-details" data-title-key="name_cidru_extra" data-desc-key="desc_cidru_extra" data-details-key="details_cidru_extra" data-i18n="btn_details">Detalii</button>
-            </div>
-
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_fritz">FRITZ-KOLA</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_fritz">19 RON</span>
-                <button class="btn-details" data-title-key="name_fritz" data-desc-key="desc_fritz" data-details-key="details_fritz" data-i18n="btn_details">Detalii</button>
-            </div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_tap1">SCHNEIDER TAP 1</span><div class="item-dots"></div><span class="item-price" data-i18n="price_tap1">22 RON</span><button class="btn-details" data-title-key="name_tap1" data-desc-key="desc_tap1" data-details-key="details_tap1" data-i18n="btn_details">Detalii</button></div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_tap3">SCHNEIDER TAP 3</span><div class="item-dots"></div><span class="item-price" data-i18n="price_tap3">25 RON</span><button class="btn-details" data-title-key="name_tap3" data-desc-key="desc_tap3" data-details-key="details_tap3" data-i18n="btn_details">Detalii</button></div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_tap5">SCHNEIDER TAP 5</span><div class="item-dots"></div><span class="item-price" data-i18n="price_tap5">27 RON</span><button class="btn-details" data-title-key="name_tap5" data-desc-key="desc_tap5" data-details-key="details_tap5" data-i18n="btn_details">Detalii</button></div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_sprit">ȘPRIȚ CAII DE LA LETEA</span><div class="item-dots"></div><span class="item-price" data-i18n="price_sprit">De la 19 RON</span><button class="btn-details" data-title-key="name_sprit" data-desc-key="desc_sprit" data-details-key="details_sprit" data-i18n="btn_details">Detalii</button></div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_socata">SOCATĂ</span><div class="item-dots"></div><span class="item-price" data-i18n="price_socata">21 RON</span><button class="btn-details" data-title-key="name_socata" data-desc-key="desc_socata" data-details-key="details_socata" data-i18n="btn_details">Detalii</button></div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_lemonaid_lime">LEMONAID LIME ECO</span><div class="item-dots"></div><span class="item-price" data-i18n="price_lemonaid_lime">23 RON</span><button class="btn-details" data-title-key="name_lemonaid_lime" data-desc-key="desc_lemonaid_lime" data-details-key="details_lemonaid_lime" data-i18n="btn_details">Detalii</button></div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_lemonaid_blood">LEMONAID BLOOD ORANGE</span><div class="item-dots"></div><span class="item-price" data-i18n="price_lemonaid_blood">23 RON</span><button class="btn-details" data-title-key="name_lemonaid_blood" data-desc-key="desc_lemonaid_blood" data-details-key="details_lemonaid_blood" data-i18n="btn_details">Detalii</button></div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_lemonaid_passion">LEMONAID PASSION FRUIT</span><div class="item-dots"></div><span class="item-price" data-i18n="price_lemonaid_passion">23 RON</span><button class="btn-details" data-title-key="name_lemonaid_passion" data-desc-key="desc_lemonaid_passion" data-details-key="details_lemonaid_passion" data-i18n="btn_details">Detalii</button></div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_lemonaid_ginger">LEMONAID GINGER ECO</span><div class="item-dots"></div><span class="item-price" data-i18n="price_lemonaid_ginger">23 RON</span><button class="btn-details" data-title-key="name_lemonaid_ginger" data-desc-key="desc_lemonaid_ginger" data-details-key="details_lemonaid_ginger" data-i18n="btn_details">Detalii</button></div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_apple">SUC MERE SPRITZER</span><div class="item-dots"></div><span class="item-price" data-i18n="price_apple">23 RON</span><button class="btn-details" data-title-key="name_apple" data-desc-key="desc_apple" data-details-key="details_apple" data-i18n="btn_details">Detalii</button></div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_cidru_brut">CIDRU BRUT MERE/PERE</span><div class="item-dots"></div><span class="item-price" data-i18n="price_cidru_brut">22 RON</span><button class="btn-details" data-title-key="name_cidru_brut" data-desc-key="desc_cidru_brut" data-details-key="details_cidru_brut" data-i18n="btn_details">Detalii</button></div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_cidru_extra">CIDRU EXTRA BRUT MERE</span><div class="item-dots"></div><span class="item-price" data-i18n="price_cidru_extra">22 RON</span><button class="btn-details" data-title-key="name_cidru_extra" data-desc-key="desc_cidru_extra" data-details-key="details_cidru_extra" data-i18n="btn_details">Detalii</button></div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_fritz">FRITZ-KOLA</span><div class="item-dots"></div><span class="item-price" data-i18n="price_fritz">19 RON</span><button class="btn-details" data-title-key="name_fritz" data-desc-key="desc_fritz" data-details-key="details_fritz" data-i18n="btn_details">Detalii</button></div>
         </div>
     </div>
 
@@ -233,103 +139,20 @@
         <div class="menu-category">
             <h2 data-i18n="cat_food_main">MENIU DE BUNĂTĂȚI</h2>
             
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_carnat">CÂRNAT ÎMPUȘCAT</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_carnat">45 RON</span>
-                <button class="btn-details" data-title-key="name_carnat" data-desc-key="desc_carnat" data-details-key="details_carnat" data-i18n="btn_details">Detalii</button>
-            </div>
-
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_aripi_bbq">ARIPIOARE ÎMBUIBATE</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_aripi_bbq">37 RON</span>
-                <button class="btn-details" data-title-key="name_aripi_bbq" data-desc-key="desc_aripi_bbq" data-details-key="details_aripi_bbq" data-i18n="btn_details">Detalii</button>
-            </div>
-
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_aripi_picante">ARIPIOARE ÎNFLĂCĂRATE</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_aripi_picante">39 RON</span>
-                <button class="btn-details" data-title-key="name_aripi_picante" data-desc-key="desc_aripi_picante" data-details-key="details_aripi_picante" data-i18n="btn_details">Detalii</button>
-            </div>
-
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_coaste">COASTE ÎMPĂNATE</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_coaste">62 RON</span>
-                <button class="btn-details" data-title-key="name_coaste" data-desc-key="desc_coaste" data-details-key="details_coaste" data-i18n="btn_details">Detalii</button>
-            </div>
-
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_chiftea">CHIFTEA'N PÂINE</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_chiftea">47 RON</span>
-                <button class="btn-details" data-title-key="name_chiftea" data-desc-key="desc_chiftea" data-details-key="details_chiftea" data-i18n="btn_details">Detalii</button>
-            </div>
-
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_chiftea_tunata">CHIFTEA TUNATĂ</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_chiftea_tunata">49 RON</span>
-                <button class="btn-details" data-title-key="name_chiftea_tunata" data-desc-key="desc_chiftea_tunata" data-details-key="details_chiftea_tunata" data-i18n="btn_details">Detalii</button>
-            </div>
-
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_chiftea_dubla">CHIFTEA DUBLĂ</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_chiftea_dubla">68 RON</span>
-                <button class="btn-details" data-title-key="name_chiftea_dubla" data-desc-key="desc_chiftea_dubla" data-details-key="details_chiftea_dubla" data-i18n="btn_details">Detalii</button>
-            </div>
-
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_chiftea_vara">CHIFTEA DE VARĂ</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_chiftea_vara">50 RON</span>
-                <button class="btn-details" data-title-key="name_chiftea_vara" data-desc-key="desc_chiftea_vara" data-details-key="details_chiftea_vara" data-i18n="btn_details">Detalii</button>
-            </div>
-
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_mamaliga">MĂMĂLIGĂ PRESATĂ</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_mamaliga">65 RON</span>
-                <button class="btn-details" data-title-key="name_mamaliga" data-desc-key="desc_mamaliga" data-details-key="details_mamaliga" data-i18n="btn_details">Detalii</button>
-            </div>
-
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_curry">CURRYWURST</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_curry">40 RON</span>
-                <button class="btn-details" data-title-key="name_curry" data-desc-key="desc_curry" data-details-key="details_curry" data-i18n="btn_details">Detalii</button>
-            </div>
-
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_cartofi_cor">CARTOFI COREENI</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_cartofi_cor">32 RON</span>
-                <button class="btn-details" data-title-key="name_cartofi_cor" data-desc-key="desc_cartofi_cor" data-details-key="details_cartofi_cor" data-i18n="btn_details">Detalii</button>
-            </div>
-
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_cartofi">CARTOFI PRĂJIȚI</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_cartofi">21 RON</span>
-                <button class="btn-details" data-title-key="name_cartofi" data-desc-key="desc_cartofi" data-details-key="details_cartofi" data-i18n="btn_details">Detalii</button>
-            </div>
-
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_cartofi_branza">CARTOFI BRÂNZĂ</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_cartofi_branza">23 RON</span>
-                <button class="btn-details" data-title-key="name_cartofi_branza" data-desc-key="desc_cartofi_branza" data-details-key="details_cartofi_branza" data-i18n="btn_details">Detalii</button>
-            </div>
-
-            <div class="menu-item">
-                <span class="item-name" data-i18n="name_sos">EXTRA SOS</span>
-                <div class="item-dots"></div>
-                <span class="item-price" data-i18n="price_sos">5 RON</span>
-                <button class="btn-details" data-title-key="name_sos" data-desc-key="desc_sos" data-details-key="details_sos" data-i18n="btn_details">Detalii</button>
-            </div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_carnat">CÂRNAT ÎMPUȘCAT</span><div class="item-dots"></div><span class="item-price" data-i18n="price_carnat">45 RON</span><button class="btn-details" data-title-key="name_carnat" data-desc-key="desc_carnat" data-details-key="details_carnat" data-i18n="btn_details">Detalii</button></div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_aripi_bbq">ARIPIOARE ÎMBUIBATE</span><div class="item-dots"></div><span class="item-price" data-i18n="price_aripi_bbq">37 RON</span><button class="btn-details" data-title-key="name_aripi_bbq" data-desc-key="desc_aripi_bbq" data-details-key="details_aripi_bbq" data-i18n="btn_details">Detalii</button></div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_aripi_picante">ARIPIOARE ÎNFLĂCĂRATE</span><div class="item-dots"></div><span class="item-price" data-i18n="price_aripi_picante">39 RON</span><button class="btn-details" data-title-key="name_aripi_picante" data-desc-key="desc_aripi_picante" data-details-key="details_aripi_picante" data-i18n="btn_details">Detalii</button></div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_coaste">COASTE ÎMPĂNATE</span><div class="item-dots"></div><span class="item-price" data-i18n="price_coaste">62 RON</span><button class="btn-details" data-title-key="name_coaste" data-desc-key="desc_coaste" data-details-key="details_coaste" data-i18n="btn_details">Detalii</button></div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_chiftea">CHIFTEA'N PÂINE</span><div class="item-dots"></div><span class="item-price" data-i18n="price_chiftea">47 RON</span><button class="btn-details" data-title-key="name_chiftea" data-desc-key="desc_chiftea" data-details-key="details_chiftea" data-i18n="btn_details">Detalii</button></div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_chiftea_tunata">CHIFTEA TUNATĂ</span><div class="item-dots"></div><span class="item-price" data-i18n="price_chiftea_tunata">49 RON</span><button class="btn-details" data-title-key="name_chiftea_tunata" data-desc-key="desc_chiftea_tunata" data-details-key="details_chiftea_tunata" data-i18n="btn_details">Detalii</button></div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_chiftea_dubla">CHIFTEA DUBLĂ</span><div class="item-dots"></div><span class="item-price" data-i18n="price_chiftea_dubla">68 RON</span><button class="btn-details" data-title-key="name_chiftea_dubla" data-desc-key="desc_chiftea_dubla" data-details-key="details_chiftea_dubla" data-i18n="btn_details">Detalii</button></div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_chiftea_vara">CHIFTEA DE VARĂ</span><div class="item-dots"></div><span class="item-price" data-i18n="price_chiftea_vara">50 RON</span><button class="btn-details" data-title-key="name_chiftea_vara" data-desc-key="desc_chiftea_vara" data-details-key="details_chiftea_vara" data-i18n="btn_details">Detalii</button></div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_mamaliga">MĂMĂLIGĂ PRESATĂ</span><div class="item-dots"></div><span class="item-price" data-i18n="price_mamaliga">65 RON</span><button class="btn-details" data-title-key="name_mamaliga" data-desc-key="desc_mamaliga" data-details-key="details_mamaliga" data-i18n="btn_details">Detalii</button></div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_curry">CURRYWURST</span><div class="item-dots"></div><span class="item-price" data-i18n="price_curry">40 RON</span><button class="btn-details" data-title-key="name_curry" data-desc-key="desc_curry" data-details-key="details_curry" data-i18n="btn_details">Detalii</button></div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_cartofi_cor">CARTOFI COREENI</span><div class="item-dots"></div><span class="item-price" data-i18n="price_cartofi_cor">32 RON</span><button class="btn-details" data-title-key="name_cartofi_cor" data-desc-key="desc_cartofi_cor" data-details-key="details_cartofi_cor" data-i18n="btn_details">Detalii</button></div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_cartofi">CARTOFI PRĂJIȚI</span><div class="item-dots"></div><span class="item-price" data-i18n="price_cartofi">21 RON</span><button class="btn-details" data-title-key="name_cartofi" data-desc-key="desc_cartofi" data-details-key="details_cartofi" data-i18n="btn_details">Detalii</button></div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_cartofi_branza">CARTOFI BRÂNZĂ</span><div class="item-dots"></div><span class="item-price" data-i18n="price_cartofi_branza">23 RON</span><button class="btn-details" data-title-key="name_cartofi_branza" data-desc-key="desc_cartofi_branza" data-details-key="details_cartofi_branza" data-i18n="btn_details">Detalii</button></div>
+            <div class="menu-item"><span class="item-name" data-i18n="name_sos">EXTRA SOS</span><div class="item-dots"></div><span class="item-price" data-i18n="price_sos">5 RON</span><button class="btn-details" data-title-key="name_sos" data-desc-key="desc_sos" data-details-key="details_sos" data-i18n="btn_details">Detalii</button></div>
         </div>
     </div>
 
@@ -365,6 +188,7 @@
 
 </div>
 
+<!-- INCARCAM JS -->
 <script src="js/lang.js"></script>
 <script src="js/script.js"></script>
 </body>
