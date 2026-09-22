@@ -1,7 +1,7 @@
 const translations = {
     ro: {
-        tab_drinks: "BEERS",
-        tab_food: "FOOD",
+        tab_drinks: "BĂUTURI",
+        tab_food: "MÂNCARE",
         
         cat_gz_beers: "GROUND ZERO BEERS",
         cat_deranj_beers: "DERANJ BEERS",
@@ -12,7 +12,6 @@ const translations = {
         stat_clarity: "CLARITATE",
         stat_bitterness: "AMĂREALĂ",
 
-        // Ground Zero Beers
         desc_easy_rider: "Bere cu o concentrație mai scăzută de alcool pentru a putea fi băută la o masă de prânz sau, în contextul în care vrei să bei mai multe, fară să te ia cu amețeală.",
         desc_morning_glory: "Exotică, cu note de mango, grapefruit și tușe de citrice. Puternic amară, evidențiind perfect caracterul hameiului.",
         desc_split_pot: "O bere cu tărie crescută, hazy, miros de iarbă, bine aromată, cu mult hamei și note de fructe tropicale: ananas, mango, piersică.",
@@ -20,18 +19,15 @@ const translations = {
         desc_amber_guerre: "O bere roșie cu arome florale complexe și note de fructe negre, stafide, dar cu o amăreală fermă. Creată special pentru pairing-ul cu burger și carne la grătar.",
         desc_black_hole: "Bere brună cu un corp mediu și concentrație mică de alcool. Gust ușor dulceag cu arome de malțuri prăjite, ciocolată neagră și tușe de cafea.",
 
-        // Deranj Beers
         desc_deranj_blonda: "Stil de bere tradițional nemțesc, fermentată și maturată natural până atinge gustul specific, lejer și răcoritor.",
         desc_deranj_oranj: "Bază de malt nemțesc din orz și grâu, peste care adăugăm hamei din Washington. Berea trece printr-un proces natural de fermentare și maturare la finalul căruia se adaugă extract de portocale 100% natural.",
         desc_deranj_ipa: "O bere de tip india Pale Ale brasată cu malțuri, hamei și drojdie de cea mai înaltă calitate, pentru un echilibru perfect.",
         desc_deranj_doar: "O bere care oferă echilibrul perfect dintre malț și hamei și care, printr-o maturare îndelungată, capătă arome intense și o savoare rafinată.",
 
-        // Special Beers
         desc_x029: "Pentru a crea un profil de malt care să echilibreze dulceaţa și amărăciunea am adăugat boabe de cacao, cafea de specialitate, vanilie de Madagascar. Note de ciocolată, sherry și fructe negre.",
         desc_x030: "Pils german nefiltrat, cu malt din regiunea Bamber Germania, hamei Mandarina Bavaria - arome citrice, amăreală fină, gust super răcoritor.",
         name_pachet: "PACHET DEGUSTARE", desc_pachet: "Easy Rider, Morning Glory, Split the Pot, Imperial Fuck, Black Hole",
 
-        // Guest Drinks
         name_sprit: "ȘPRIŢ CAII DE LA LETEA",
         name_socata: "SOCATĂ ARTIZANALĂ",
         name_lemonaid_blood: "LEMONAID BLOOD ORANGE",
@@ -40,7 +36,6 @@ const translations = {
         name_cidru_brut: "CIDRU BRUT MERE/PERE",
         name_cidru_extra: "CIDRU EXTRA BRUT MERE",
 
-        // Food
         name_carnat: "CÂRNAT ÎMPUŞCAT", desc_carnat: "Cârnat kasekrainer de porc cu branza, castravete murat, pâine.<br><i>Alergeni: gluten, muştar, lactate</i><br><b>Savurează cu:</b> Helles, Kolsch - Deranj Blonda, Deranj Doar O Bere",
         name_aripi_bbq: "ARIPIOARE ÎMBUIBATE", desc_aripi_bbq: "Aripioare glazurate cu sos BBQ și presărate cu ceapă verde.<br><i>Alergeni: muştar, susan, soia</i><br><b>Savurează cu:</b> Kolsch - Deranj Blondă",
         name_aripi_picante: "ARIPIOARE ÎNFLĂCĂRATE", desc_aripi_picante: "Aripioare glazurate cu sos Gochujang și presărate cu ceapă verde.<br><i>Alergeni: mustar, susan, soia</i><br><b>Savurează cu:</b> NEIPA - Split the Pot, Deranj IPA",
@@ -62,19 +57,18 @@ const translations = {
         link_flyer_deranj: "assets/pdf/deranj_pliant_ro.pdf"
     },
     en: {
-        tab_drinks: "BEERS",
+        tab_drinks: "DRINKS",
         tab_food: "FOOD",
         
         cat_gz_beers: "GROUND ZERO BEERS",
         cat_deranj_beers: "DERANJ BEERS",
-        cat_special: "SPECIAL BEERS & PACKS",
+        cat_special: "SPECIAL BEERS",
         cat_guest: "GUEST BEERS & EXTRA",
         cat_food_main: "FOOD MENU",
         stat_hops: "HOPS",
         stat_clarity: "CLARITY",
         stat_bitterness: "BITTERNESS",
 
-        // Ground Zero Beers
         desc_easy_rider: "A less alcoholic beer to be consumed during lunch or when you want to drink more without getting dizzy.",
         desc_morning_glory: "Exotic, with notes of mango, grapefruit and hints of citrus. Strongly bitter, perfectly highlighting the hop character.",
         desc_split_pot: "A stronger, hazy, grassy beer, well flavored, with lots of hops and tropical fruits hints (pineapple, mango, peach).",
@@ -82,18 +76,18 @@ const translations = {
         desc_amber_guerre: "A red beer with a complex floral flavor and hints of black fruits, raisins, but with a sharp bitterness. Perfect for burger & grill pairing.",
         desc_black_hole: "A soft body and low alcoholic concentration dark beer, slightly sweet with roasted malt, chocolate, coffee hints and a long tasty finish.",
 
-        // Deranj Beers
         desc_deranj_blonda: "A traditional German beer style, naturally brewed until reaches its specific light and refreshing taste.",
         desc_deranj_oranj: "German malt from barley and wheat topped with a bit of hops and a drop of 100% natural orange extract.",
         desc_deranj_ipa: "Top quality malts, hops and yeast for a perfect balance.",
         desc_deranj_doar: "A beer that offers the perfect balance between malt and hops and, through long maturation, develops intense aromas and a refined flavor.",
 
-        // Special Beers
         desc_x029: "To create a malt profile that balances both the sweetness and bitterness of this classic style, we added cocoa beans, specialty coffee, and Madagascar vanilla. Notes of chocolate, sherry, cocoa beans, and dark fruits.",
         desc_x030: "Unfiltered German Pilsner made with malt from the Bamberg region of Germany and Mandarina Bavaria hops-featuring citrus aromas, a refined bitterness, and a super-refreshing taste.",
         name_pachet: "BEER FLIGHT", desc_pachet: "Easy Rider, Morning Glory, Split the Pot, Imperial Fuck, Black Hole",
 
-        // Guest Drinks
+        name_tap1: "SCHNEIDER WEISSE TAP 1 (4.9%)",
+        name_tap3: "SCHNEIDER WEISSE TAP 3 (<0.5%)",
+        name_tap5: "SCHNEIDER WEISSE TAP 5 (8.2%)",
         name_sprit: "HOMEMADE CARBONATED WINE",
         name_socata: "ELDERFLOWER DRINK",
         name_lemonaid_blood: "LEMONAID BLOOD ORANGE",
@@ -102,7 +96,6 @@ const translations = {
         name_cidru_brut: "CIDER APPLE/PEAR",
         name_cidru_extra: "CIDER EXTRA APPLE",
 
-        // Food
         name_carnat: "KASEKRAINER SAUSAGE", desc_carnat: "Pork Kasekrainer with cheese, mustard, pickles, bread.<br><i>Allergens: dairy, gluten, mustard</i><br><b>Pair with:</b> Helles, Kolsch - Deranj Blonda, Deranj Doar O Bere",
         name_aripi_bbq: "BBQ CHICKEN WINGS", desc_aripi_bbq: "BBQ glazed chicken wings sprinkled with green onions.<br><i>Allergens: mustard, sesame, soya</i><br><b>Pair with:</b> Lager, Kolsch - Deranj Blondă",
         name_aripi_picante: "HOT CHICKEN WINGS", desc_aripi_picante: "Hot sauce glazed chicken wings sprinkled with green onions.<br><i>Allergens: mustard, sesame, soya</i><br><b>Pair with:</b> NEIPA - Split the Pot, Deranj IPA",

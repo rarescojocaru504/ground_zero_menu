@@ -58,7 +58,6 @@ btnFood.addEventListener('click', () => {
     sectionDrinks.classList.add('hidden');
 });
 
-// Apeleaza setLanguage imediat la incarcarea paginii pentru a traduce inclusiv butoanele Meniu
 document.addEventListener('DOMContentLoaded', () => {
     setLanguage('ro');
 });

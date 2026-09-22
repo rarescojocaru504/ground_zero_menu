@@ -9,7 +9,7 @@
     <style>
         /* BASE DESIGN - PDF Style */
         body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #111; color: #fff; margin: 0; padding: 0; line-height: 1.4; }
-        .container { max-width: 600px; margin: 0 auto; padding: 15px; transition: opacity 0.2s ease-in-out; }
+        .container { max-width: 600px; margin: 0 auto; padding: 15px; transition: opacity 0.2s ease-in-out; position: relative; }
         .container.fade-out { opacity: 0; }
         
         /* TOP BAR (Review + Lang) */
@@ -41,10 +41,10 @@
         .beer-title { font-size: 19px; font-weight: 900; color: #fff; margin: 0; line-height: 1.1; text-transform: uppercase; }
         .beer-subtitle { font-size: 11px; color: #aaa; text-transform: uppercase; margin-top: 4px; letter-spacing: 0.5px; }
         
-        /* PRICE MATRIX */
+        /* PRICE MATRIX - Galben fosforescent Ground Zero (#e6b800 / #f3ce00) */
         .beer-price-matrix { display: flex; gap: 12px; text-align: center; }
         .price-col { display: flex; flex-direction: column; }
-        .p-val { font-size: 16px; font-weight: bold; color: #fff; line-height: 1; }
+        .p-val { font-size: 17px; font-weight: bold; color: #f3ce00; line-height: 1; }
         .p-vol { font-size: 10px; color: #888; margin-top: 4px; }
         
         /* DESC & BARS */
@@ -59,7 +59,7 @@
         .food-card { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #222; }
         .food-header { display: flex; justify-content: space-between; align-items: baseline; }
         .food-title { font-size: 18px; font-weight: bold; color: #fff; margin: 0; text-transform: uppercase; }
-        .food-price { font-size: 18px; font-weight: bold; color: #fff; }
+        .food-price { font-size: 18px; font-weight: bold; color: #f3ce00; }
         .food-weight { font-size: 12px; color: #888; display: block; margin-top: 2px; margin-bottom: 10px; }
         .food-desc { font-size: 13px; color: #ccc; line-height: 1.5; }
 
@@ -94,8 +94,8 @@
     </div>
 
     <div class="menu-tabs">
-        <button id="btn-drinks" class="tab-btn active" data-i18n="tab_drinks">BEERS</button>
-        <button id="btn-food" class="tab-btn" data-i18n="tab_food">FOOD</button>
+        <button id="btn-drinks" class="tab-btn active" data-i18n="tab_drinks">BĂUTURI</button>
+        <button id="btn-food" class="tab-btn" data-i18n="tab_food">MÂNCARE</button>
     </div>
 
     <!-- DRINKS SECTION -->
@@ -121,8 +121,8 @@
                 </div>
                 <div class="beer-desc" data-i18n="desc_easy_rider">Bere cu o concentrație mai scăzută...</div>
                 <div class="beer-stats">
-                    <div class="stat-row"><span data-i18n="stat_hops">HAMEI</span><div class="stat-bar"><div style="width: 40%"></div></div></div>
-                    <div class="stat-row"><span data-i18n="stat_clarity">CLARITATE</span><div class="stat-bar"><div style="width: 80%"></div></div></div>
+                    <div class="stat-row"><span data-i18n="stat_hops">HAMEI</span><div class="stat-bar"><div style="width: 50%"></div></div></div>
+                    <div class="stat-row"><span data-i18n="stat_clarity">CLARITATE</span><div class="stat-bar"><div style="width: 50%"></div></div></div>
                     <div class="stat-row"><span data-i18n="stat_bitterness">AMĂREALĂ</span><div class="stat-bar"><div style="width: 40%"></div></div></div>
                 </div>
             </div>
@@ -146,8 +146,8 @@
                 </div>
                 <div class="beer-desc" data-i18n="desc_morning_glory">Exotică, cu note de mango...</div>
                 <div class="beer-stats">
-                    <div class="stat-row"><span data-i18n="stat_hops">HAMEI</span><div class="stat-bar"><div style="width: 85%"></div></div></div>
-                    <div class="stat-row"><span data-i18n="stat_clarity">CLARITATE</span><div class="stat-bar"><div style="width: 75%"></div></div></div>
+                    <div class="stat-row"><span data-i18n="stat_hops">HAMEI</span><div class="stat-bar"><div style="width: 70%"></div></div></div>
+                    <div class="stat-row"><span data-i18n="stat_clarity">CLARITATE</span><div class="stat-bar"><div style="width: 60%"></div></div></div>
                     <div class="stat-row"><span data-i18n="stat_bitterness">AMĂREALĂ</span><div class="stat-bar"><div style="width: 80%"></div></div></div>
                 </div>
             </div>
@@ -172,8 +172,8 @@
                 <div class="beer-desc" data-i18n="desc_split_pot">O bere cu tărie crescută...</div>
                 <div class="beer-stats">
                     <div class="stat-row"><span data-i18n="stat_hops">HAMEI</span><div class="stat-bar"><div style="width: 90%"></div></div></div>
-                    <div class="stat-row"><span data-i18n="stat_clarity">CLARITATE</span><div class="stat-bar"><div style="width: 15%"></div></div></div>
-                    <div class="stat-row"><span data-i18n="stat_bitterness">AMĂREALĂ</span><div class="stat-bar"><div style="width: 35%"></div></div></div>
+                    <div class="stat-row"><span data-i18n="stat_clarity">CLARITATE</span><div class="stat-bar"><div style="width: 20%"></div></div></div>
+                    <div class="stat-row"><span data-i18n="stat_bitterness">AMĂREALĂ</span><div class="stat-bar"><div style="width: 50%"></div></div></div>
                 </div>
             </div>
         </div>
@@ -196,9 +196,9 @@
                 </div>
                 <div class="beer-desc" data-i18n="desc_imperial_fuck">O bere puternică, cu gust bogat...</div>
                 <div class="beer-stats">
-                    <div class="stat-row"><span data-i18n="stat_hops">HAMEI</span><div class="stat-bar"><div style="width: 95%"></div></div></div>
-                    <div class="stat-row"><span data-i18n="stat_clarity">CLARITATE</span><div class="stat-bar"><div style="width: 85%"></div></div></div>
-                    <div class="stat-row"><span data-i18n="stat_bitterness">AMĂREALĂ</span><div class="stat-bar"><div style="width: 90%"></div></div></div>
+                    <div class="stat-row"><span data-i18n="stat_hops">HAMEI</span><div class="stat-bar"><div style="width: 90%"></div></div></div>
+                    <div class="stat-row"><span data-i18n="stat_clarity">CLARITATE</span><div class="stat-bar"><div style="width: 70%"></div></div></div>
+                    <div class="stat-row"><span data-i18n="stat_bitterness">AMĂREALĂ</span><div class="stat-bar"><div style="width: 95%"></div></div></div>
                 </div>
             </div>
         </div>
@@ -222,8 +222,8 @@
                 <div class="beer-desc" data-i18n="desc_amber_guerre">O bere roșie cu arome florale...</div>
                 <div class="beer-stats">
                     <div class="stat-row"><span data-i18n="stat_hops">HAMEI</span><div class="stat-bar"><div style="width: 60%"></div></div></div>
-                    <div class="stat-row"><span data-i18n="stat_clarity">CLARITATE</span><div class="stat-bar"><div style="width: 90%"></div></div></div>
-                    <div class="stat-row"><span data-i18n="stat_bitterness">AMĂREALĂ</span><div class="stat-bar"><div style="width: 70%"></div></div></div>
+                    <div class="stat-row"><span data-i18n="stat_clarity">CLARITATE</span><div class="stat-bar"><div style="width: 80%"></div></div></div>
+                    <div class="stat-row"><span data-i18n="stat_bitterness">AMĂREALĂ</span><div class="stat-bar"><div style="width: 65%"></div></div></div>
                 </div>
             </div>
         </div>
@@ -246,9 +246,9 @@
                 </div>
                 <div class="beer-desc" data-i18n="desc_black_hole">Bere brună cu un corp mediu...</div>
                 <div class="beer-stats">
-                    <div class="stat-row"><span data-i18n="stat_hops">HAMEI</span><div class="stat-bar"><div style="width: 50%"></div></div></div>
-                    <div class="stat-row"><span data-i18n="stat_clarity">CLARITATE</span><div class="stat-bar"><div style="width: 10%"></div></div></div>
-                    <div class="stat-row"><span data-i18n="stat_bitterness">AMĂREALĂ</span><div class="stat-bar"><div style="width: 60%"></div></div></div>
+                    <div class="stat-row"><span data-i18n="stat_hops">HAMEI</span><div class="stat-bar"><div style="width: 40%"></div></div></div>
+                    <div class="stat-row"><span data-i18n="stat_clarity">CLARITATE</span><div class="stat-bar"><div style="width: 15%"></div></div></div>
+                    <div class="stat-row"><span data-i18n="stat_bitterness">AMĂREALĂ</span><div class="stat-bar"><div style="width: 50%"></div></div></div>
                 </div>
             </div>
         </div>
@@ -374,7 +374,6 @@
         </div>
 
         <h2 data-i18n="cat_guest">GUEST BEERS & EXTRA</h2>
-        <!-- Extra drinks as simple cards -->
         <div class="food-card"><div class="food-header"><h3 class="food-title">SCHNEIDER TAP 1</h3><span class="food-price">22 RON</span></div><span class="food-weight">0.5L - Helle Weisse 4.9%</span></div>
         <div class="food-card"><div class="food-header"><h3 class="food-title">SCHNEIDER TAP 3</h3><span class="food-price">25 RON</span></div><span class="food-weight">0.5L - Alkoholfrei <0.5%</span></div>
         <div class="food-card"><div class="food-header"><h3 class="food-title">SCHNEIDER TAP 5</h3><span class="food-price">27 RON</span></div><span class="food-weight">0.5L - Hopfenweisse 8.2%</span></div>
@@ -398,7 +397,7 @@
         <div class="food-card">
             <div class="food-header"><h3 class="food-title" data-i18n="name_carnat">CÂRNAT ÎMPUȘCAT</h3><span class="food-price">45 RON</span></div>
             <span class="food-weight">~320 g</span>
-            <div class="food-desc" data-i18n="desc_carnat">Cârnat kasekrainer de porc cu branza...</div>
+            <div class="food-desc" data-i18n="desc_carnat">Cârnat kasekrainer de porc...</div>
         </div>
 
         <div class="food-card">
@@ -482,13 +481,12 @@
 
     <!-- FLYER BUTTONS -->
     <div class="flyer-buttons">
-        <a href="assets/pdf/ground_zero_pliant_ro.pdf" data-i18n="btn_flyer_gz" data-i18n-href="link_flyer_gz" target="_blank" class="btn-flyer">DESPRE GAMA GROUND ZERO</a>
-        <a href="assets/pdf/deranj_pliant_ro.pdf" data-i18n="btn_flyer_deranj" data-i18n-href="link_flyer_deranj" target="_blank" class="btn-flyer">DESPRE GAMA DERANJ</a>
+        <a href="assets/pdf/ground_zero_pliant_ro.pdf" data-i18n="btn_flyer_gz" data-i18n-href="link_flyer_gz" target="_blank" class="btn-flyer" style="padding: 22px; font-size: 16px;">DESPRE GAMA GROUND ZERO</a>
+        <a href="assets/pdf/deranj_pliant_ro.pdf" data-i18n="btn_flyer_deranj" data-i18n-href="link_flyer_deranj" target="_blank" class="btn-flyer" style="padding: 22px; font-size: 16px;">DESPRE GAMA DERANJ</a>
     </div>
 
 </div>
 
-<!-- INCARCAM JS -->
 <script src="js/lang.js"></script>
 <script src="js/script.js"></script>
 </body>
