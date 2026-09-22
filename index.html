@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meniu Ground Zero</title>
-    <!-- main stylesheet -->
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -19,15 +18,15 @@
 
     <!-- lang toggle -->
     <div class="language-switcher">
-        <a href="#" class="active">RO</a>
-        <a href="en.html">EN</a>
+        <a href="#" class="active" data-lang="ro">RO</a>
+        <a href="#" data-lang="en">EN</a>
     </div>
 
     <!-- drinks section -->
-    <h1>BĂUTURI</h1>
+    <h1 data-i18n="title_drinks">BĂUTURI</h1>
 
     <div class="menu-category">
-        <h2>BERE LA DRAFT</h2>
+        <h2 data-i18n="cat_draft">BERE LA DRAFT</h2>
         
         <div class="menu-item">
             <span class="item-name">URSUS PREMIUM</span>
@@ -46,7 +45,7 @@
             <div class="item-dots"></div>
             <span class="item-price">18 RON</span>
         </div>
-        <div class="item-description">(Bere de grâu nefiltrată)</div>
+        <div class="item-description" data-i18n="desc_weiss">(Bere de grâu nefiltrată)</div>
     </div>
 
     <div class="menu-category">
@@ -67,12 +66,12 @@
     </div>
 
     <!-- food section -->
-    <h1>MÂNCARE</h1>
+    <h1 data-i18n="title_food">MÂNCARE</h1>
     <div class="menu-category">
         <h2>THE BEST WE CAN OFF-ER</h2>
         
         <div class="menu-item">
-            <span class="item-name">PORC TĂIAT (5 BUC)</span>
+            <span class="item-name" data-i18n="item_pork">PORC TĂIAT (5 BUC)</span>
             <div class="item-dots"></div>
             <span class="item-price">15 RON</span>
         </div>
@@ -85,17 +84,17 @@
     </div>
 
     <!-- flyers -->
-    <h1>INFORMAȚII</h1>
+    <h1 data-i18n="title_info">INFORMAȚII</h1>
     <div class="flyer-buttons">
-        <a href="assets/pdf/pliant_ground_zero.pdf" target="_blank" class="btn-flyer">📄 Vezi Pliant Ground Zero</a>
-        <a href="assets/pdf/pliant_deranj.pdf" target="_blank" class="btn-flyer">📄 Vezi Pliant Deranj</a>
+        <a href="assets/pdf/ground_zero_pliant_ro.pdf" data-i18n="btn_flyer_gz" data-i18n-href="link_flyer_gz" target="_blank" class="btn-flyer">📄 Vezi Pliant Ground Zero</a>
+        <a href="assets/pdf/deranj_pliant_ro.pdf" data-i18n="btn_flyer_deranj" data-i18n-href="link_flyer_deranj" target="_blank" class="btn-flyer">📄 Vezi Pliant Deranj</a>
     </div>
 
     <!-- google review cta -->
     <div class="review-section">
-        <h3>Ți-a plăcut la noi?</h3>
-        <p>Părerea ta ne ajută să creștem!</p>
-        <a href="https://g.page/r/CQDxRjrBVDAmEAE/review" class="btn-review" target="_blank">
+        <h3 data-i18n="review_title">Ți-a plăcut la noi?</h3>
+        <p data-i18n="review_desc">Părerea ta ne ajută să creștem!</p>
+        <a href="https://g.page/r/CQDxRjrBVDAmEAE/review" data-i18n="review_btn" class="btn-review" target="_blank">
             ⭐ Lasă-ne un review pe Google!
         </a>
     </div>
