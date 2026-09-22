@@ -33,21 +33,6 @@ function setLanguage(lang) {
     }, 200);
 }
 
-    document.querySelectorAll('[data-i18n-href]').forEach(el => {
-        const key = el.getAttribute('data-i18n-href');
-        if (translations[lang][key]) {
-            el.setAttribute('href', translations[lang][key]);
-        }
-    });
-
-    document.querySelectorAll('.language-switcher a').forEach(btn => {
-        btn.classList.remove('active');
-        if (btn.getAttribute('data-lang') === lang) {
-            btn.classList.add('active');
-        }
-    });
-}
-
 document.querySelectorAll('.language-switcher a').forEach(btn => {
     btn.addEventListener('click', (e) => {
         e.preventDefault();
