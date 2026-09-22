@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meniu Ground Zero</title>
+    <!-- main stylesheet -->
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
 <div class="container">
 
-    <!-- main header -->
+    <!-- header & logo -->
     <div class="header">
         <img src="assets/img/logo.png" alt="Ground Zero Logo" class="logo">
         <h2>GROUND ZERO TAPROOM</h2>
@@ -22,64 +23,64 @@
         <a href="#" data-lang="en">EN</a>
     </div>
 
+    <!-- menu tabs -->
+    <div class="menu-tabs">
+        <button id="btn-drinks" class="tab-btn active" data-i18n="tab_drinks">BĂUTURI</button>
+        <button id="btn-food" class="tab-btn" data-i18n="tab_food">MÂNCARE</button>
+    </div>
+
     <!-- drinks section -->
-    <h1 data-i18n="title_drinks">BĂUTURI</h1>
+    <div id="section-drinks" class="content-section">
+        <div class="menu-category">
+            <h2 data-i18n="cat_draft">BERE LA DRAFT</h2>
+            <div class="menu-item">
+                <span class="item-name">URSUS PREMIUM</span>
+                <div class="item-dots"></div>
+                <span class="item-price">12 RON</span>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">URSUS IPA</span>
+                <div class="item-dots"></div>
+                <span class="item-price">18 RON</span>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">URSUS WEISSBEER</span>
+                <div class="item-dots"></div>
+                <span class="item-price">18 RON</span>
+            </div>
+            <div class="item-description" data-i18n="desc_weiss">(Bere de grâu nefiltrată)</div>
+        </div>
 
-    <div class="menu-category">
-        <h2 data-i18n="cat_draft">BERE LA DRAFT</h2>
-        
-        <div class="menu-item">
-            <span class="item-name">URSUS PREMIUM</span>
-            <div class="item-dots"></div>
-            <span class="item-price">12 RON</span>
+        <div class="menu-category">
+            <h2>LONG DRINKS (240ML)</h2>
+            <div class="menu-item">
+                <span class="item-name">CUBA LIBRE</span>
+                <div class="item-dots"></div>
+                <span class="item-price">19 RON</span>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">GIN TONIC</span>
+                <div class="item-dots"></div>
+                <span class="item-price">22 RON</span>
+            </div>
+            <div class="item-description">(Bombay Sapphire)</div>
         </div>
-        
-        <div class="menu-item">
-            <span class="item-name">URSUS IPA</span>
-            <div class="item-dots"></div>
-            <span class="item-price">18 RON</span>
-        </div>
-
-        <div class="menu-item">
-            <span class="item-name">URSUS WEISSBEER</span>
-            <div class="item-dots"></div>
-            <span class="item-price">18 RON</span>
-        </div>
-        <div class="item-description" data-i18n="desc_weiss">(Bere de grâu nefiltrată)</div>
     </div>
 
-    <div class="menu-category">
-        <h2>LONG DRINKS (240ML)</h2>
-        
-        <div class="menu-item">
-            <span class="item-name">CUBA LIBRE</span>
-            <div class="item-dots"></div>
-            <span class="item-price">19 RON</span>
-        </div>
-        
-        <div class="menu-item">
-            <span class="item-name">GIN TONIC</span>
-            <div class="item-dots"></div>
-            <span class="item-price">22 RON</span>
-        </div>
-        <div class="item-description">(Bombay Sapphire)</div>
-    </div>
-
-    <!-- food section -->
-    <h1 data-i18n="title_food">MÂNCARE</h1>
-    <div class="menu-category">
-        <h2>THE BEST WE CAN OFF-ER</h2>
-        
-        <div class="menu-item">
-            <span class="item-name" data-i18n="item_pork">PORC TĂIAT (5 BUC)</span>
-            <div class="item-dots"></div>
-            <span class="item-price">15 RON</span>
-        </div>
-
-        <div class="menu-item">
-            <span class="item-name">BULANGA (5 BUC)</span>
-            <div class="item-dots"></div>
-            <span class="item-price">15 RON</span>
+    <!-- food section (hidden by default) -->
+    <div id="section-food" class="content-section hidden">
+        <div class="menu-category">
+            <h2>THE BEST WE CAN OFF-ER</h2>
+            <div class="menu-item">
+                <span class="item-name" data-i18n="item_pork">PORC TĂIAT (5 BUC)</span>
+                <div class="item-dots"></div>
+                <span class="item-price">15 RON</span>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">BULANGA (5 BUC)</span>
+                <div class="item-dots"></div>
+                <span class="item-price">15 RON</span>
+            </div>
         </div>
     </div>
 
@@ -90,7 +91,7 @@
         <a href="assets/pdf/deranj_pliant_ro.pdf" data-i18n="btn_flyer_deranj" data-i18n-href="link_flyer_deranj" target="_blank" class="btn-flyer">📄 Vezi Pliant Deranj</a>
     </div>
 
-    <!-- google review cta -->
+    <!-- review cta -->
     <div class="review-section">
         <h3 data-i18n="review_title">Ți-a plăcut la noi?</h3>
         <p data-i18n="review_desc">Părerea ta ne ajută să creștem!</p>
@@ -101,7 +102,8 @@
 
 </div>
 
-<!-- core js -->
+<!-- scripts: load dict before logic -->
+<script src="js/lang.js"></script>
 <script src="js/script.js"></script>
 </body>
 </html>
