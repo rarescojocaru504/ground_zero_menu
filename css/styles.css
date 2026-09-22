@@ -1,0 +1,138 @@
+/* base reset & typography */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1a1a1a;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* layout */
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* header & logo */
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo {
+    width: 150px;
+    height: auto;
+    display: block;
+    margin: 0 auto 15px auto;
+}
+
+/* lang switcher */
+.language-switcher {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.language-switcher a {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 15px;
+    border: 1px solid #fff;
+    border-radius: 20px;
+    margin: 0 5px;
+    font-size: 14px;
+}
+
+.language-switcher a.active {
+    background-color: #fff;
+    color: #000;
+}
+
+/* section headings */
+h1, h2 {
+    text-align: center;
+    color: #e6b800;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+    margin-top: 40px;
+}
+
+/* menu lists */
+.menu-category {
+    margin-bottom: 30px;
+}
+
+.menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+}
+
+.item-name {
+    font-weight: bold;
+    flex-grow: 1;
+}
+
+.item-dots {
+    flex-grow: 2;
+    border-bottom: 1px dotted #555;
+    margin: 0 10px;
+    position: relative;
+    top: -4px;
+}
+
+.item-price {
+    font-weight: bold;
+    color: #e6b800;
+}
+
+.item-description {
+    font-size: 12px;
+    color: #aaa;
+    margin-top: -5px;
+    margin-bottom: 15px;
+}
+
+/* promo buttons */
+.flyer-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 40px 0;
+}
+
+.btn-flyer {
+    display: block;
+    text-align: center;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #555;
+    font-weight: bold;
+}
+
+/* review cta */
+.review-section {
+    text-align: center;
+    margin: 50px 0 30px 0;
+    padding: 20px;
+    background-color: #222;
+    border-radius: 10px;
+}
+
+.btn-review {
+    display: inline-block;
+    background-color: #4285F4;
+    color: white;
+    text-decoration: none;
+    padding: 15px 30px;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
