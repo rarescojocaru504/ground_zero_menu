@@ -1,16 +1,14 @@
 // lang switcher logic with smooth fade
 function setLanguage(lang) {
     const container = document.querySelector('.container');
-    
-    // start fade out
     container.classList.add('fade-out');
 
-    // wait 200ms for fade out, change text, then fade back in
     setTimeout(() => {
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
             if (translations[lang][key]) {
-                el.innerText = translations[lang][key];
+                // IMPORTANT: changed from innerText into innerHTML to grant <br> usage in translations
+                el.innerHTML = translations[lang][key]; 
             }
         });
 
@@ -28,10 +26,10 @@ function setLanguage(lang) {
             }
         });
 
-        // remove fade out class to trigger fade in
         container.classList.remove('fade-out');
     }, 200);
 }
+// ... restul fisierului ramane neschimbat
 
 document.querySelectorAll('.language-switcher a').forEach(btn => {
     btn.addEventListener('click', (e) => {
