@@ -136,13 +136,19 @@ h1, h2 {
     margin-top: 15px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.3);
 }
-/* menu tabs */
+
+/* menu tabs (with sticky behavior) */
 .menu-tabs {
     display: flex;
     justify-content: center;
     gap: 10px;
     margin-bottom: 30px;
     margin-top: 20px;
+    position: sticky;
+    top: 0;
+    background-color: #1a1a1a;
+    padding: 15px 0;
+    z-index: 100;
 }
 
 .tab-btn {
@@ -163,9 +169,24 @@ h1, h2 {
     border-color: #e6b800;
 }
 
-/* visibility state */
+/* visibility state & fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .content-section {
     display: block;
+}
+
+.content-section:not(.hidden) {
+    animation: fadeIn 0.4s ease-out forwards;
 }
 
 .content-section.hidden {
@@ -219,4 +240,10 @@ h1, h2 {
     padding: 0;
     margin-right: 5px;
     line-height: 1;
+}
+
+/* touch feedback for interactive elements */
+.btn-flyer:active, .btn-review:active, .tab-btn:active, .popup-link:active {
+    transform: scale(0.95);
+    transition: transform 0.1s;
 }
