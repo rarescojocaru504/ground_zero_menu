@@ -49,3 +49,20 @@ btnFood.addEventListener('click', () => {
     sectionFood.classList.remove('hidden');
     sectionDrinks.classList.add('hidden');
 });
+
+// popup logic
+const reviewPopup = document.getElementById('review-popup');
+const closePopupBtn = document.getElementById('close-popup');
+
+// show popup after 5s if user hasn't closed it in this session
+if (!sessionStorage.getItem('reviewPopupClosed')) {
+    setTimeout(() => {
+        reviewPopup.classList.remove('hidden-popup');
+    }, 5000);
+}
+
+// close popup and save state
+closePopupBtn.addEventListener('click', () => {
+    reviewPopup.classList.add('hidden-popup');
+    sessionStorage.setItem('reviewPopupClosed', 'true');
+});

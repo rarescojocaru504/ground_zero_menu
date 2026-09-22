@@ -15,7 +15,10 @@ const translations = {
         link_flyer_deranj: "assets/pdf/deranj_pliant_ro.pdf",
         review_title: "Ți-a plăcut la noi?",
         review_desc: "Părerea ta ne ajută să creștem!",
-        review_btn: "⭐ Lasă-ne un review pe Google!"
+        review_btn: "⭐ Lasă-ne un review pe Google!",
+        // popup texts
+        popup_text: "Ne-am bucura de un review!",
+        popup_btn: "⭐ Lasă o părere"
     },
     en: {
         tab_drinks: "DRINKS",
@@ -32,6 +35,9 @@ const translations = {
         link_flyer_deranj: "assets/pdf/deranj_pliant_en.pdf",
         review_title: "Did you enjoy your time?",
         review_desc: "Your feedback helps us grow!",
-        review_btn: "⭐ Leave a review on Google!"
+        review_btn: "⭐ Leave a review on Google!",
+        // popup texts
+        popup_text: "We'd love your review!",
+        popup_btn: "⭐ Leave feedback"
     }
 };
