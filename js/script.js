@@ -1,20 +1,22 @@
-// lang switcher logic with smooth fade
+let currentLang = 'ro';
+
 function setLanguage(lang) {
+    currentLang = lang;
     const container = document.querySelector('.container');
     container.classList.add('fade-out');
 
     setTimeout(() => {
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
-            if (translations[lang][key]) {
-                // IMPORTANT: changed from innerText into innerHTML to grant <br> usage in translations
+            // Check if translations exist before setting innerHTML
+            if (translations[lang] && translations[lang][key]) {
                 el.innerHTML = translations[lang][key]; 
             }
         });
 
         document.querySelectorAll('[data-i18n-href]').forEach(el => {
             const key = el.getAttribute('data-i18n-href');
-            if (translations[lang][key]) {
+            if (translations[lang] && translations[lang][key]) {
                 el.setAttribute('href', translations[lang][key]);
             }
         });
@@ -29,7 +31,6 @@ function setLanguage(lang) {
         container.classList.remove('fade-out');
     }, 200);
 }
-// ... restul fisierului ramane neschimbat
 
 document.querySelectorAll('.language-switcher a').forEach(btn => {
     btn.addEventListener('click', (e) => {
@@ -39,7 +40,6 @@ document.querySelectorAll('.language-switcher a').forEach(btn => {
     });
 });
 
-// tab switching logic (drinks vs food)
 const btnDrinks = document.getElementById('btn-drinks');
 const btnFood = document.getElementById('btn-food');
 const sectionDrinks = document.getElementById('section-drinks');
@@ -59,19 +59,48 @@ btnFood.addEventListener('click', () => {
     sectionDrinks.classList.add('hidden');
 });
 
-// popup logic
-const reviewPopup = document.getElementById('review-popup');
-const closePopupBtn = document.getElementById('close-popup');
+// Modal Logic pe element
+const modal = document.getElementById('item-modal');
+const modalTitle = document.getElementById('modal-title');
+const modalDesc = document.getElementById('modal-desc');
+const modalDetails = document.getElementById('modal-details');
+const modalImgContainer = document.getElementById('modal-img-container');
+const modalImage = document.getElementById('modal-image');
+const closeModal = document.querySelector('.close-modal');
 
-// show popup after 5s if user hasn't closed it in this session
-if (!sessionStorage.getItem('reviewPopupClosed')) {
-    setTimeout(() => {
-        reviewPopup.classList.remove('hidden-popup');
-    }, 5000);
-}
+document.querySelectorAll('.trigger-modal').forEach(item => {
+    item.addEventListener('click', () => {
+        const key = item.getAttribute('data-key');
+        
+        // Extragem datele din dictionar pe baza cheii de baza (ex: 'easy_rider')
+        const titleText = translations[currentLang]['name_' + key] || '';
+        const descText = translations[currentLang]['desc_' + key] || '';
+        const detailsText = translations[currentLang]['details_' + key] || '';
+        const imgSrc = translations[currentLang]['img_' + key];
 
-// close popup and save state
-closePopupBtn.addEventListener('click', () => {
-    reviewPopup.classList.add('hidden-popup');
-    sessionStorage.setItem('reviewPopupClosed', 'true');
+        modalTitle.innerHTML = titleText;
+        modalDesc.innerHTML = descText;
+        modalDetails.innerHTML = detailsText;
+
+        // Daca exista o imagine in dictionar pt acest item, o afisam
+        if(imgSrc) {
+            modalImage.src = imgSrc;
+            modalImgContainer.classList.remove('hidden-img');
+        } else {
+            modalImgContainer.classList.add('hidden-img');
+        }
+
+        modal.classList.remove('hidden-modal');
+    });
+});
+
+closeModal.addEventListener('click', () => {
+    modal.classList.add('hidden-modal');
+});
+
+// Inchide modalul daca dai click in afara lui
+window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+        modal.classList.add('hidden-modal');
+    }
 });
