@@ -8,7 +8,7 @@
     
     <style>
         /* BASE DESIGN - PDF Style */
-        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #111; color: #fff; margin: 0; padding: 0; line-height: 1.4; }
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #111; color: #fff; margin: 0; padding: 0; line-height: 1.4; padding-bottom: 80px; }
         .container { max-width: 600px; margin: 0 auto; padding: 15px; transition: opacity 0.2s ease-in-out; position: relative; }
         .container.fade-out { opacity: 0; }
         
@@ -41,7 +41,7 @@
         .beer-title { font-size: 19px; font-weight: 900; color: #fff; margin: 0; line-height: 1.1; text-transform: uppercase; }
         .beer-subtitle { font-size: 11px; color: #aaa; text-transform: uppercase; margin-top: 4px; letter-spacing: 0.5px; }
         
-        /* PRICE MATRIX - Galben fosforescent Ground Zero (#bef300) */
+        /* PRICE MATRIX */
         .beer-price-matrix { display: flex; gap: 12px; text-align: center; }
         .price-col { display: flex; flex-direction: column; }
         .p-val { font-size: 17px; font-weight: bold; color: #bef300; line-height: 1; }
@@ -59,34 +59,27 @@
         /* FOOD PAIRING ICONS */
         .food-pairing { display: flex; gap: 10px; align-items: center; justify-content: flex-end; }
         .food-pairing img { width: 30px; height: auto; opacity: 0.8; }
-        .deranj-pairing { margin-top: 15px; display: flex; justify-content: flex-start; gap: 15px; } /* Pt Deranj care nu au bari */
+        .deranj-pairing { margin-top: 15px; display: flex; justify-content: flex-start; gap: 15px; }
 
         /* FOOD CARD */
         .food-card { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #222; }
-        .food-header { display: flex; justify-content: space-between; align-items: baseline; }
-        .food-title { font-size: 18px; font-weight: bold; color: #fff; margin: 0; text-transform: uppercase; }
-        .food-price { font-size: 18px; font-weight: bold; color: #bef300; }
-        .food-weight { font-size: 12px; color: #888; display: block; margin-top: 2px; margin-bottom: 10px; }
+        .food-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;}
+        .food-title { font-size: 18px; font-weight: bold; color: #fff; margin: 0; text-transform: uppercase; line-height: 1.2; }
         .food-desc { font-size: 13px; color: #ccc; line-height: 1.5; }
+        .food-desc strong { color: #fff; font-weight: bold; } /* Face berile sa iasa in evidenta la pairing */
 
         /* FLYER BUTTONS */
         .flyer-buttons { display: flex; flex-direction: column; gap: 15px; margin: 50px 0; }
         .btn-flyer { display: block; text-align: center; background-color: #222; color: #fff; text-decoration: none; padding: 20px; border-radius: 8px; border: 1px solid #444; font-size: 15px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; transition: transform 0.1s; }
         .btn-flyer:active { transform: scale(0.97); }
 
-        /* VISIBILITY */
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .content-section { display: block; }
-        .content-section:not(.hidden) { animation: fadeIn 0.4s ease-out forwards; }
-        .content-section.hidden { display: none; }
-        /* SERVICE BANNER (Permanent & Elegant) */
-        /* SERVICE BANNER (Permanent & Elegant) */
+        /* SERVICE BANNER */
         .service-banner {
             position: fixed;
             bottom: 25px;
             left: 50%;
             transform: translateX(-50%);
-            background-color: rgba(17, 17, 17, 0.5); /* Aici am redus opacitatea pentru a fi mai transparent */
+            background-color: rgba(17, 17, 17, 0.5);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             border: 1px solid #bef300;
@@ -105,16 +98,17 @@
             transition: opacity 0.3s ease, transform 0.3s ease;
             opacity: 1;
         }
-
-        /* Clasa pentru cand userul e jos de tot (ascundem temporar) */
         .service-banner.hidden-on-scroll {
             opacity: 0;
             transform: translate(-50%, 20px);
         }
-        
-        .service-icon {
-            font-size: 17px;
-        }
+        .service-icon { font-size: 17px; }
+
+        /* VISIBILITY */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .content-section { display: block; }
+        .content-section:not(.hidden) { animation: fadeIn 0.4s ease-out forwards; }
+        .content-section.hidden { display: none; }
     </style>
 </head>
 <body>
@@ -323,10 +317,6 @@
                         <div class="stat-row"><span data-i18n="stat_clarity">CLARITATE</span><div class="stat-bar"><div style="width: 15%"></div></div></div>
                         <div class="stat-row"><span data-i18n="stat_bitterness">AMĂREALĂ</span><div class="stat-bar"><div style="width: 50%"></div></div></div>
                     </div>
-                    <div class="food-pairing">
-                        <img src="assets/food/meat.png" alt="Meat">
-                        <img src="assets/food/fries.png" alt="Fries">
-                    </div>
                 </div>
             </div>
         </div>
@@ -433,26 +423,26 @@
 
         <div class="food-card">
             <div class="food-header">
-                <h3 class="food-title">XPERIMENTALE 029</h3>
+                <h3 class="food-title">XPERIMENT<span style="font-weight:normal;">ALE 029</span></h3>
                 <div class="beer-price-matrix">
                     <div class="price-col"><span class="p-val">22</span><span class="p-vol">0.2L</span></div>
                     <div class="price-col"><span class="p-val">43</span><span class="p-vol">0.4L</span></div>
                 </div>
             </div>
-            <span class="food-weight">RUSSIAN IMPERIAL STOUT 12%</span>
+            <div class="beer-subtitle" style="margin-bottom: 10px;">RUSSIAN IMPERIAL STOUT 12%</div>
             <div class="food-desc" data-i18n="desc_x029">Pentru a crea un profil de malt...</div>
         </div>
 
         <div class="food-card">
             <div class="food-header">
-                <h3 class="food-title">XPERIMENTALE 030</h3>
+                <h3 class="food-title">XPERIMENT<span style="font-weight:normal;">ALE 030</span></h3>
                 <div class="beer-price-matrix">
                     <div class="price-col"><span class="p-val">17</span><span class="p-vol">0.2L</span></div>
                     <div class="price-col"><span class="p-val">33</span><span class="p-vol">0.4L</span></div>
                     <div class="price-col"><span class="p-val">119</span><span class="p-vol">1.5L</span></div>
                 </div>
             </div>
-            <span class="food-weight">CITRIC PILS 5.2%</span>
+            <div class="beer-subtitle" style="margin-bottom: 10px;">CITRIC PILS 5.2%</div>
             <div class="food-desc" data-i18n="desc_x030">Pils german nefiltrat...</div>
         </div>
 
@@ -463,24 +453,138 @@
                     <div class="price-col"><span class="p-val">59</span><span class="p-vol">RON</span></div>
                 </div>
             </div>
-            <span class="food-weight">5 X 100ML</span>
+            <div class="beer-subtitle" style="margin-bottom: 10px;">5 X 100ML</div>
             <div class="food-desc" data-i18n="desc_pachet">Easy Rider, Morning Glory, Split the Pot, Imperial Fuck, Black Hole</div>
         </div>
 
         <h2 data-i18n="cat_guest">GUEST BEERS & EXTRA</h2>
-        <div class="food-card"><div class="food-header"><h3 class="food-title">SCHNEIDER TAP 1</h3><span class="food-price">22 RON</span></div><span class="food-weight">0.5L - Helle Weisse 4.9%</span></div>
-        <div class="food-card"><div class="food-header"><h3 class="food-title">SCHNEIDER TAP 3</h3><span class="food-price">25 RON</span></div><span class="food-weight">0.5L - Alkoholfrei <0.5%</span></div>
-        <div class="food-card"><div class="food-header"><h3 class="food-title">SCHNEIDER TAP 5</h3><span class="food-price">27 RON</span></div><span class="food-weight">0.5L - Hopfenweisse 8.2%</span></div>
-        <div class="food-card"><div class="food-header"><h3 class="food-title" data-i18n="name_sprit">ȘPRIȚ CAII DE LA LETEA</h3><div class="beer-price-matrix"><div class="price-col"><span class="p-val">19</span><span class="p-vol">0.2L</span></div><div class="price-col"><span class="p-val">37</span><span class="p-vol">0.4L</span></div></div></div></div>
-        <div class="food-card"><div class="food-header"><h3 class="food-title" data-i18n="name_socata">SOCATĂ ARTIZANALĂ</h3><span class="food-price">21 RON</span></div><span class="food-weight">0.33L</span></div>
-        <div class="food-card"><div class="food-header"><h3 class="food-title">LEMONAID LIME ECO</h3><span class="food-price">23 RON</span></div><span class="food-weight">0.33L</span></div>
-        <div class="food-card"><div class="food-header"><h3 class="food-title" data-i18n="name_lemonaid_blood">LEMONAID BLOOD ORANGE</h3><span class="food-price">23 RON</span></div><span class="food-weight">0.33L</span></div>
-        <div class="food-card"><div class="food-header"><h3 class="food-title" data-i18n="name_lemonaid_passion">LEMONAID PASSION FRUIT</h3><span class="food-price">23 RON</span></div><span class="food-weight">0.33L</span></div>
-        <div class="food-card"><div class="food-header"><h3 class="food-title">LEMONAID GINGER ECO</h3><span class="food-price">23 RON</span></div><span class="food-weight">0.33L</span></div>
-        <div class="food-card"><div class="food-header"><h3 class="food-title" data-i18n="name_apple">SUC MERE SPRITZER</h3><span class="food-price">23 RON</span></div><span class="food-weight">0.33L</span></div>
-        <div class="food-card"><div class="food-header"><h3 class="food-title" data-i18n="name_cidru_brut">CIDRU BRUT MERE/PERE</h3><span class="food-price">22 RON</span></div><span class="food-weight">0.33L</span></div>
-        <div class="food-card"><div class="food-header"><h3 class="food-title" data-i18n="name_cidru_extra">CIDRU EXTRA BRUT MERE</h3><span class="food-price">22 RON</span></div><span class="food-weight">0.33L</span></div>
-        <div class="food-card"><div class="food-header"><h3 class="food-title">FRITZ-KOLA</h3><span class="food-price">19 RON</span></div><span class="food-weight">0.33L</span></div>
+        
+        <div class="food-card">
+            <div class="food-header">
+                <div class="beer-title-wrap">
+                    <h3 class="food-title">SCHNEIDER <span style="font-weight: normal;">TAP 1</span></h3>
+                    <div class="beer-subtitle">Helle Weisse 4.9%</div>
+                </div>
+                <div class="beer-price-matrix">
+                    <div class="price-col"><span class="p-val">22</span><span class="p-vol">0.5L</span></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="food-card">
+            <div class="food-header">
+                <div class="beer-title-wrap">
+                    <h3 class="food-title">SCHNEIDER <span style="font-weight: normal;">TAP 3</span></h3>
+                    <div class="beer-subtitle">Alkoholfrei <0.5%</div>
+                </div>
+                <div class="beer-price-matrix">
+                    <div class="price-col"><span class="p-val">25</span><span class="p-vol">0.5L</span></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="food-card">
+            <div class="food-header">
+                <div class="beer-title-wrap">
+                    <h3 class="food-title">SCHNEIDER <span style="font-weight: normal;">TAP 5</span></h3>
+                    <div class="beer-subtitle">Hopfenweisse 8.2%</div>
+                </div>
+                <div class="beer-price-matrix">
+                    <div class="price-col"><span class="p-val">27</span><span class="p-vol">0.5L</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="food-card">
+            <div class="food-header">
+                <h3 class="food-title" data-i18n="name_sprit">ȘPRIȚ CAII DE LA LETEA</h3>
+                <div class="beer-price-matrix">
+                    <div class="price-col"><span class="p-val">19</span><span class="p-vol">0.2L</span></div>
+                    <div class="price-col"><span class="p-val">37</span><span class="p-vol">0.4L</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="food-card">
+            <div class="food-header">
+                <h3 class="food-title" data-i18n="name_socata">SOCATĂ ARTIZANALĂ</h3>
+                <div class="beer-price-matrix">
+                    <div class="price-col"><span class="p-val">21</span><span class="p-vol">0.33L</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="food-card">
+            <div class="food-header">
+                <h3 class="food-title">LEMONAID LIME ECO</h3>
+                <div class="beer-price-matrix">
+                    <div class="price-col"><span class="p-val">23</span><span class="p-vol">0.33L</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="food-card">
+            <div class="food-header">
+                <h3 class="food-title" data-i18n="name_lemonaid_blood">LEMONAID BLOOD ORANGE ECO</h3>
+                <div class="beer-price-matrix">
+                    <div class="price-col"><span class="p-val">23</span><span class="p-vol">0.33L</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="food-card">
+            <div class="food-header">
+                <h3 class="food-title" data-i18n="name_lemonaid_passion">LEMONAID PASSION FRUIT ECO</h3>
+                <div class="beer-price-matrix">
+                    <div class="price-col"><span class="p-val">23</span><span class="p-vol">0.33L</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="food-card">
+            <div class="food-header">
+                <h3 class="food-title">LEMONAID GINGER ECO</h3>
+                <div class="beer-price-matrix">
+                    <div class="price-col"><span class="p-val">23</span><span class="p-vol">0.33L</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="food-card">
+            <div class="food-header">
+                <h3 class="food-title" data-i18n="name_apple">SUC MERO APPLE SPRITZER</h3>
+                <div class="beer-price-matrix">
+                    <div class="price-col"><span class="p-val">23</span><span class="p-vol">0.33L</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="food-card">
+            <div class="food-header">
+                <h3 class="food-title" data-i18n="name_cidru_brut">CIDRU BRUT MERE/PERE</h3>
+                <div class="beer-price-matrix">
+                    <div class="price-col"><span class="p-val">22</span><span class="p-vol">0.33L</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="food-card">
+            <div class="food-header">
+                <h3 class="food-title" data-i18n="name_cidru_extra">CIDRU EXTRA BRUT MERE</h3>
+                <div class="beer-price-matrix">
+                    <div class="price-col"><span class="p-val">22</span><span class="p-vol">0.33L</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="food-card">
+            <div class="food-header">
+                <h3 class="food-title">FRITZ-KOLA +/- ZAHĂR</h3>
+                <div class="beer-price-matrix">
+                    <div class="price-col"><span class="p-val">19</span><span class="p-vol">0.33L</span></div>
+                </div>
+            </div>
+        </div>
 
     </div>
 
@@ -489,87 +593,149 @@
         <h2 data-i18n="cat_food_main">MENIU DE BUNĂTĂȚI</h2>
         
         <div class="food-card">
-            <div class="food-header"><h3 class="food-title" data-i18n="name_carnat">CÂRNAT ÎMPUȘCAT</h3><span class="food-price">45 RON</span></div>
-            <span class="food-weight">~320 g</span>
-            <div class="food-desc" data-i18n="desc_carnat">Cârnat kasekrainer de porc...</div>
+            <div class="food-header">
+                <h3 class="food-title" data-i18n="name_carnat">CÂRNAT ÎMPUȘCAT</h3>
+                <div class="beer-price-matrix">
+                    <div class="price-col"><span class="p-val">45</span><span class="p-vol">~320 g</span></div>
+                </div>
+            </div>
+            <div class="food-desc" data-i18n="desc_carnat">Cârnat kasekrainer de porc... <br><br>Pairing: Red Ale, Pale Ale - <strong>Amber Guerre, Easy Rider</strong></div>
         </div>
 
+        <!-- Mutat aici, fix sub Carnat Impuscat -->
         <div class="food-card">
-            <div class="food-header"><h3 class="food-title" data-i18n="name_aripi_bbq">ARIPIOARE ÎMBUIBATE</h3><span class="food-price">37 RON</span></div>
-            <span class="food-weight">~280 g</span>
-            <div class="food-desc" data-i18n="desc_aripi_bbq">Aripioare glazurate cu sos BBQ...</div>
-        </div>
-
-        <div class="food-card">
-            <div class="food-header"><h3 class="food-title" data-i18n="name_aripi_picante">ARIPIOARE ÎNFLĂCĂRATE</h3><span class="food-price">39 RON</span></div>
-            <span class="food-weight">~280 g</span>
-            <div class="food-desc" data-i18n="desc_aripi_picante">Aripioare glazurate cu sos Gochujang...</div>
-        </div>
-
-        <div class="food-card">
-            <div class="food-header"><h3 class="food-title" data-i18n="name_coaste">COASTE ÎMPĂNATE</h3><span class="food-price">62 RON</span></div>
-            <span class="food-weight">~400 g</span>
-            <div class="food-desc" data-i18n="desc_coaste">Coaste de porc glazurate cu sos BBQ...</div>
-        </div>
-
-        <div class="food-card">
-            <div class="food-header"><h3 class="food-title" data-i18n="name_chiftea">CHIFTEA'N PÂINE</h3><span class="food-price">47 RON</span></div>
-            <span class="food-weight">~270 g</span>
-            <div class="food-desc" data-i18n="desc_chiftea">Smash Burger de vită...</div>
-        </div>
-
-        <div class="food-card">
-            <div class="food-header"><h3 class="food-title" data-i18n="name_chiftea_tunata">CHIFTEA TUNATĂ</h3><span class="food-price">49 RON</span></div>
-            <span class="food-weight">~290 g</span>
-            <div class="food-desc" data-i18n="desc_chiftea_tunata">Smash Burger de vită cu bacon și jalapeno...</div>
-        </div>
-
-        <div class="food-card">
-            <div class="food-header"><h3 class="food-title" data-i18n="name_chiftea_dubla">CHIFTEA DUBLĂ</h3><span class="food-price">68 RON</span></div>
-            <span class="food-weight">~400 g</span>
-            <div class="food-desc" data-i18n="desc_chiftea_dubla">Smash Burger de vită x2...</div>
-        </div>
-
-        <div class="food-card">
-            <div class="food-header"><h3 class="food-title" data-i18n="name_chiftea_vara">CHIFTEA DE VARĂ</h3><span class="food-price">50 RON</span></div>
-            <span class="food-weight">~270 g</span>
-            <div class="food-desc" data-i18n="desc_chiftea_vara">Burger cu iceberg salad, tartar sauce...</div>
-        </div>
-
-        <div class="food-card">
-            <div class="food-header"><h3 class="food-title" data-i18n="name_mamaliga">MĂMĂLIGĂ PRESATĂ</h3><span class="food-price">65 RON</span></div>
-            <span class="food-weight">~500 g</span>
-            <div class="food-desc" data-i18n="desc_mamaliga">Nachos, sos ardei copt...</div>
-        </div>
-
-        <div class="food-card">
-            <div class="food-header"><h3 class="food-title" data-i18n="name_curry">CURRYWURST</h3><span class="food-price">40 RON</span></div>
-            <span class="food-weight">~340 g</span>
+            <div class="food-header">
+                <h3 class="food-title" data-i18n="name_curry">CURRYWURST</h3>
+                <div class="beer-price-matrix">
+                    <div class="price-col"><span class="p-val">40</span><span class="p-vol">~340 g</span></div>
+                </div>
+            </div>
             <div class="food-desc" data-i18n="desc_curry">Kasekrainer de porc, cartofi prăjiti...</div>
         </div>
 
         <div class="food-card">
-            <div class="food-header"><h3 class="food-title" data-i18n="name_cartofi_cor">CARTOFI COREENI</h3><span class="food-price">32 RON</span></div>
-            <span class="food-weight">~300 g</span>
-            <div class="food-desc" data-i18n="desc_cartofi_cor">Cartofi proaspeți prăjiți cu sos de maioneză...</div>
+            <div class="food-header">
+                <h3 class="food-title" data-i18n="name_aripi_bbq">ARIPIOARE ÎMBUIBATE</h3>
+                <div class="beer-price-matrix">
+                    <div class="price-col"><span class="p-val">37</span><span class="p-vol">~280 g</span></div>
+                </div>
+            </div>
+            <div class="food-desc" data-i18n="desc_aripi_bbq">Aripioare glazurate cu sos BBQ...</div>
         </div>
 
         <div class="food-card">
-            <div class="food-header"><h3 class="food-title" data-i18n="name_cartofi">CARTOFI PRĂJIȚI</h3><span class="food-price">21 RON</span></div>
-            <span class="food-weight">~200 g</span>
+            <div class="food-header">
+                <h3 class="food-title" data-i18n="name_aripi_picante">ARIPIOARE ÎNFLĂCĂRATE</h3>
+                <div class="beer-price-matrix">
+                    <div class="price-col"><span class="p-val">39</span><span class="p-vol">~280 g</span></div>
+                </div>
+            </div>
+            <div class="food-desc" data-i18n="desc_aripi_picante">Aripioare glazurate cu sos Gochujang...</div>
+        </div>
+
+        <div class="food-card">
+            <div class="food-header">
+                <h3 class="food-title" data-i18n="name_coaste">COASTE ÎMPĂNATE</h3>
+                <div class="beer-price-matrix">
+                    <div class="price-col"><span class="p-val">62</span><span class="p-vol">~400 g</span></div>
+                </div>
+            </div>
+            <div class="food-desc" data-i18n="desc_coaste">Coaste de porc glazurate cu sos BBQ...</div>
+        </div>
+
+        <div class="food-card">
+            <div class="food-header">
+                <h3 class="food-title" data-i18n="name_chiftea">CHIFTEA'N PÂINE</h3>
+                <div class="beer-price-matrix">
+                    <div class="price-col"><span class="p-val">47</span><span class="p-vol">~270 g</span></div>
+                </div>
+            </div>
+            <div class="food-desc" data-i18n="desc_chiftea">Smash Burger de vită...</div>
+        </div>
+
+        <div class="food-card">
+            <div class="food-header">
+                <h3 class="food-title" data-i18n="name_chiftea_tunata">CHIFTEA TUNATĂ</h3>
+                <div class="beer-price-matrix">
+                    <div class="price-col"><span class="p-val">49</span><span class="p-vol">~290 g</span></div>
+                </div>
+            </div>
+            <div class="food-desc" data-i18n="desc_chiftea_tunata">Smash Burger de vită cu bacon și jalapeno...</div>
+        </div>
+
+        <div class="food-card">
+            <div class="food-header">
+                <h3 class="food-title" data-i18n="name_chiftea_dubla">CHIFTEA DUBLĂ</h3>
+                <div class="beer-price-matrix">
+                    <div class="price-col"><span class="p-val">68</span><span class="p-vol">~400 g</span></div>
+                </div>
+            </div>
+            <div class="food-desc" data-i18n="desc_chiftea_dubla">Smash Burger de vită x2...</div>
+        </div>
+
+        <div class="food-card">
+            <div class="food-header">
+                <h3 class="food-title" data-i18n="name_chiftea_vara">CHIFTEA DE VARĂ</h3>
+                <div class="beer-price-matrix">
+                    <div class="price-col"><span class="p-val">50</span><span class="p-vol">~270 g</span></div>
+                </div>
+            </div>
+            <div class="food-desc" data-i18n="desc_chiftea_vara">Burger cu iceberg salad, tartar sauce...</div>
+        </div>
+
+        <div class="food-card">
+            <div class="food-header">
+                <h3 class="food-title" data-i18n="name_mamaliga">MĂMĂLIGĂ PRESATĂ</h3>
+                <div class="beer-price-matrix">
+                    <div class="price-col"><span class="p-val">65</span><span class="p-vol">~500 g</span></div>
+                </div>
+            </div>
+            <div class="food-desc" data-i18n="desc_mamaliga">Nachos, sos ardei copt... <br><br><i>Alergeni: Lactoză (sau de completat în lang.js)</i></div>
+        </div>
+
+        <div class="food-card">
+            <div class="food-header">
+                <h3 class="food-title" data-i18n="name_cartofi_cor">CARTOFI COREENI</h3>
+                <div class="beer-price-matrix">
+                    <div class="price-col"><span class="p-val">32</span><span class="p-vol">~300 g</span></div>
+                </div>
+            </div>
+            <div class="food-desc" data-i18n="desc_cartofi_cor">Cartofi proaspeți prăjiți cu sos de maioneză... <br><br><i>Alergeni: de completat în lang.js</i></div>
+        </div>
+
+        <div class="food-card">
+            <div class="food-header">
+                <h3 class="food-title" data-i18n="name_cartofi">CARTOFI PRĂJIȚI</h3>
+                <div class="beer-price-matrix">
+                    <div class="price-col"><span class="p-val">21</span><span class="p-vol">~200 g</span></div>
+                </div>
+            </div>
             <div class="food-desc" data-i18n="desc_cartofi">Cartofi proaspeți prăjiți.</div>
         </div>
 
         <div class="food-card">
-            <div class="food-header"><h3 class="food-title" data-i18n="name_cartofi_branza">CARTOFI CU BRÂNZĂ</h3><span class="food-price">23 RON</span></div>
-            <span class="food-weight">~200 g</span>
+            <div class="food-header">
+                <h3 class="food-title" data-i18n="name_cartofi_branza">CARTOFI CU BRÂNZĂ</h3>
+                <div class="beer-price-matrix">
+                    <div class="price-col"><span class="p-val">23</span><span class="p-vol">~200 g</span></div>
+                </div>
+            </div>
             <div class="food-desc" data-i18n="desc_cartofi_branza">Cartofi proaspeți prăjiți presărați...</div>
         </div>
 
         <div class="food-card">
-            <div class="food-header"><h3 class="food-title" data-i18n="name_sos">EXTRA SOS</h3><span class="food-price">5 RON</span></div>
-            <span class="food-weight">~40 ml</span>
-            <div class="food-desc" data-i18n="desc_sos">Sos de maioneză picantă, Ketchup...</div>
+            <div class="food-header">
+                <h3 class="food-title" data-i18n="name_sos">EXTRA SOS</h3>
+                <div class="beer-price-matrix">
+                    <div class="price-col"><span class="p-val">5</span><span class="p-vol">~40 ml</span></div>
+                </div>
+            </div>
+            <div class="food-desc" data-i18n="desc_sos">
+                Sos de maioneză picantă<br>
+                Ketchup<br>
+                Mustar<br>
+                Sos BBQ
+            </div>
         </div>
     </div>
 
@@ -579,11 +745,12 @@
         <a href="assets/pdf/deranj_pliant_ro.pdf" data-i18n="btn_flyer_deranj" data-i18n-href="link_flyer_deranj" target="_blank" class="btn-flyer" style="padding: 22px; font-size: 16px;">DESPRE GAMA DERANJ</a>
     </div>
 
-    <!-- BANNER SERVIRE PERMANENT -->
-    <div class="service-banner">
-        <span class="service-icon">🍻</span>
-        <span data-i18n="service_toast">Comanda și servirea la bar / Apreciem debarasarea</span>
-    </div>
+</div>
+
+<!-- BANNER SERVIRE PERMANENT -->
+<div class="service-banner">
+    <span class="service-icon">🍻</span>
+    <span data-i18n="service_toast">Comanda și servirea la bar / Apreciem debarasarea</span>
 </div>
 
 <script src="js/lang.js"></script>
