@@ -84,3 +84,14 @@ window.addEventListener('scroll', () => {
         serviceBanner.classList.remove('hidden-on-scroll');
     }
 });
+
+// Keep the menu tabs stuck right under the sticky top bar (Review + RO/EN)
+function setTopbarHeight() {
+    const topBar = document.querySelector('.top-bar');
+    if (topBar) {
+        document.documentElement.style.setProperty('--topbar-h', topBar.offsetHeight + 'px');
+    }
+}
+setTopbarHeight();
+window.addEventListener('load', setTopbarHeight);
+window.addEventListener('resize', setTopbarHeight);
