@@ -68,3 +68,19 @@ btnFood.addEventListener('click', () => {
 document.addEventListener('DOMContentLoaded', () => {
     setLanguage('ro');
 });
+
+// Logica pentru Service Banner
+const serviceBanner = document.querySelector('.service-banner');
+
+window.addEventListener('scroll', () => {
+    // Verificam daca utilizatorul a facut scroll pana jos de tot
+    const scrollPosition = window.innerHeight + window.scrollY;
+    const documentHeight = document.body.offsetHeight;
+
+    // Daca mai sunt sub 60 de pixeli pana jos, ascundem bannerul usor
+    if (documentHeight - scrollPosition < 60) {
+        serviceBanner.classList.add('hidden-on-scroll');
+    } else {
+        serviceBanner.classList.remove('hidden-on-scroll');
+    }
+});

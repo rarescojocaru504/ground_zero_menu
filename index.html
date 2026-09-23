@@ -79,6 +79,42 @@
         .content-section { display: block; }
         .content-section:not(.hidden) { animation: fadeIn 0.4s ease-out forwards; }
         .content-section.hidden { display: none; }
+        /* SERVICE BANNER (Permanent & Elegant) */
+        /* SERVICE BANNER (Permanent & Elegant) */
+        .service-banner {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(17, 17, 17, 0.5); /* Aici am redus opacitatea pentru a fi mai transparent */
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid #bef300;
+            color: #fff;
+            padding: 10px 22px;
+            border-radius: 30px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.8), 0 0 10px rgba(190, 243, 0, 0.2);
+            font-size: 13px;
+            font-weight: bold;
+            z-index: 9999; 
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            pointer-events: none; 
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            opacity: 1;
+        }
+
+        /* Clasa pentru cand userul e jos de tot (ascundem temporar) */
+        .service-banner.hidden-on-scroll {
+            opacity: 0;
+            transform: translate(-50%, 20px);
+        }
+        
+        .service-icon {
+            font-size: 17px;
+        }
     </style>
 </head>
 <body>
