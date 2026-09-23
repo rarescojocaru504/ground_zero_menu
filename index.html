@@ -84,20 +84,28 @@
             -webkit-backdrop-filter: blur(8px);
             border: 1px solid #bef300;
             color: #fff;
-            padding: 10px 22px;
+            padding: 8px 15px;
             border-radius: 30px;
             box-shadow: 0 5px 25px rgba(0, 0, 0, 0.8), 0 0 10px rgba(190, 243, 0, 0.2);
-            font-size: 13px;
+            font-size: 11px; 
             font-weight: bold;
             z-index: 9999; 
-            white-space: nowrap;
+            white-space: nowrap; 
+            max-width: 95%;
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: center;
+            gap: 6px; 
             pointer-events: none; 
             transition: opacity 0.3s ease, transform 0.3s ease;
             opacity: 1;
-            max-width: 90%;
+        }
+        .service-banner.hidden-on-scroll {
+            opacity: 0;
+            transform: translate(-50%, 20px);
+        }
+        .service-icon { 
+            font-size: 14px; 
         }
 
         /* FOOD PAIRING ICONS */
@@ -329,11 +337,11 @@
                         <div class="stat-row"><span data-i18n="stat_clarity">CLARITATE</span><div class="stat-bar"><div style="width: 40%"></div></div></div>
                         <div class="stat-row"><span data-i18n="stat_bitterness">AMĂREALĂ</span><div class="stat-bar"><div style="width: 50%"></div></div></div>
                     </div>
-                </div>
-                <div class="food-pairing">
+                    <div class="food-pairing">
                         <img src="assets/food/meat.png" alt="Meat">
                         <img src="assets/food/fries.png" alt="Fries">
                     </div>
+                </div>
             </div>
         </div>
 
