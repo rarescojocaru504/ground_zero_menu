@@ -5,143 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meniu Ground Zero</title>
     <link rel="icon" type="image/png" href="assets/img/logo.png">
-    
-    <style>
-        /* BASE DESIGN - PDF Style */
-        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #111; color: #fff; margin: 0; padding: 0; line-height: 1.4; padding-bottom: 80px; }
-        .container { max-width: 600px; margin: 0 auto; padding: 15px; transition: opacity 0.2s ease-in-out; position: relative; }
-        .container.fade-out { opacity: 0; }
-        
-        /* TOP BAR (Review + Lang) */
-        .top-bar { display: flex; justify-content: space-between; align-items: center; margin: -15px -15px 20px; padding: 10px 15px; position: sticky; top: 0; z-index: 101; background-color: #111; }
-        .review-btn-top { background: transparent; color: #fff; text-decoration: none; border: 1px solid #444; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; display: flex; align-items: center; gap: 5px; }
-        .review-btn-top span { font-size: 14px; }
-        .language-switcher { display: flex; gap: 5px; }
-        .language-switcher a { color: #888; text-decoration: none; padding: 6px 10px; border: 1px solid #444; border-radius: 4px; font-size: 12px; font-weight: bold; }
-        .language-switcher a.active { background-color: #bef300; color: #000; border-color: #bef300; }
-        
-        /* HEADER & LOGO */
-        .header { text-align: center; margin-bottom: 30px; }
-        .logo { width: 160px; height: auto; display: block; margin: 0 auto; }
-        
-        /* MENU TABS */
-        .menu-tabs { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; position: sticky; top: var(--topbar-h, 50px); background-color: rgba(17, 17, 17, 0.95); padding: 15px 0; z-index: 100; border-bottom: 1px solid #333; }
-        .tab-btn { background: none; color: #888; border: none; font-size: 18px; font-weight: bold; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; padding-bottom: 5px; border-bottom: 2px solid transparent; }
-        .tab-btn.active { color: #fff; border-bottom: 2px solid #fff; }
-        
-        /* SECTION TITLES */
-        h2 { text-align: left; color: #fff; font-size: 22px; letter-spacing: 1px; border-bottom: 1px solid #444; padding-bottom: 8px; margin-top: 30px; margin-bottom: 20px; text-transform: uppercase; }
-        
-        /* BEER CARD (PDF LAYOUT) */
-        .beer-card { display: flex; margin-bottom: 35px; border-bottom: 1px solid #222; padding-bottom: 25px; }
-        .beer-img-col { width: 80px; flex-shrink: 0; margin-right: 15px; display: flex; align-items: flex-start; justify-content: center; }
-        .beer-img-col img { width: 100%; height: auto; max-height: 250px; object-fit: contain; }
-        .beer-info-col { flex-grow: 1; display: flex; flex-direction: column; }
-        .beer-header-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
-        .beer-title { font-size: 19px; font-weight: 900; color: #fff; margin: 0; line-height: 1.1; text-transform: uppercase; }
-        .beer-subtitle { font-size: 11px; color: #aaa; text-transform: uppercase; margin-top: 4px; letter-spacing: 0.5px; }
-        
-        /* PRICE MATRIX */
-        .beer-price-matrix { display: flex; gap: 12px; text-align: center; }
-        .price-col { display: flex; flex-direction: column; }
-        .p-val { font-size: 17px; font-weight: bold; color: #bef300; line-height: 1; }
-        .p-vol { font-size: 10px; color: #888; margin-top: 4px; }
-        
-        /* DESC & BARS & PAIRING */
-        .beer-desc { font-size: 13px; color: #ccc; line-height: 1.5; margin-bottom: 15px; }
-        .beer-stats-pairing { display: flex; justify-content: space-between; align-items: flex-end; }
-        .beer-stats { font-size: 10px; color: #aaa; text-transform: uppercase; font-weight: bold; flex-grow: 1; margin-right: 15px;}
-        .stat-row { display: flex; align-items: center; margin-bottom: 4px; }
-        .stat-row > span { width: 80px; }
-        .stat-bar { flex-grow: 1; height: 6px; background: #333; border-radius: 3px; overflow: hidden; }
-        .stat-bar > div { height: 100%; background: #ddd; }
-        
-        /* FOOD PAIRING ICONS */
-        .food-pairing { display: flex; gap: 10px; align-items: center; justify-content: flex-end; }
-        .food-pairing img { width: 30px; height: auto; opacity: 0.8; }
-        .deranj-pairing { margin-top: 15px; display: flex; justify-content: flex-start; gap: 15px; }
-
-        /* FOOD CARD */
-        .food-card { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #222; }
-        .food-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;}
-        .food-title { font-size: 18px; font-weight: bold; color: #fff; margin: 0; text-transform: uppercase; line-height: 1.2; }
-        .food-desc { font-size: 13px; color: #ccc; line-height: 1.5; }
-        .food-desc strong { color: #fff; font-weight: bold; }
-
-        /* FLYER BUTTONS */
-        .flyer-buttons { display: flex; flex-direction: column; gap: 15px; margin: 50px 0; }
-        .btn-flyer { display: block; text-align: center; background-color: #222; color: #fff; text-decoration: none; padding: 20px; border-radius: 8px; border: 1px solid #444; font-size: 15px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; transition: transform 0.1s; }
-        .btn-flyer:active { transform: scale(0.97); }
-
-        /* SERVICE BANNER */
-        .service-banner {
-            position: fixed;
-            bottom: 25px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: rgba(17, 17, 17, 0.5);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid #bef300;
-            color: #fff;
-            padding: 8px 15px;
-            border-radius: 30px;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.8), 0 0 10px rgba(190, 243, 0, 0.2);
-            font-size: 11px; 
-            font-weight: bold;
-            z-index: 9999; 
-            white-space: nowrap; 
-            max-width: 95%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px; 
-            pointer-events: none; 
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            opacity: 1;
-        }
-        .service-banner.hidden-on-scroll {
-            opacity: 0;
-            transform: translate(-50%, 20px);
-        }
-        .service-icon { 
-            font-size: 14px; 
-        }
-
-        /* FOOD PAIRING ICONS */
-        .food-pairing { display: flex; gap: 10px; align-items: center; justify-content: flex-end; }
-        .deranj-pairing { margin-top: 5px; display: flex; justify-content: flex-end; gap: 10px; }
-        .food-pairing img, .deranj-pairing img { 
-            width: 32px !important; 
-            height: 32px !important; 
-            object-fit: contain; 
-            opacity: 0.8; 
-        }
-
-        .service-banner.hidden-on-scroll {
-            opacity: 0;
-            transform: translate(-50%, 20px);
-        }
-        .service-icon { font-size: 17px; }
-
-        /* CHILLI ICON + LEGEND */
-        .chilli-icon { height: 20px; width: auto; vertical-align: -2px; margin-left: 4px; }
-        .food-legend { font-size: 11px; color: #aaa; line-height: 1.5; margin-top: 10px; }
-        .food-legend strong { color: #fff; }
-
-        /* VISIBILITY */
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .content-section { display: block; }
-        .content-section:not(.hidden) { animation: fadeIn 0.4s ease-out forwards; }
-        .content-section.hidden { display: none; }
-    </style>
+    <link rel="stylesheet" href="css/styles.css?v=3">
 </head>
 <body>
 
+<!--
+    Ground Zero QR menu
+    - Texts that change with the language have data-i18n="key"; the RO/EN strings live in js/lang.js.
+      The text written here is only the RO fallback (shown if JS fails) - edit js/lang.js, not this.
+    - Prices, volumes, weights and beer names are NOT translated: edit them directly here.
+    - Beer card taste bars: the inline width (0-100%) is the value of each bar.
+    - Images: use the small .webp files (bottles 240x360, icons max 96px); the .png files are the
+      full-size originals. New image -> resize + convert to .webp, then bump ?v= on css/js if they changed.
+-->
 <div class="container">
 
+    <!-- TOP BAR (sticky): Google review link + language switcher -->
     <div class="top-bar">
-        <a href="https://g.page/r/CQDxRjrBVDAmEAE/review" target="_blank" class="review-btn-top">
+        <a href="https://g.page/r/CQDxRjrBVDAmEAE/review" target="_blank" rel="noopener" class="review-btn-top">
             <span>⭐</span> Review
         </a>
         <div class="language-switcher">
@@ -151,22 +32,24 @@
     </div>
 
     <div class="header">
-        <img src="assets/img/logo.png" alt="Ground Zero Logo" class="logo">
+        <img src="assets/img/logo.webp" alt="Ground Zero Logo" class="logo" width="480" height="480">
     </div>
 
+    <!-- DRINKS / FOOD TABS (sticky, under the top bar) -->
     <div class="menu-tabs">
-        <button id="btn-drinks" class="tab-btn active" data-i18n="tab_drinks">DRINKS</button>
-        <button id="btn-food" class="tab-btn" data-i18n="tab_food">FOOD</button>
+        <button id="btn-drinks" class="tab-btn active" data-i18n="tab_drinks">BĂUTURI</button>
+        <button id="btn-food" class="tab-btn" data-i18n="tab_food">MÂNCARE</button>
     </div>
 
     <!-- DRINKS SECTION -->
     <div id="section-drinks" class="content-section">
-        
+
+        <!-- ===== GROUND ZERO BEERS: price columns 0.2L / 0.4L / 1.5L / 0.33L bottle ===== -->
         <h2 data-i18n="cat_gz_beers">GROUND ZERO BEERS</h2>
-        
+
         <!-- Easy Rider -->
         <div class="beer-card">
-            <div class="beer-img-col"><img src="assets/bottles/easyrider.png" alt="Easy Rider"></div>
+            <div class="beer-img-col"><img src="assets/bottles/easyrider.webp" alt="Easy Rider" width="240" height="360" loading="lazy" decoding="async"></div>
             <div class="beer-info-col">
                 <div class="beer-header-row">
                     <div class="beer-title-wrap">
@@ -180,7 +63,7 @@
                         <div class="price-col"><span class="p-val">27</span><span class="p-vol">0.33L</span></div>
                     </div>
                 </div>
-                <div class="beer-desc" data-i18n="desc_easy_rider">Bere cu o concentrație mai scăzută...</div>
+                <div class="beer-desc" data-i18n="desc_easy_rider">Bere cu o concentrație mai scăzută de alcool pentru a putea fi băută la o masă de prânz sau, în contextul în care vrei să bei mai multe, fară să te ia cu amețeală.</div>
                 <div class="beer-stats-pairing">
                     <div class="beer-stats">
                         <div class="stat-row"><span data-i18n="stat_hops">HAMEI</span><div class="stat-bar"><div style="width: 40%"></div></div></div>
@@ -188,8 +71,8 @@
                         <div class="stat-row"><span data-i18n="stat_bitterness">AMĂREALĂ</span><div class="stat-bar"><div style="width: 20%"></div></div></div>
                     </div>
                     <div class="food-pairing">
-                        <img src="assets/food/sandwhich.png" alt="Sandwich">
-                        <img src="assets/food/fries.png" alt="Fries">
+                        <img src="assets/food/sandwhich.webp" alt="Sandwich" width="96" height="94" loading="lazy" decoding="async">
+                        <img src="assets/food/fries.webp" alt="Fries" width="70" height="96" loading="lazy" decoding="async">
                     </div>
                 </div>
             </div>
@@ -197,7 +80,7 @@
 
         <!-- Morning Glory -->
         <div class="beer-card">
-            <div class="beer-img-col"><img src="assets/bottles/morningglory.png" alt="Morning Glory"></div>
+            <div class="beer-img-col"><img src="assets/bottles/morningglory.webp" alt="Morning Glory" width="240" height="360" loading="lazy" decoding="async"></div>
             <div class="beer-info-col">
                 <div class="beer-header-row">
                     <div class="beer-title-wrap">
@@ -211,7 +94,7 @@
                         <div class="price-col"><span class="p-val">29</span><span class="p-vol">0.33L</span></div>
                     </div>
                 </div>
-                <div class="beer-desc" data-i18n="desc_morning_glory">Exotică, cu note de mango...</div>
+                <div class="beer-desc" data-i18n="desc_morning_glory">Exotică, cu note de mango, grapefruit și tușe de citrice. Puternic amară, evidențiind perfect caracterul hameiului.</div>
                 <div class="beer-stats-pairing">
                     <div class="beer-stats">
                         <div class="stat-row"><span data-i18n="stat_hops">HAMEI</span><div class="stat-bar"><div style="width: 80%"></div></div></div>
@@ -219,8 +102,8 @@
                         <div class="stat-row"><span data-i18n="stat_bitterness">AMĂREALĂ</span><div class="stat-bar"><div style="width: 60%"></div></div></div>
                     </div>
                     <div class="food-pairing">
-                        <img src="assets/food/burger.png" alt="Burger">
-                        <img src="assets/food/fries.png" alt="Fries">
+                        <img src="assets/food/burger.webp" alt="Burger" width="96" height="83" loading="lazy" decoding="async">
+                        <img src="assets/food/fries.webp" alt="Fries" width="70" height="96" loading="lazy" decoding="async">
                     </div>
                 </div>
             </div>
@@ -228,7 +111,7 @@
 
         <!-- Split The Pot -->
         <div class="beer-card">
-            <div class="beer-img-col"><img src="assets/bottles/splittheepot.png" alt="Split The Pot"></div>
+            <div class="beer-img-col"><img src="assets/bottles/splittheepot.webp" alt="Split The Pot" width="240" height="360" loading="lazy" decoding="async"></div>
             <div class="beer-info-col">
                 <div class="beer-header-row">
                     <div class="beer-title-wrap">
@@ -242,7 +125,7 @@
                         <div class="price-col"><span class="p-val">31</span><span class="p-vol">0.33L</span></div>
                     </div>
                 </div>
-                <div class="beer-desc" data-i18n="desc_split_pot">O bere cu tărie crescută...</div>
+                <div class="beer-desc" data-i18n="desc_split_pot">O bere cu tărie crescută, hazy, miros de iarbă, bine aromată, cu mult hamei și note de fructe tropicale: ananas, mango, piersică.</div>
                 <div class="beer-stats-pairing">
                     <div class="beer-stats">
                         <div class="stat-row"><span data-i18n="stat_hops">HAMEI</span><div class="stat-bar"><div style="width: 70%"></div></div></div>
@@ -250,8 +133,8 @@
                         <div class="stat-row"><span data-i18n="stat_bitterness">AMĂREALĂ</span><div class="stat-bar"><div style="width: 30%"></div></div></div>
                     </div>
                     <div class="food-pairing">
-                        <img src="assets/food/burger.png" alt="Burger">
-                        <img src="assets/food/chickenleg.png" alt="Chicken Leg">
+                        <img src="assets/food/burger.webp" alt="Burger" width="96" height="83" loading="lazy" decoding="async">
+                        <img src="assets/food/chickenleg.webp" alt="Chicken Leg" width="96" height="90" loading="lazy" decoding="async">
                     </div>
                 </div>
             </div>
@@ -259,7 +142,7 @@
 
         <!-- Imperial Fuck -->
         <div class="beer-card">
-            <div class="beer-img-col"><img src="assets/bottles/imperialfuck.png" alt="Imperial Fuck"></div>
+            <div class="beer-img-col"><img src="assets/bottles/imperialfuck.webp" alt="Imperial Fuck" width="240" height="360" loading="lazy" decoding="async"></div>
             <div class="beer-info-col">
                 <div class="beer-header-row">
                     <div class="beer-title-wrap">
@@ -273,7 +156,7 @@
                         <div class="price-col"><span class="p-val">33</span><span class="p-vol">0.33L</span></div>
                     </div>
                 </div>
-                <div class="beer-desc" data-i18n="desc_imperial_fuck">O bere puternică, cu gust bogat...</div>
+                <div class="beer-desc" data-i18n="desc_imperial_fuck">O bere puternică, cu gust bogat, mai amară și mai aromată decât IPA, dar și cu o dulceață reținută. Una dintre cele mai puternice beri produse în România.</div>
                 <div class="beer-stats-pairing">
                     <div class="beer-stats">
                         <div class="stat-row"><span data-i18n="stat_hops">HAMEI</span><div class="stat-bar"><div style="width: 90%"></div></div></div>
@@ -281,8 +164,8 @@
                         <div class="stat-row"><span data-i18n="stat_bitterness">AMĂREALĂ</span><div class="stat-bar"><div style="width: 80%"></div></div></div>
                     </div>
                     <div class="food-pairing">
-                        <img src="assets/food/burger.png" alt="Burger">
-                        <img src="assets/food/meat.png" alt="Meat">
+                        <img src="assets/food/burger.webp" alt="Burger" width="96" height="83" loading="lazy" decoding="async">
+                        <img src="assets/food/meat.webp" alt="Meat" width="96" height="83" loading="lazy" decoding="async">
                     </div>
                 </div>
             </div>
@@ -290,7 +173,7 @@
 
         <!-- Amber Guerre -->
         <div class="beer-card">
-            <div class="beer-img-col"><img src="assets/bottles/amberguerre.png" alt="Amber Guerre"></div>
+            <div class="beer-img-col"><img src="assets/bottles/amberguerre.webp" alt="Amber Guerre" width="240" height="360" loading="lazy" decoding="async"></div>
             <div class="beer-info-col">
                 <div class="beer-header-row">
                     <div class="beer-title-wrap">
@@ -304,7 +187,7 @@
                         <div class="price-col"><span class="p-val">27</span><span class="p-vol">0.33L</span></div>
                     </div>
                 </div>
-                <div class="beer-desc" data-i18n="desc_amber_guerre">O bere roșie cu arome florale...</div>
+                <div class="beer-desc" data-i18n="desc_amber_guerre">O bere roșie cu arome florale complexe și note de fructe negre, stafide, dar cu o amăreală fermă. Creată special pentru pairing-ul cu burger și carne la grătar.</div>
                 <div class="beer-stats-pairing">
                     <div class="beer-stats">
                         <div class="stat-row"><span data-i18n="stat_hops">HAMEI</span><div class="stat-bar"><div style="width: 30%"></div></div></div>
@@ -312,8 +195,8 @@
                         <div class="stat-row"><span data-i18n="stat_bitterness">AMĂREALĂ</span><div class="stat-bar"><div style="width: 40%"></div></div></div>
                     </div>
                     <div class="food-pairing">
-                        <img src="assets/food/burger.png" alt="Burger">
-                        <img src="assets/food/meat.png" alt="Meat">
+                        <img src="assets/food/burger.webp" alt="Burger" width="96" height="83" loading="lazy" decoding="async">
+                        <img src="assets/food/meat.webp" alt="Meat" width="96" height="83" loading="lazy" decoding="async">
                     </div>
                 </div>
             </div>
@@ -321,7 +204,7 @@
 
         <!-- Black Hole -->
         <div class="beer-card">
-            <div class="beer-img-col"><img src="assets/bottles/blackhole.png" alt="Black Hole"></div>
+            <div class="beer-img-col"><img src="assets/bottles/blackhole.webp" alt="Black Hole" width="240" height="360" loading="lazy" decoding="async"></div>
             <div class="beer-info-col">
                 <div class="beer-header-row">
                     <div class="beer-title-wrap">
@@ -335,7 +218,7 @@
                         <div class="price-col"><span class="p-val">32</span><span class="p-vol">0.33L</span></div>
                     </div>
                 </div>
-                <div class="beer-desc" data-i18n="desc_black_hole">Bere brună cu un corp mediu...</div>
+                <div class="beer-desc" data-i18n="desc_black_hole">Bere brună cu un corp mediu și concentrație mică de alcool. Gust ușor dulceag cu arome de malțuri prăjite, ciocolată neagră și tușe de cafea.</div>
                 <div class="beer-stats-pairing">
                     <div class="beer-stats">
                         <div class="stat-row"><span data-i18n="stat_hops">HAMEI</span><div class="stat-bar"><div style="width: 30%"></div></div></div>
@@ -343,18 +226,19 @@
                         <div class="stat-row"><span data-i18n="stat_bitterness">AMĂREALĂ</span><div class="stat-bar"><div style="width: 50%"></div></div></div>
                     </div>
                     <div class="food-pairing">
-                        <img src="assets/food/meat.png" alt="Meat">
-                        <img src="assets/food/fries.png" alt="Fries">
+                        <img src="assets/food/meat.webp" alt="Meat" width="96" height="83" loading="lazy" decoding="async">
+                        <img src="assets/food/fries.webp" alt="Fries" width="70" height="96" loading="lazy" decoding="async">
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- ===== DERANJ BEERS: price columns 0.2L / 0.4L / 1.5L / 0.5L bottle (no taste bars) ===== -->
         <h2 data-i18n="cat_deranj_beers">DERANJ BEERS</h2>
-        
+
         <!-- Deranj Blonda -->
         <div class="beer-card">
-            <div class="beer-img-col"><img src="assets/bottles/deranjblonda.png" alt="Deranj Blonda"></div>
+            <div class="beer-img-col"><img src="assets/bottles/deranjblonda.webp" alt="Deranj Blonda" width="240" height="360" loading="lazy" decoding="async"></div>
             <div class="beer-info-col">
                 <div class="beer-header-row">
                     <div class="beer-title-wrap">
@@ -368,17 +252,17 @@
                         <div class="price-col"><span class="p-val">32</span><span class="p-vol">0.5L</span></div>
                     </div>
                 </div>
-                <div class="beer-desc" data-i18n="desc_deranj_blonda">Stil de bere tradițional nemțesc...</div>
+                <div class="beer-desc" data-i18n="desc_deranj_blonda">Stil de bere tradițional nemțesc, fermentată și maturată natural până atinge gustul specific, lejer și răcoritor.</div>
                 <div class="deranj-pairing">
-                    <img src="assets/food/sandwhich.png" alt="Sandwich" style="width:30px;">
-                    <img src="assets/food/chickenleg.png" alt="Chicken Leg" style="width:30px;">
+                    <img src="assets/food/sandwhich.webp" alt="Sandwich" width="96" height="94" loading="lazy" decoding="async">
+                    <img src="assets/food/chickenleg.webp" alt="Chicken Leg" width="96" height="90" loading="lazy" decoding="async">
                 </div>
             </div>
         </div>
 
         <!-- Deranj Oranj -->
         <div class="beer-card">
-            <div class="beer-img-col"><img src="assets/bottles/deranjoranj.png" alt="Deranj Oranj"></div>
+            <div class="beer-img-col"><img src="assets/bottles/deranjoranj.webp" alt="Deranj Oranj" width="240" height="360" loading="lazy" decoding="async"></div>
             <div class="beer-info-col">
                 <div class="beer-header-row">
                     <div class="beer-title-wrap">
@@ -392,17 +276,17 @@
                         <div class="price-col"><span class="p-val">32</span><span class="p-vol">0.5L</span></div>
                     </div>
                 </div>
-                <div class="beer-desc" data-i18n="desc_deranj_oranj">Bază de malt nemțesc din orz...</div>
+                <div class="beer-desc" data-i18n="desc_deranj_oranj">Bază de malt nemțesc din orz și grâu, peste care adăugăm hamei din Washington. Berea trece printr-un proces natural de fermentare și maturare la finalul căruia se adaugă extract de portocale 100% natural.</div>
                 <div class="deranj-pairing">
-                    <img src="assets/food/chickenleg.png" alt="Chicken Leg" style="width:30px;">
-                    <img src="assets/food/fries.png" alt="Fries" style="width:30px;">
+                    <img src="assets/food/chickenleg.webp" alt="Chicken Leg" width="96" height="90" loading="lazy" decoding="async">
+                    <img src="assets/food/fries.webp" alt="Fries" width="70" height="96" loading="lazy" decoding="async">
                 </div>
             </div>
         </div>
 
         <!-- Deranj IPA -->
         <div class="beer-card">
-            <div class="beer-img-col"><img src="assets/bottles/deranjipa.png" alt="Deranj IPA"></div>
+            <div class="beer-img-col"><img src="assets/bottles/deranjipa.webp" alt="Deranj IPA" width="240" height="360" loading="lazy" decoding="async"></div>
             <div class="beer-info-col">
                 <div class="beer-header-row">
                     <div class="beer-title-wrap">
@@ -416,17 +300,17 @@
                         <div class="price-col"><span class="p-val">35</span><span class="p-vol">0.5L</span></div>
                     </div>
                 </div>
-                <div class="beer-desc" data-i18n="desc_deranj_ipa">O bere de tip india Pale Ale brasată...</div>
+                <div class="beer-desc" data-i18n="desc_deranj_ipa">O bere de tip india Pale Ale brasată cu malțuri, hamei și drojdie de cea mai înaltă calitate, pentru un echilibru perfect.</div>
                 <div class="deranj-pairing">
-                    <img src="assets/food/chickenleg.png" alt="Chicken Leg" style="width:30px;">
-                    <img src="assets/food/burger.png" alt="Burger" style="width:30px;">
+                    <img src="assets/food/chickenleg.webp" alt="Chicken Leg" width="96" height="90" loading="lazy" decoding="async">
+                    <img src="assets/food/burger.webp" alt="Burger" width="96" height="83" loading="lazy" decoding="async">
                 </div>
             </div>
         </div>
 
         <!-- Deranj Doar O Bere -->
         <div class="beer-card">
-            <div class="beer-img-col"><img src="assets/bottles/deranjdoarobere.png" alt="Doar O Bere"></div>
+            <div class="beer-img-col"><img src="assets/bottles/deranjdoarobere.webp" alt="Doar O Bere" width="240" height="360" loading="lazy" decoding="async"></div>
             <div class="beer-info-col">
                 <div class="beer-header-row">
                     <div class="beer-title-wrap">
@@ -440,43 +324,46 @@
                         <div class="price-col"><span class="p-val">32</span><span class="p-vol">0.5L</span></div>
                     </div>
                 </div>
-                <div class="beer-desc" data-i18n="desc_deranj_doar">O bere care oferă echilibrul perfect...</div>
+                <div class="beer-desc" data-i18n="desc_deranj_doar">O bere care oferă echilibrul perfect dintre malț și hamei și care, printr-o maturare îndelungată, capătă arome intense și o savoare rafinată.</div>
                 <div class="deranj-pairing">
-                    <img src="assets/food/burger.png" alt="Burger" style="width:30px;">
-                    <img src="assets/food/fries.png" alt="Fries" style="width:30px;">
+                    <img src="assets/food/burger.webp" alt="Burger" width="96" height="83" loading="lazy" decoding="async">
+                    <img src="assets/food/fries.webp" alt="Fries" width="70" height="96" loading="lazy" decoding="async">
                 </div>
             </div>
         </div>
 
-        <h2 data-i18n="cat_special">SPECIAL BEERS & PACKS</h2>
+        <!-- ===== SPECIAL BEERS: XperimentALE + beer flight ===== -->
+        <h2 data-i18n="cat_special">GROUND ZERO SPECIAL BEERS</h2>
 
         <div class="food-card">
             <div class="food-header">
-                <h3 class="food-title">X<span style="font-weight:normal;">PERIMENT</span>ALE<span style="font-weight:normal;"> 029</span></h3>
+                <!-- Title: only "X" and "ALE" are bold -->
+                <h3 class="food-title">X<span class="light">PERIMENT</span>ALE<span class="light"> 029</span></h3>
                 <div class="beer-price-matrix">
                     <div class="price-col"><span class="p-val">22</span><span class="p-vol">0.2L</span></div>
                     <div class="price-col"><span class="p-val">43</span><span class="p-vol">0.4L</span></div>
                 </div>
             </div>
-            <div class="beer-subtitle" style="margin-bottom: 10px;">RUSSIAN IMPERIAL STOUT 12%</div>
-            <div class="food-desc" data-i18n="desc_x029">Pentru a crea un profil de malt...</div>
+            <div class="beer-subtitle spaced">RUSSIAN IMPERIAL STOUT 12%</div>
+            <div class="food-desc" data-i18n="desc_x029">O bere foarte apreciată în rândul cunoscătoriilor. Pentru a crea un profil de malț care să echilibreze atât dulceața, cât și amărăciunea acestui stil clasic, am adăugat boabe de cacao, cafea despecialitate, vanilie de Madagascar. Aroma rezultată este atât fină, cât și nuanțată. Descoperiți note de ciocolată, aromă de sherry, boabe de cacao și fructe negre.</div>
         </div>
 
         <div class="food-card">
             <div class="food-header">
-                <h3 class="food-title">X<span style="font-weight:normal;">PERIMENT</span>ALE<span style="font-weight:normal;"> 030</span></h3>
+                <h3 class="food-title">X<span class="light">PERIMENT</span>ALE<span class="light"> 030</span></h3>
                 <div class="beer-price-matrix">
                     <div class="price-col"><span class="p-val">17</span><span class="p-vol">0.2L</span></div>
                     <div class="price-col"><span class="p-val">33</span><span class="p-vol">0.4L</span></div>
                     <div class="price-col"><span class="p-val">119</span><span class="p-vol">1.5L</span></div>
                 </div>
             </div>
-            <div class="beer-subtitle" style="margin-bottom: 10px;">CITRIC PILS 5.2%</div>
-            <div class="food-desc" data-i18n="desc_x030">Pils german nefiltrat...</div>
+            <div class="beer-subtitle spaced">CITRIC PILS 5.2%</div>
+            <div class="food-desc" data-i18n="desc_x030">Pils german nefiltrat, cu malt din regiunea Bamber Germania, hamei Mandarina Bavaria - arome citrice, amăreală fină, gust super răcoritor.</div>
         </div>
 
         <div class="food-card">
             <div class="food-header">
+                <!-- Beer flight: the quantity sits under the price like the other items -->
                 <h3 class="food-title" data-i18n="name_pachet">PACHET DEGUSTARE</h3>
                 <div class="beer-price-matrix">
                     <div class="price-col"><span class="p-val">59</span><span class="p-vol">5 X 100ML</span></div>
@@ -485,12 +372,13 @@
             <div class="food-desc" data-i18n="desc_pachet">Easy Rider, Morning Glory, Split the Pot, Imperial Fuck, Black Hole</div>
         </div>
 
+        <!-- ===== GUEST BEERS & EXTRA: Schneider, spritz, ciders, soft drinks ===== -->
         <h2 data-i18n="cat_guest">GUEST BEERS & EXTRA</h2>
-        
+
         <div class="food-card">
             <div class="food-header">
                 <div class="beer-title-wrap">
-                    <h3 class="food-title">SCHNEIDER WEISSE <span style="font-weight: normal;">TAP 1</span></h3>
+                    <h3 class="food-title">SCHNEIDER WEISSE <span class="light">TAP 1</span></h3>
                     <div class="beer-subtitle">Helle Weisse 4.9%</div>
                 </div>
                 <div class="beer-price-matrix">
@@ -498,11 +386,11 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="food-card">
             <div class="food-header">
                 <div class="beer-title-wrap">
-                    <h3 class="food-title">SCHNEIDER WEISSE <span style="font-weight: normal;">TAP 3</span></h3>
+                    <h3 class="food-title">SCHNEIDER WEISSE <span class="light">TAP 3</span></h3>
                     <div class="beer-subtitle">ALKOHOLFREE &lt;0.5%</div>
                 </div>
                 <div class="beer-price-matrix">
@@ -510,11 +398,11 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="food-card">
             <div class="food-header">
                 <div class="beer-title-wrap">
-                    <h3 class="food-title">SCHNEIDER WEISSE <span style="font-weight: normal;">TAP 5</span></h3>
+                    <h3 class="food-title">SCHNEIDER WEISSE <span class="light">TAP 5</span></h3>
                     <div class="beer-subtitle">Hopfenweisse 8.2%</div>
                 </div>
                 <div class="beer-price-matrix">
@@ -611,14 +499,22 @@
             </div>
         </div>
 
-        <div class="food-card"><div class="food-header"><h3 class="food-title" data-i18n="name_fritz">FRITZ-KOLA +/- ZAHĂR</h3><div class="beer-price-matrix"><div class="price-col"><span class="p-val">19</span><span class="p-vol">0.33L</span></div></div></div></div>
+        <div class="food-card">
+            <div class="food-header">
+                <h3 class="food-title" data-i18n="name_fritz">FRITZ-KOLA +/- ZAHĂR</h3>
+                <div class="beer-price-matrix">
+                    <div class="price-col"><span class="p-val">19</span><span class="p-vol">0.33L</span></div>
+                </div>
+            </div>
+        </div>
 
     </div>
 
     <!-- FOOD SECTION -->
     <div id="section-food" class="content-section hidden">
+        <!-- Food cards: name + price/weight; description, allergens and beer pairing come from js/lang.js -->
         <h2 data-i18n="cat_food_main">MENIU DE BUNĂTĂȚI</h2>
-        
+
         <div class="food-card">
             <div class="food-header">
                 <h3 class="food-title" data-i18n="name_carnat">CÂRNAT ÎMPUȘCAT</h3>
@@ -626,10 +522,9 @@
                     <div class="price-col"><span class="p-val">45</span><span class="p-vol">~320 g</span></div>
                 </div>
             </div>
-            <div class="food-desc" data-i18n="desc_carnat">Cârnat kasekrainer de porc... <br><br>Pairing: Red Ale, Pale Ale - <strong>Amber Guerre, Easy Rider</strong></div>
+            <div class="food-desc" data-i18n="desc_carnat">Cârnat kasekrainer de porc cu brânză, muștar, castravete murat, pâine.<br><i>Alergeni: gluten, muștar, lactate</i><br><b>Savurează cu:</b> Helles, Kolsch - <strong>Deranj Blonda</strong>, <strong>Deranj Doar O Bere</strong></div>
         </div>
 
-        <!-- Mutat aici, fix sub Carnat Impuscat -->
         <div class="food-card">
             <div class="food-header">
                 <h3 class="food-title" data-i18n="name_curry">CURRYWURST</h3>
@@ -637,7 +532,7 @@
                     <div class="price-col"><span class="p-val">40</span><span class="p-vol">~340 g</span></div>
                 </div>
             </div>
-            <div class="food-desc" data-i18n="desc_curry">Kasekrainer de porc, cartofi prăjiti...</div>
+            <div class="food-desc" data-i18n="desc_curry">Kasekrainer de porc, cartofi prăjiti, ketchup, ceapă prăjită, curry.<br><i>Alergeni: țelină, lactoză</i><br><b>Savurează cu:</b> IPA - <strong>Morning Glory</strong></div>
         </div>
 
         <div class="food-card">
@@ -647,17 +542,18 @@
                     <div class="price-col"><span class="p-val">37</span><span class="p-vol">~280 g</span></div>
                 </div>
             </div>
-            <div class="food-desc" data-i18n="desc_aripi_bbq">Aripioare glazurate cu sos BBQ...</div>
+            <div class="food-desc" data-i18n="desc_aripi_bbq">Aripioare glazurate cu sos BBQ și presărate cu ceapă verde.<br><i>Alergeni: muștar, susan, soia</i><br><b>Savurează cu:</b> Kolsch - <strong>Deranj Blondă</strong></div>
         </div>
 
         <div class="food-card">
             <div class="food-header">
-                <h3 class="food-title"><span data-i18n="name_aripi_picante">ARIPIOARE ÎNFLĂCĂRATE</span><img src="assets/food/chilli.png" alt="Chilli" class="chilli-icon"></h3>
+                <!-- Spicy item: chilli icon sits outside the translated span so it survives language switching -->
+                <h3 class="food-title"><span data-i18n="name_aripi_picante">ARIPIOARE ÎNFLĂCĂRATE</span><img src="assets/food/chilli.webp" alt="Chilli" class="chilli-icon" width="64" height="96" loading="lazy" decoding="async"></h3>
                 <div class="beer-price-matrix">
                     <div class="price-col"><span class="p-val">39</span><span class="p-vol">~280 g</span></div>
                 </div>
             </div>
-            <div class="food-desc" data-i18n="desc_aripi_picante">Aripioare glazurate cu sos Gochujang...</div>
+            <div class="food-desc" data-i18n="desc_aripi_picante">Aripioare glazurate cu sos Gochujang și presărate cu ceapă verde.<br><i>Alergeni: muștar, susan, soia</i><br><b>Savurează cu:</b> NEIPA - <strong>Split the Pot</strong>, <strong>Deranj IPA</strong></div>
         </div>
 
         <div class="food-card">
@@ -667,7 +563,7 @@
                     <div class="price-col"><span class="p-val">62</span><span class="p-vol">~400 g</span></div>
                 </div>
             </div>
-            <div class="food-desc" data-i18n="desc_coaste">Coaste de porc glazurate cu sos BBQ...</div>
+            <div class="food-desc" data-i18n="desc_coaste">Coaste de porc* glazurate cu sos BBQ presărate cu ceapă verde.<br><i>Alergeni: gluten, alune</i><br><b>Savurează cu:</b> Imperial Stout, Porter - <strong>Black Hole</strong></div>
         </div>
 
         <div class="food-card">
@@ -677,7 +573,7 @@
                     <div class="price-col"><span class="p-val">47</span><span class="p-vol">~270 g</span></div>
                 </div>
             </div>
-            <div class="food-desc" data-i18n="desc_chiftea">Smash Burger de vită...</div>
+            <div class="food-desc" data-i18n="desc_chiftea">Smash Burger de vită, cheddar, castravete murat, ceapă roșie, mustar, ketchup, chiflă cu unt.<br><i>Alergeni: gluten, ou, lactate, muștar, țelină</i><br><b>Savurează cu:</b> Red Ale, Pale Ale - <strong>Amber Guerre</strong>, <strong>Easy Rider</strong></div>
         </div>
 
         <div class="food-card">
@@ -687,7 +583,7 @@
                     <div class="price-col"><span class="p-val">49</span><span class="p-vol">~290 g</span></div>
                 </div>
             </div>
-            <div class="food-desc" data-i18n="desc_chiftea_tunata">Smash Burger de vită cu bacon și jalapeno...</div>
+            <div class="food-desc" data-i18n="desc_chiftea_tunata">Smash Burger de vită, cheddar, bacon, jalapeno murat, fulgi de ceapă prăjită, sos BBQ, chiflă cu unt.<br><i>Alergeni: gluten, ou, lactate, muștar, sulfiți - poate conține urme de țelină, soia, lupin, susan</i><br><b>Savurează cu:</b> Red Ale, IPA - <strong>Amber Guerre</strong>, <strong>Morning Glory</strong>, <strong>Imperial Fuck</strong></div>
         </div>
 
         <div class="food-card">
@@ -697,7 +593,7 @@
                     <div class="price-col"><span class="p-val">68</span><span class="p-vol">~400 g</span></div>
                 </div>
             </div>
-            <div class="food-desc" data-i18n="desc_chiftea_dubla">Smash Burger de vită x2...</div>
+            <div class="food-desc" data-i18n="desc_chiftea_dubla">Smash Burger de vită x2, cheddar x2, castravete murat, ceapă roșie, mustar, ketchup, chiflă cu unt.<br><i>Alergeni: gluten, ou, lactate, muștar, țelină</i><br><b>Savurează cu:</b> Red Ale, Pale Ale - <strong>Amber Guerre</strong>, <strong>Easy Rider</strong></div>
         </div>
 
         <div class="food-card">
@@ -707,7 +603,7 @@
                     <div class="price-col"><span class="p-val">50</span><span class="p-vol">~270 g</span></div>
                 </div>
             </div>
-            <div class="food-desc" data-i18n="desc_chiftea_vara">Burger cu iceberg salad, tartar sauce...</div>
+            <div class="food-desc" data-i18n="desc_chiftea_vara">Smash Burger de vită x2, cheddar x2, castravete murat, ceapă roșie, mustar, ketchup, chiflă cu unt.<br><i>Alergeni: lactate, ou, gluten, muștar</i><br><b>Savurează cu:</b> IPA - <strong>Split The Pot</strong>, <strong>Imperial fuck</strong></div>
         </div>
 
         <div class="food-card">
@@ -717,17 +613,17 @@
                     <div class="price-col"><span class="p-val">65</span><span class="p-vol">~500 g</span></div>
                 </div>
             </div>
-            <div class="food-desc" data-i18n="desc_mamaliga">Nachos, sos ardei copt... <br><br><i>Alergeni: Lactoză (sau de completat în lang.js)</i></div>
+            <div class="food-desc" data-i18n="desc_mamaliga">Nachos, sos ardei copt, sprinkle bacon, mix de 4 brânzeturi, jalapeno murat, ceapă verde, guacamole, salsa de roșii coapte.<br><i>Alergeni: gluten, lactate - poate conține urme de muștar, țelină</i><br><b>Savurează cu:</b> Pale Ale - <strong>Easy Rider</strong></div>
         </div>
 
         <div class="food-card">
             <div class="food-header">
-                <h3 class="food-title"><span data-i18n="name_cartofi_cor">CARTOFI COREENI</span><img src="assets/food/chilli.png" alt="Chilli" class="chilli-icon"></h3>
+                <h3 class="food-title"><span data-i18n="name_cartofi_cor">CARTOFI COREENI</span><img src="assets/food/chilli.webp" alt="Chilli" class="chilli-icon" width="64" height="96" loading="lazy" decoding="async"></h3>
                 <div class="beer-price-matrix">
                     <div class="price-col"><span class="p-val">32</span><span class="p-vol">~300 g</span></div>
                 </div>
             </div>
-            <div class="food-desc" data-i18n="desc_cartofi_cor">Cartofi proaspeți prăjiți cu sos de maioneză... <br><br><i>Alergeni: de completat în lang.js</i></div>
+            <div class="food-desc" data-i18n="desc_cartofi_cor">Cartofi proaspeți prăjiți cu sos de maioneză și Gochujang, ceapă verde, ceapă prăjită și semințe de susan.<br><i>Alergeni: soia, gluten, ou, muștar, susan</i><br><b>Savurează cu:</b> IPA - <strong>Morning Glory</strong>, <strong>Imperial Fuck</strong></div>
         </div>
 
         <div class="food-card">
@@ -747,7 +643,7 @@
                     <div class="price-col"><span class="p-val">23</span><span class="p-vol">~200 g</span></div>
                 </div>
             </div>
-            <div class="food-desc" data-i18n="desc_cartofi_branza">Cartofi proaspeți prăjiți presărați...</div>
+            <div class="food-desc" data-i18n="desc_cartofi_branza">Cartofi proaspeți prăjiți presărați cu Grana Padano sau telemea de oaie.<br><i>Alergeni: lactate</i></div>
         </div>
 
         <div class="food-card">
@@ -757,32 +653,28 @@
                     <div class="price-col"><span class="p-val">5</span><span class="p-vol">~40 ml</span></div>
                 </div>
             </div>
-            <div class="food-desc" data-i18n="desc_sos">
-                Sos de maioneză picantă<br>
-                Ketchup<br>
-                Mustar<br>
-                Sos BBQ
-            </div>
+            <div class="food-desc" data-i18n="desc_sos">Sos de maioneză picantă<br>Sos de maioneză<br>Sos de maioneză cu usturoi<br>Ketchup<br>Sos de Barbeque<br><i>Alergeni: ou, soia, muștar, sulfiți</i></div>
         </div>
 
+        <!-- Legend: * = frozen product + full allergen list -->
         <div class="food-legend" data-i18n="food_legend"><strong>Legendă:</strong> *produs / din produs congelat<br>Listă Alergeni: nuci, gluten, lactate, lupin, muștar, ou, pește, soia, sulfiți, susan, țelină</div>
     </div>
 
-    <!-- FLYER BUTTONS -->
+    <!-- FLYER BUTTONS: link to the RO or EN brand PDF (href swapped by data-i18n-href) -->
     <div class="flyer-buttons">
-        <a href="assets/pdf/ground_zero_pliant_ro.pdf" data-i18n="btn_flyer_gz" data-i18n-href="link_flyer_gz" target="_blank" class="btn-flyer" style="padding: 22px; font-size: 16px;">DESPRE GAMA GROUND ZERO</a>
-        <a href="assets/pdf/deranj_pliant_ro.pdf" data-i18n="btn_flyer_deranj" data-i18n-href="link_flyer_deranj" target="_blank" class="btn-flyer" style="padding: 22px; font-size: 16px;">DESPRE GAMA DERANJ</a>
+        <a href="assets/pdf/ground_zero_pliant_ro.pdf" data-i18n="btn_flyer_gz" data-i18n-href="link_flyer_gz" target="_blank" rel="noopener" class="btn-flyer">DESPRE GAMA GROUND ZERO</a>
+        <a href="assets/pdf/deranj_pliant_ro.pdf" data-i18n="btn_flyer_deranj" data-i18n-href="link_flyer_deranj" target="_blank" rel="noopener" class="btn-flyer">DESPRE GAMA DERANJ</a>
     </div>
 
 </div>
 
-<!-- BANNER SERVIRE PERMANENT -->
+<!-- Floating service banner (hidden automatically near the bottom of the page, see script.js) -->
 <div class="service-banner">
     <span class="service-icon">🍻</span>
     <span data-i18n="service_toast">Comanda și servirea la bar / Apreciem debarasarea</span>
 </div>
 
-<script src="js/lang.js"></script>
-<script src="js/script.js"></script>
+<script src="js/lang.js?v=3"></script>
+<script src="js/script.js?v=3"></script>
 </body>
 </html>

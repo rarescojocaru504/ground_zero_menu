@@ -1,91 +1,83 @@
+/*
+ * Ground Zero QR menu – page behaviour
+ *  1. Language switcher (RO / EN) using the `translations` object from lang.js
+ *  2. Drinks / Food tabs
+ *  3. Sticky header offset (tabs stick right under the Review + RO/EN bar)
+ *  4. Floating service banner that hides near the bottom of the page
+ */
+
+/* ---------- 1. Language ---------- */
+
 let currentLang = 'ro';
 
-function setLanguage(lang) {
+// Replace every translatable text/link with the strings for `lang`.
+function applyTranslations(lang) {
+    const strings = translations[lang];
+    if (!strings) return;
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const value = strings[el.getAttribute('data-i18n')];
+        if (value) el.innerHTML = value;           // values may contain <br>, <i>, <b>, <strong>
+    });
+
+    document.querySelectorAll('[data-i18n-href]').forEach(el => {
+        const value = strings[el.getAttribute('data-i18n-href')];
+        if (value) el.setAttribute('href', value);
+    });
+
+    document.querySelectorAll('.language-switcher a').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+
+    document.documentElement.lang = lang;          // correct <html lang> for screen readers / translators
     currentLang = lang;
+}
+
+// Switch language with a short fade (the fade duration matches .container transition in CSS).
+function setLanguage(lang) {
+    if (lang === currentLang) return;
     const container = document.querySelector('.container');
     container.classList.add('fade-out');
-
     setTimeout(() => {
-        document.querySelectorAll('[data-i18n]').forEach(el => {
-            const key = el.getAttribute('data-i18n');
-            if (translations[lang] && translations[lang][key]) {
-                el.innerHTML = translations[lang][key]; 
-            }
-        });
-
-        document.querySelectorAll('[data-i18n-href]').forEach(el => {
-            const key = el.getAttribute('data-i18n-href');
-            if (translations[lang] && translations[lang][key]) {
-                el.setAttribute('href', translations[lang][key]);
-            }
-        });
-
-        document.querySelectorAll('.language-switcher a').forEach(btn => {
-            btn.classList.remove('active');
-            if (btn.getAttribute('data-lang') === lang) {
-                btn.classList.add('active');
-            }
-        });
-
+        applyTranslations(lang);
         container.classList.remove('fade-out');
     }, 200);
 }
 
 document.querySelectorAll('.language-switcher a').forEach(btn => {
-    btn.addEventListener('click', (e) => {
+    btn.addEventListener('click', e => {
         e.preventDefault();
-        const targetLang = e.target.getAttribute('data-lang');
-        setLanguage(targetLang);
+        setLanguage(e.currentTarget.dataset.lang);
     });
 });
 
-const btnDrinks = document.getElementById('btn-drinks');
-const btnFood = document.getElementById('btn-food');
-const sectionDrinks = document.getElementById('section-drinks');
-const sectionFood = document.getElementById('section-food');
+// Initial render in Romanian (no fade on first load).
+applyTranslations('ro');
 
-btnDrinks.addEventListener('click', () => {
-    btnDrinks.classList.add('active');
-    btnFood.classList.remove('active');
-    sectionDrinks.classList.remove('hidden');
-    sectionFood.classList.add('hidden');
-    
-    // Scroll to the top when switching tabs
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-});
 
-btnFood.addEventListener('click', () => {
-    btnFood.classList.add('active');
-    btnDrinks.classList.remove('active');
-    sectionFood.classList.remove('hidden');
-    sectionDrinks.classList.add('hidden');
-    
-    // Scroll to the top when switching tabs
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-});
+/* ---------- 2. Drinks / Food tabs ---------- */
 
-// Call setLanguage immediately on page load to translate the Menu buttons as well
-document.addEventListener('DOMContentLoaded', () => {
-    setLanguage('ro');
-});
+const tabs = [
+    { button: document.getElementById('btn-drinks'), section: document.getElementById('section-drinks') },
+    { button: document.getElementById('btn-food'),   section: document.getElementById('section-food') }
+];
 
-// Logica pentru Service Banner
-const serviceBanner = document.querySelector('.service-banner');
+function showTab(activeButton) {
+    tabs.forEach(({ button, section }) => {
+        const isActive = button === activeButton;
+        button.classList.toggle('active', isActive);
+        section.classList.toggle('hidden', !isActive);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });  // start the new tab from the top
+}
 
-window.addEventListener('scroll', () => {
-    // Verificam daca utilizatorul a facut scroll pana jos de tot
-    const scrollPosition = window.innerHeight + window.scrollY;
-    const documentHeight = document.body.offsetHeight;
+tabs.forEach(({ button }) => button.addEventListener('click', () => showTab(button)));
 
-    // Daca mai sunt sub 60 de pixeli pana jos, ascundem bannerul usor
-    if (documentHeight - scrollPosition < 60) {
-        serviceBanner.classList.add('hidden-on-scroll');
-    } else {
-        serviceBanner.classList.remove('hidden-on-scroll');
-    }
-});
 
-// Keep the menu tabs stuck right under the sticky top bar (Review + RO/EN)
+/* ---------- 3. Sticky header offset ---------- */
+
+// The tabs bar sticks at `top: var(--topbar-h)`; measure the real top-bar height
+// so the two sticky bars never overlap (height can change with font size / zoom).
 function setTopbarHeight() {
     const topBar = document.querySelector('.top-bar');
     if (topBar) {
@@ -93,5 +85,19 @@ function setTopbarHeight() {
     }
 }
 setTopbarHeight();
-window.addEventListener('load', setTopbarHeight);
+window.addEventListener('load', setTopbarHeight);      // again after fonts/images are loaded
 window.addEventListener('resize', setTopbarHeight);
+
+
+/* ---------- 4. Floating service banner ---------- */
+
+// Hide the banner when the user is within 60px of the bottom,
+// so it doesn't cover the flyer buttons.
+const serviceBanner = document.querySelector('.service-banner');
+
+function updateServiceBanner() {
+    const distanceToBottom = document.body.offsetHeight - (window.innerHeight + window.scrollY);
+    serviceBanner.classList.toggle('hidden-on-scroll', distanceToBottom < 60);
+}
+
+window.addEventListener('scroll', updateServiceBanner, { passive: true });

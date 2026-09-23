@@ -1,94 +1,275 @@
-/* details button */
-.btn-details {
-    background-color: #333;
-    border: 1px solid #555;
-    color: #bef300;
-    padding: 3px 10px;
+/* =========================================================================
+   Ground Zero – QR menu styles
+   Dark, PDF-like layout optimised for phones (max content width 600px).
+   Accent colour: #bef300 (Ground Zero lime).
+   ========================================================================= */
+
+:root {
+    --bg: #111;
+    --bg-soft: #222;
+    --border: #444;
+    --border-soft: #222;
+    --text: #fff;
+    --text-muted: #ccc;
+    --text-dim: #aaa;
+    --text-faint: #888;
+    --accent: #bef300;
+    --topbar-h: 50px; /* real value is measured in script.js */
+}
+
+/* ---------- Base ---------- */
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 0 0 80px;          /* room for the floating service banner */
+    line-height: 1.4;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 15px;
+    position: relative;
+    transition: opacity 0.2s ease-in-out;
+}
+.container.fade-out { opacity: 0; }   /* used while switching language */
+
+/* Normal-weight part inside a bold title, e.g. "SCHNEIDER WEISSE <light>TAP 1</light>" */
+.light { font-weight: normal; }
+
+/* ---------- Top bar: Review + RO/EN (sticky) ---------- */
+.top-bar {
+    position: sticky;
+    top: 0;
+    z-index: 101;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: -15px -15px 20px;   /* stretch over the container padding */
+    padding: 10px 15px;
+    background-color: var(--bg);
+}
+
+.review-btn-top {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 12px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+}
+.review-btn-top span { font-size: 14px; }
+
+.language-switcher { display: flex; gap: 5px; }
+.language-switcher a {
+    padding: 6px 10px;
+    border: 1px solid var(--border);
     border-radius: 4px;
+    color: var(--text-faint);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+}
+.language-switcher a.active {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: #000;
+}
+
+/* ---------- Logo ---------- */
+.header { text-align: center; margin-bottom: 30px; }
+.logo { width: 160px; height: auto; display: block; margin: 0 auto; }
+
+/* ---------- Drinks / Food tabs (sticky, right under the top bar) ---------- */
+.menu-tabs {
+    position: sticky;
+    top: var(--topbar-h);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    padding: 15px 0;
+    background-color: var(--bg);   /* solid, so scrolled text never shows through */
+    border-bottom: 1px solid #333;
+}
+.tab-btn {
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 5px;
+    color: var(--text-faint);
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.tab-btn.active { color: var(--text); border-bottom-color: var(--text); }
+
+/* ---------- Section titles ---------- */
+h2 {
+    margin: 30px 0 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    font-size: 22px;
+    letter-spacing: 1px;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+/* ---------- Beer card (bottle image + info) ---------- */
+.beer-card {
+    display: flex;
+    margin-bottom: 35px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid var(--border-soft);
+}
+.beer-img-col {
+    width: 80px;
+    flex-shrink: 0;
+    margin-right: 15px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+.beer-img-col img { width: 100%; height: auto; max-height: 250px; object-fit: contain; }
+
+.beer-info-col { flex-grow: 1; display: flex; flex-direction: column; }
+.beer-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+.beer-title {
+    margin: 0;
+    color: var(--text);
+    font-size: 19px;
+    font-weight: 900;
+    line-height: 1.1;
+    text-transform: uppercase;
+}
+.beer-subtitle {
+    margin-top: 4px;
+    color: var(--text-dim);
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+.beer-subtitle.spaced { margin-bottom: 10px; }
+
+/* Price matrix: price on top, volume/quantity under it */
+.beer-price-matrix { display: flex; gap: 12px; text-align: center; }
+.price-col { display: flex; flex-direction: column; }
+.p-val { color: var(--accent); font-size: 17px; font-weight: bold; line-height: 1; }
+.p-vol { margin-top: 4px; color: var(--text-faint); font-size: 10px; }
+
+.beer-desc { margin-bottom: 15px; color: var(--text-muted); font-size: 13px; line-height: 1.5; }
+
+/* Taste bars (hops / clarity / bitterness) + food pairing icons */
+.beer-stats-pairing { display: flex; justify-content: space-between; align-items: flex-end; }
+.beer-stats {
+    flex-grow: 1;
+    margin-right: 15px;
+    color: var(--text-dim);
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.stat-row { display: flex; align-items: center; margin-bottom: 4px; }
+.stat-row > span { width: 80px; }
+.stat-bar { flex-grow: 1; height: 6px; background: #333; border-radius: 3px; overflow: hidden; }
+.stat-bar > div { height: 100%; background: #ddd; }   /* width set inline = bar value */
+
+.food-pairing,
+.deranj-pairing { display: flex; justify-content: flex-end; align-items: center; gap: 10px; }
+.deranj-pairing { margin-top: 5px; }                   /* Deranj cards have no taste bars */
+.food-pairing img,
+.deranj-pairing img { width: 32px; height: 32px; object-fit: contain; opacity: 0.8; }
+
+/* ---------- Simple card (special beers, extras, food) ---------- */
+.food-card { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid var(--border-soft); }
+.food-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+.food-title {
+    margin: 0;
+    color: var(--text);
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+.food-desc { color: var(--text-muted); font-size: 13px; line-height: 1.5; }
+.food-desc strong,
+.food-desc b { color: var(--text); font-weight: bold; }   /* pairing label + beer names */
+
+.chilli-icon { height: 20px; width: auto; margin-left: 4px; vertical-align: -2px; }
+
+/* Legend at the end of the food menu (* frozen + allergen list) */
+.food-legend { margin-top: 10px; color: var(--text-dim); font-size: 11px; line-height: 1.5; }
+.food-legend strong { color: var(--text); }
+
+/* ---------- Flyer (PDF) buttons ---------- */
+.flyer-buttons { display: flex; flex-direction: column; gap: 15px; margin: 50px 0; }
+.btn-flyer {
+    display: block;
+    padding: 22px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background-color: var(--bg-soft);
+    color: var(--text);
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 0.1s;
+}
+.btn-flyer:active { transform: scale(0.97); }
+
+/* ---------- Floating "order at the bar" banner ---------- */
+.service-banner {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    max-width: 95%;
+    padding: 8px 15px;
+    border: 1px solid var(--accent);
+    border-radius: 30px;
+    background-color: rgba(17, 17, 17, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.8), 0 0 10px rgba(190, 243, 0, 0.2);
+    color: var(--text);
     font-size: 11px;
     font-weight: bold;
-    cursor: pointer;
-    margin-left: 10px;
     white-space: nowrap;
-}
-
-/* global modal */
-.modal {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background-color: rgba(0, 0, 0, 0.85);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
+    pointer-events: none;       /* never blocks taps on the menu */
     opacity: 1;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
+.service-banner.hidden-on-scroll { opacity: 0; transform: translate(-50%, 20px); }  /* hidden near page bottom */
+.service-icon { font-size: 17px; }
 
-.modal.hidden-modal {
-    opacity: 0;
-    pointer-events: none;
+/* ---------- Tab visibility ---------- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
-
-.modal-content {
-    background-color: #1a1a1a;
-    border: 1px solid #333;
-    padding: 25px;
-    border-radius: 12px;
-    width: 85%;
-    max-width: 400px;
-    position: relative;
-    text-align: center;
-    transform: translateY(0);
-    transition: transform 0.3s ease;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
-
-.modal.hidden-modal .modal-content {
-    transform: translateY(30px);
-}
-
-.close-modal {
-    position: absolute;
-    top: 5px; right: 15px;
-    font-size: 28px;
-    cursor: pointer;
-    color: #aaa;
-}
-
-.modal-img {
-    width: 100%;
-    height: 160px;
-    background-color: #333;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-    color: #666;
-    font-weight: bold;
-    border: 1px dashed #555;
-}
-
-#modal-title {
-    color: #bef300;
-    margin-top: 0;
-    margin-bottom: 10px;
-    font-size: 18px;
-}
-
-#modal-desc {
-    font-size: 14px;
-    color: #ccc;
-    margin-bottom: 15px;
-}
-
-#modal-details {
-    font-size: 14px;
-    font-weight: bold;
-    color: #fff;
-    background: #222;
-    padding: 10px;
-    border-radius: 6px;
-    border: 1px solid #444;
-}
+.content-section { display: block; }
+.content-section:not(.hidden) { animation: fadeIn 0.4s ease-out forwards; }
+.content-section.hidden { display: none; }
