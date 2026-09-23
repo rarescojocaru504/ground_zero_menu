@@ -24,7 +24,7 @@ const translations = {
         desc_deranj_ipa: "O bere de tip india Pale Ale brasată cu malțuri, hamei și drojdie de cea mai înaltă calitate, pentru un echilibru perfect.",
         desc_deranj_doar: "O bere care oferă echilibrul perfect dintre malț și hamei și care, printr-o maturare îndelungată, capătă arome intense și o savoare rafinată.",
 
-        desc_x029: "Pentru a crea un profil de malt care să echilibreze dulceaţa și amărăciunea am adăugat boabe de cacao, cafea de specialitate, vanilie de Madagascar. Note de ciocolată, sherry și fructe negre.",
+        desc_x029: "O bere foarte apreciată în rândul cunoscătoriilor. Pentru a crea un profil de malț care să echilibreze atât dulceața, cât și amărăciunea acestui stil clasic, am adăugat boabe de cacao, cafea despecialitate, vanilie de Madagascar. Aroma rezultată este atât fină, cât și nuanțată. Descoperiți note de ciocolată, aromă de sherry, boabe de cacao și fructe negre.",
         desc_x030: "Pils german nefiltrat, cu malt din regiunea Bamber Germania, hamei Mandarina Bavaria - arome citrice, amăreală fină, gust super răcoritor.",
         name_pachet: "PACHET DEGUSTARE", desc_pachet: "Easy Rider, Morning Glory, Split the Pot, Imperial Fuck, Black Hole",
 
