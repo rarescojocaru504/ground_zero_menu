@@ -41,20 +41,26 @@
         .beer-title { font-size: 19px; font-weight: 900; color: #fff; margin: 0; line-height: 1.1; text-transform: uppercase; }
         .beer-subtitle { font-size: 11px; color: #aaa; text-transform: uppercase; margin-top: 4px; letter-spacing: 0.5px; }
         
-        /* PRICE MATRIX - Galben fosforescent Ground Zero (#bef300 / #bef300) */
+        /* PRICE MATRIX - Galben fosforescent Ground Zero (#bef300) */
         .beer-price-matrix { display: flex; gap: 12px; text-align: center; }
         .price-col { display: flex; flex-direction: column; }
         .p-val { font-size: 17px; font-weight: bold; color: #bef300; line-height: 1; }
         .p-vol { font-size: 10px; color: #888; margin-top: 4px; }
         
-        /* DESC & BARS */
+        /* DESC & BARS & PAIRING */
         .beer-desc { font-size: 13px; color: #ccc; line-height: 1.5; margin-bottom: 15px; }
-        .beer-stats { font-size: 10px; color: #aaa; text-transform: uppercase; font-weight: bold; }
+        .beer-stats-pairing { display: flex; justify-content: space-between; align-items: flex-end; }
+        .beer-stats { font-size: 10px; color: #aaa; text-transform: uppercase; font-weight: bold; flex-grow: 1; margin-right: 15px;}
         .stat-row { display: flex; align-items: center; margin-bottom: 4px; }
         .stat-row > span { width: 80px; }
         .stat-bar { flex-grow: 1; height: 6px; background: #333; border-radius: 3px; overflow: hidden; }
         .stat-bar > div { height: 100%; background: #ddd; }
         
+        /* FOOD PAIRING ICONS */
+        .food-pairing { display: flex; gap: 10px; align-items: center; justify-content: flex-end; }
+        .food-pairing img { width: 30px; height: auto; opacity: 0.8; }
+        .deranj-pairing { margin-top: 15px; display: flex; justify-content: flex-start; gap: 15px; } /* Pt Deranj care nu au bari */
+
         /* FOOD CARD */
         .food-card { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #222; }
         .food-header { display: flex; justify-content: space-between; align-items: baseline; }
@@ -94,8 +100,8 @@
     </div>
 
     <div class="menu-tabs">
-        <button id="btn-drinks" class="tab-btn active" data-i18n="tab_drinks">BĂUTURI</button>
-        <button id="btn-food" class="tab-btn" data-i18n="tab_food">MÂNCARE</button>
+        <button id="btn-drinks" class="tab-btn active" data-i18n="tab_drinks">DRINKS</button>
+        <button id="btn-food" class="tab-btn" data-i18n="tab_food">FOOD</button>
     </div>
 
     <!-- DRINKS SECTION -->
@@ -120,10 +126,16 @@
                     </div>
                 </div>
                 <div class="beer-desc" data-i18n="desc_easy_rider">Bere cu o concentrație mai scăzută...</div>
-                <div class="beer-stats">
-                    <div class="stat-row"><span data-i18n="stat_hops">HAMEI</span><div class="stat-bar"><div style="width: 40%"></div></div></div>
-                    <div class="stat-row"><span data-i18n="stat_clarity">CLARITATE</span><div class="stat-bar"><div style="width: 20%"></div></div></div>
-                    <div class="stat-row"><span data-i18n="stat_bitterness">AMĂREALĂ</span><div class="stat-bar"><div style="width: 20%"></div></div></div>
+                <div class="beer-stats-pairing">
+                    <div class="beer-stats">
+                        <div class="stat-row"><span data-i18n="stat_hops">HAMEI</span><div class="stat-bar"><div style="width: 50%"></div></div></div>
+                        <div class="stat-row"><span data-i18n="stat_clarity">CLARITATE</span><div class="stat-bar"><div style="width: 50%"></div></div></div>
+                        <div class="stat-row"><span data-i18n="stat_bitterness">AMĂREALĂ</span><div class="stat-bar"><div style="width: 40%"></div></div></div>
+                    </div>
+                    <div class="food-pairing">
+                        <img src="assets/food/sandwhich.png" alt="Sandwich">
+                        <img src="assets/food/fries.png" alt="Fries">
+                    </div>
                 </div>
             </div>
         </div>
@@ -145,10 +157,16 @@
                     </div>
                 </div>
                 <div class="beer-desc" data-i18n="desc_morning_glory">Exotică, cu note de mango...</div>
-                <div class="beer-stats">
-                    <div class="stat-row"><span data-i18n="stat_hops">HAMEI</span><div class="stat-bar"><div style="width: 80%"></div></div></div>
-                    <div class="stat-row"><span data-i18n="stat_clarity">CLARITATE</span><div class="stat-bar"><div style="width: 50%"></div></div></div>
-                    <div class="stat-row"><span data-i18n="stat_bitterness">AMĂREALĂ</span><div class="stat-bar"><div style="width: 60%"></div></div></div>
+                <div class="beer-stats-pairing">
+                    <div class="beer-stats">
+                        <div class="stat-row"><span data-i18n="stat_hops">HAMEI</span><div class="stat-bar"><div style="width: 70%"></div></div></div>
+                        <div class="stat-row"><span data-i18n="stat_clarity">CLARITATE</span><div class="stat-bar"><div style="width: 60%"></div></div></div>
+                        <div class="stat-row"><span data-i18n="stat_bitterness">AMĂREALĂ</span><div class="stat-bar"><div style="width: 80%"></div></div></div>
+                    </div>
+                    <div class="food-pairing">
+                        <img src="assets/food/burger.png" alt="Burger">
+                        <img src="assets/food/fries.png" alt="Fries">
+                    </div>
                 </div>
             </div>
         </div>
@@ -170,10 +188,16 @@
                     </div>
                 </div>
                 <div class="beer-desc" data-i18n="desc_split_pot">O bere cu tărie crescută...</div>
-                <div class="beer-stats">
-                    <div class="stat-row"><span data-i18n="stat_hops">HAMEI</span><div class="stat-bar"><div style="width: 70%"></div></div></div>
-                    <div class="stat-row"><span data-i18n="stat_clarity">CLARITATE</span><div class="stat-bar"><div style="width: 20%"></div></div></div>
-                    <div class="stat-row"><span data-i18n="stat_bitterness">AMĂREALĂ</span><div class="stat-bar"><div style="width: 30%"></div></div></div>
+                <div class="beer-stats-pairing">
+                    <div class="beer-stats">
+                        <div class="stat-row"><span data-i18n="stat_hops">HAMEI</span><div class="stat-bar"><div style="width: 90%"></div></div></div>
+                        <div class="stat-row"><span data-i18n="stat_clarity">CLARITATE</span><div class="stat-bar"><div style="width: 20%"></div></div></div>
+                        <div class="stat-row"><span data-i18n="stat_bitterness">AMĂREALĂ</span><div class="stat-bar"><div style="width: 50%"></div></div></div>
+                    </div>
+                    <div class="food-pairing">
+                        <img src="assets/food/burger.png" alt="Burger">
+                        <img src="assets/food/chickenleg.png" alt="Chicken Leg">
+                    </div>
                 </div>
             </div>
         </div>
@@ -195,10 +219,16 @@
                     </div>
                 </div>
                 <div class="beer-desc" data-i18n="desc_imperial_fuck">O bere puternică, cu gust bogat...</div>
-                <div class="beer-stats">
-                    <div class="stat-row"><span data-i18n="stat_hops">HAMEI</span><div class="stat-bar"><div style="width: 90%"></div></div></div>
-                    <div class="stat-row"><span data-i18n="stat_clarity">CLARITATE</span><div class="stat-bar"><div style="width: 70%"></div></div></div>
-                    <div class="stat-row"><span data-i18n="stat_bitterness">AMĂREALĂ</span><div class="stat-bar"><div style="width: 80%"></div></div></div>
+                <div class="beer-stats-pairing">
+                    <div class="beer-stats">
+                        <div class="stat-row"><span data-i18n="stat_hops">HAMEI</span><div class="stat-bar"><div style="width: 90%"></div></div></div>
+                        <div class="stat-row"><span data-i18n="stat_clarity">CLARITATE</span><div class="stat-bar"><div style="width: 70%"></div></div></div>
+                        <div class="stat-row"><span data-i18n="stat_bitterness">AMĂREALĂ</span><div class="stat-bar"><div style="width: 95%"></div></div></div>
+                    </div>
+                    <div class="food-pairing">
+                        <img src="assets/food/burger.png" alt="Burger">
+                        <img src="assets/food/meat.png" alt="Meat">
+                    </div>
                 </div>
             </div>
         </div>
@@ -220,10 +250,16 @@
                     </div>
                 </div>
                 <div class="beer-desc" data-i18n="desc_amber_guerre">O bere roșie cu arome florale...</div>
-                <div class="beer-stats">
-                    <div class="stat-row"><span data-i18n="stat_hops">HAMEI</span><div class="stat-bar"><div style="width: 30%"></div></div></div>
-                    <div class="stat-row"><span data-i18n="stat_clarity">CLARITATE</span><div class="stat-bar"><div style="width: 60%"></div></div></div>
-                    <div class="stat-row"><span data-i18n="stat_bitterness">AMĂREALĂ</span><div class="stat-bar"><div style="width: 40%"></div></div></div>
+                <div class="beer-stats-pairing">
+                    <div class="beer-stats">
+                        <div class="stat-row"><span data-i18n="stat_hops">HAMEI</span><div class="stat-bar"><div style="width: 60%"></div></div></div>
+                        <div class="stat-row"><span data-i18n="stat_clarity">CLARITATE</span><div class="stat-bar"><div style="width: 80%"></div></div></div>
+                        <div class="stat-row"><span data-i18n="stat_bitterness">AMĂREALĂ</span><div class="stat-bar"><div style="width: 65%"></div></div></div>
+                    </div>
+                    <div class="food-pairing">
+                        <img src="assets/food/burger.png" alt="Burger">
+                        <img src="assets/food/meat.png" alt="Meat">
+                    </div>
                 </div>
             </div>
         </div>
@@ -245,10 +281,13 @@
                     </div>
                 </div>
                 <div class="beer-desc" data-i18n="desc_black_hole">Bere brună cu un corp mediu...</div>
-                <div class="beer-stats">
-                    <div class="stat-row"><span data-i18n="stat_hops">HAMEI</span><div class="stat-bar"><div style="width: 30%"></div></div></div>
-                    <div class="stat-row"><span data-i18n="stat_clarity">CLARITATE</span><div class="stat-bar"><div style="width: 40%"></div></div></div>
-                    <div class="stat-row"><span data-i18n="stat_bitterness">AMĂREALĂ</span><div class="stat-bar"><div style="width: 50%"></div></div></div>
+                <div class="beer-stats-pairing">
+                    <div class="beer-stats">
+                        <div class="stat-row"><span data-i18n="stat_hops">HAMEI</span><div class="stat-bar"><div style="width: 40%"></div></div></div>
+                        <div class="stat-row"><span data-i18n="stat_clarity">CLARITATE</span><div class="stat-bar"><div style="width: 15%"></div></div></div>
+                        <div class="stat-row"><span data-i18n="stat_bitterness">AMĂREALĂ</span><div class="stat-bar"><div style="width: 50%"></div></div></div>
+                    </div>
+                    <!-- Nu ai specificat pairing pentru Black Hole, asa ca l-am lasat liber. Daca vrei, poti adauga un div cu clasa food-pairing aici -->
                 </div>
             </div>
         </div>
@@ -272,6 +311,10 @@
                     </div>
                 </div>
                 <div class="beer-desc" data-i18n="desc_deranj_blonda">Stil de bere tradițional nemțesc...</div>
+                <div class="deranj-pairing">
+                    <img src="assets/food/sandwhich.png" alt="Sandwich" style="width:30px;">
+                    <img src="assets/food/chickenleg.png" alt="Chicken Leg" style="width:30px;">
+                </div>
             </div>
         </div>
 
@@ -292,6 +335,10 @@
                     </div>
                 </div>
                 <div class="beer-desc" data-i18n="desc_deranj_oranj">Bază de malt nemțesc din orz...</div>
+                <div class="deranj-pairing">
+                    <img src="assets/food/chickenleg.png" alt="Chicken Leg" style="width:30px;">
+                    <img src="assets/food/fries.png" alt="Fries" style="width:30px;">
+                </div>
             </div>
         </div>
 
@@ -312,6 +359,10 @@
                     </div>
                 </div>
                 <div class="beer-desc" data-i18n="desc_deranj_ipa">O bere de tip india Pale Ale brasată...</div>
+                <div class="deranj-pairing">
+                    <img src="assets/food/chickenleg.png" alt="Chicken Leg" style="width:30px;">
+                    <img src="assets/food/burger.png" alt="Burger" style="width:30px;">
+                </div>
             </div>
         </div>
 
@@ -332,6 +383,10 @@
                     </div>
                 </div>
                 <div class="beer-desc" data-i18n="desc_deranj_doar">O bere care oferă echilibrul perfect...</div>
+                <div class="deranj-pairing">
+                    <img src="assets/food/burger.png" alt="Burger" style="width:30px;">
+                    <img src="assets/food/fries.png" alt="Fries" style="width:30px;">
+                </div>
             </div>
         </div>
 
