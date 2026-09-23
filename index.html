@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meniu Ground Zero</title>
     <link rel="icon" type="image/png" href="assets/img/logo.png">
-    <link rel="stylesheet" href="css/styles.css?v=3">
+    <link rel="stylesheet" href="css/styles.css?v=10">
 </head>
 <body>
 
@@ -18,28 +18,38 @@
     - Images: use the small .webp files (bottles 240x360, icons max 96px); the .png files are the
       full-size originals. New image -> resize + convert to .webp, then bump ?v= on css/js if they changed.
 -->
-<div class="container">
+<!-- Two sticky glass bars (full screen width, same glass), shown flush on top of each other when
+     scrolling: 1) Review + RO/EN, 2) Drinks/Food tabs. The logo sits between them at the top of the
+     page and scrolls away. Glass look: --glass-bg / --glass-blur in css/styles.css. -->
 
-    <!-- TOP BAR (sticky): Google review link + language switcher -->
-    <div class="top-bar">
+<!-- One shared glass layer behind BOTH bars once they are stuck together (see script.js / .header-glass),
+     so the scrolled header is a single sheet of glass instead of two separately blurred strips. -->
+<div class="header-glass" aria-hidden="true"></div>
+
+<!-- TOP BAR (sticky): Google review link + language switcher. .bar-inner keeps it in the 600px column -->
+<header class="top-bar">
+    <div class="bar-inner">
         <a href="https://g.page/r/CQDxRjrBVDAmEAE/review" target="_blank" rel="noopener" class="review-btn-top">
-            <span>⭐</span> Review
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.94 5.96 6.58.96-4.76 4.64 1.12 6.55L12 17.52l-5.88 3.09 1.12-6.55L2.48 9.42l6.58-.96z"/></svg> Review
         </a>
         <div class="language-switcher">
             <a href="#" class="active" data-lang="ro">RO</a>
             <a href="#" data-lang="en">EN</a>
         </div>
     </div>
+</header>
 
-    <div class="header">
-        <img src="assets/img/logo.webp" alt="Ground Zero Logo" class="logo" width="480" height="480">
-    </div>
+<div class="header">
+    <img src="assets/img/logo.webp" alt="Ground Zero Logo" class="logo" width="480" height="480">
+</div>
 
-    <!-- DRINKS / FOOD TABS (sticky, under the top bar) -->
-    <div class="menu-tabs">
-        <button id="btn-drinks" class="tab-btn active" data-i18n="tab_drinks">BĂUTURI</button>
-        <button id="btn-food" class="tab-btn" data-i18n="tab_food">MÂNCARE</button>
-    </div>
+<!-- DRINKS / FOOD TABS (sticky, right under the top bar; offset measured in script.js) -->
+<nav class="menu-tabs">
+    <button id="btn-drinks" class="tab-btn active" data-i18n="tab_drinks">BĂUTURI</button>
+    <button id="btn-food" class="tab-btn" data-i18n="tab_food">MÂNCARE</button>
+</nav>
+
+<div class="container">
 
     <!-- DRINKS SECTION -->
     <div id="section-drinks" class="content-section">
@@ -603,7 +613,7 @@
                     <div class="price-col"><span class="p-val">50</span><span class="p-vol">~270 g</span></div>
                 </div>
             </div>
-            <div class="food-desc" data-i18n="desc_chiftea_vara">Smash Burger de vită x2, cheddar x2, castravete murat, ceapă roșie, mustar, ketchup, chiflă cu unt.<br><i>Alergeni: lactate, ou, gluten, muștar</i><br><b>Savurează cu:</b> IPA - <strong>Split The Pot</strong>, <strong>Imperial fuck</strong></div>
+            <div class="food-desc" data-i18n="desc_chiftea_vara">Smash Burger de vită, cheddar, bacon, salată iceberg, sos tartar (sos de maioneză, ceapă, castraveți murați, muștar, boia), chiflă cu unt.<br><i>Alergeni: lactate, ou, gluten, muștar</i><br><b>Savurează cu:</b> IPA - <strong>Split The Pot</strong>, <strong>Imperial fuck</strong></div>
         </div>
 
         <div class="food-card">
@@ -670,11 +680,11 @@
 
 <!-- Floating service banner (hidden automatically near the bottom of the page, see script.js) -->
 <div class="service-banner">
-    <span class="service-icon">🍻</span>
+    <svg class="icon service-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9h10v10a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2z"/><path d="M15 12h2a2 2 0 0 1 2 2v1.5a2 2 0 0 1-2 2h-2"/><path d="M5 9a2.5 2.5 0 0 1 1.5-4.3A3 3 0 0 1 12 4a2.5 2.5 0 0 1 3 3.2V9"/><path d="M8.5 12.5v5M11.5 12.5v5"/></svg>
     <span data-i18n="service_toast">Comanda și servirea la bar / Apreciem debarasarea</span>
 </div>
 
-<script src="js/lang.js?v=3"></script>
-<script src="js/script.js?v=3"></script>
+<script src="js/lang.js?v=4"></script>
+<script src="js/script.js?v=7"></script>
 </body>
 </html>

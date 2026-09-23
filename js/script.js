@@ -2,7 +2,8 @@
  * Ground Zero QR menu – page behaviour
  *  1. Language switcher (RO / EN) using the `translations` object from lang.js
  *  2. Drinks / Food tabs
- *  3. Sticky header offset (tabs stick right under the Review + RO/EN bar)
+ *  3. Sticky bars: tabs stick exactly under the Review + RO/EN bar, and once they are
+ *     stuck a single shared glass layer is shown behind both (one piece of glass)
  *  4. Floating service banner that hides near the bottom of the page
  */
 
@@ -74,19 +75,32 @@ function showTab(activeButton) {
 tabs.forEach(({ button }) => button.addEventListener('click', () => showTab(button)));
 
 
-/* ---------- 3. Sticky header offset ---------- */
+/* ---------- 3. Sticky bars offset ---------- */
 
-// The tabs bar sticks at `top: var(--topbar-h)`; measure the real top-bar height
-// so the two sticky bars never overlap (height can change with font size / zoom).
-function setTopbarHeight() {
-    const topBar = document.querySelector('.top-bar');
-    if (topBar) {
-        document.documentElement.style.setProperty('--topbar-h', topBar.offsetHeight + 'px');
-    }
+const topBar = document.querySelector('.top-bar');
+const menuTabs = document.querySelector('.menu-tabs');
+
+// The tabs bar sticks at `top: var(--topbar-h)`. Measure the real (sub-pixel exact) heights
+// so the bars meet with no gap, and so the shared glass layer covers exactly both bars.
+function measureBars() {
+    const topH = topBar.getBoundingClientRect().height;
+    const tabsH = menuTabs.getBoundingClientRect().height;
+    document.documentElement.style.setProperty('--topbar-h', topH + 'px');
+    document.documentElement.style.setProperty('--header-h', (topH + tabsH) + 'px');
+    updateStuckState();
 }
-setTopbarHeight();
-window.addEventListener('load', setTopbarHeight);      // again after fonts/images are loaded
-window.addEventListener('resize', setTopbarHeight);
+
+// "Stuck" = the tabs have reached the top bar. Then body.bars-stuck switches the two bars
+// from their own glass to the one shared glass layer (.header-glass).
+function updateStuckState() {
+    const stuck = menuTabs.getBoundingClientRect().top <= topBar.getBoundingClientRect().bottom + 0.5;
+    document.body.classList.toggle('bars-stuck', stuck);
+}
+
+measureBars();
+window.addEventListener('load', measureBars);          // again after fonts/images are loaded
+window.addEventListener('resize', measureBars);
+window.addEventListener('scroll', updateStuckState, { passive: true });
 
 
 /* ---------- 4. Floating service banner ---------- */
