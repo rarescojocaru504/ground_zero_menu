@@ -49,6 +49,9 @@ btnDrinks.addEventListener('click', () => {
     btnFood.classList.remove('active');
     sectionDrinks.classList.remove('hidden');
     sectionFood.classList.add('hidden');
+    
+    // Scroll to the top when switching tabs
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
 btnFood.addEventListener('click', () => {
@@ -56,8 +59,12 @@ btnFood.addEventListener('click', () => {
     btnDrinks.classList.remove('active');
     sectionFood.classList.remove('hidden');
     sectionDrinks.classList.add('hidden');
+    
+    // Scroll to the top when switching tabs
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
+// Call setLanguage immediately on page load to translate the Menu buttons as well
 document.addEventListener('DOMContentLoaded', () => {
     setLanguage('ro');
 });
