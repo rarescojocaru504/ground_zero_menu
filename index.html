@@ -99,6 +99,17 @@
             opacity: 1;
             max-width: 90%;
         }
+
+        /* FOOD PAIRING ICONS */
+        .food-pairing { display: flex; gap: 10px; align-items: center; justify-content: flex-end; }
+        .deranj-pairing { margin-top: 5px; display: flex; justify-content: flex-end; gap: 10px; }
+        .food-pairing img, .deranj-pairing img { 
+            width: 32px !important; 
+            height: 32px !important; 
+            object-fit: contain; 
+            opacity: 0.8; 
+        }
+
         .service-banner.hidden-on-scroll {
             opacity: 0;
             transform: translate(-50%, 20px);
@@ -319,6 +330,10 @@
                         <div class="stat-row"><span data-i18n="stat_bitterness">AMĂREALĂ</span><div class="stat-bar"><div style="width: 50%"></div></div></div>
                     </div>
                 </div>
+                <div class="food-pairing">
+                        <img src="assets/food/meat.png" alt="Meat">
+                        <img src="assets/food/fries.png" alt="Fries">
+                    </div>
             </div>
         </div>
 
