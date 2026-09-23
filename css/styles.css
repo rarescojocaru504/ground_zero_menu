@@ -1,66 +1,92 @@
-/* =========================================================================
-   Ground Zero – QR menu styles
-   Dark, PDF-like layout optimised for phones (max content width 600px).
-   Accent colour: #bef300 (Ground Zero lime).
-   ========================================================================= */
+/* Ground Zero – QR menu
+   Built for phones first; content is a single column, max 600px wide.
+   Colours, fonts and the glass settings are all in :root below. */
+
+/* ---------- Fonts ----------
+   Bebas Neue, self-hosted (licence in assets/fonts). Split in two files like Google Fonts does,
+   so phones only download the second one when a Romanian letter like ă or ț is on the page. */
+@font-face {
+    font-family: 'Bebas Neue';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;          /* on a slow connection, show text in the fallback font until this loads */
+    src: url('../assets/fonts/bebas-neue-latin-400-normal.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+    font-family: 'Bebas Neue';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../assets/fonts/bebas-neue-latin-ext-400-normal.woff2') format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
 
 :root {
     --bg: #111;
-    --bg-soft: #222;
-    --border: #444;
     --border-soft: #222;
     --text: #fff;
     --text-muted: #ccc;
-    --text-dim: #aaa;
-    --text-faint: #888;
+    --text-dim: #b3b3b3;
+    --text-faint: #8a8a8a;
     --accent: #bef300;
-    --topbar-h: 51px;  /* real values are measured in script.js */
-    --header-h: 103px; /* top bar + tabs */
-    /* Glass look of the two sticky bars: lower alpha = more see-through */
+    --accent-tint: rgba(190, 243, 0, 0.12);
+    --pill-border: rgba(255, 255, 255, 0.18);
+    --pill-bg: rgba(255, 255, 255, 0.06);
+    --font-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --font-display: 'Bebas Neue', 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif;
+    --topbar-h: 61px;  /* placeholders; script.js sets the real heights */
+    --header-h: 150px; /* top bar + tabs + chips */
+    /* Header glass. Lower alpha = more see-through, bigger blur = softer background. */
     --glass-bg: rgba(17, 17, 17, 0.25);
     --glass-blur: blur(3px) saturate(160%);
 }
 
 /* ---------- Base ---------- */
 body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: var(--font-body);
     background-color: var(--bg);
+    /* faint diagonal stripes, same as the printed menu background */
+    background-image: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.022) 0 70px, transparent 70px 140px);
     color: var(--text);
     margin: 0;
     padding: 0 0 80px;          /* room for the floating service banner */
     line-height: 1.4;
 }
+body.lightbox-open { overflow: hidden; }
 
 .container {
     max-width: 600px;
     margin: 0 auto;
     padding: 0 15px 15px;
     position: relative;
-    transition: opacity 0.2s ease-in-out;
 }
-.container.fade-out { opacity: 0; }   /* used while switching language */
+/* Language switch: script.js adds body.lang-fading, swaps the texts while they're invisible,
+   then removes it. Keep 0.25s in sync with LANG_FADE_MS in script.js. */
+.container,
+.tab-row,
+.service-banner > span { transition: opacity 0.25s ease; }
+body.lang-fading .container,
+body.lang-fading .tab-row,
+body.lang-fading .service-banner > span { opacity: 0; }
 
-/* Inline SVG icons (white, follow the text colour) */
+/* Inline SVG icons take the text colour */
 .icon { display: inline-block; width: 1em; height: 1em; flex-shrink: 0; color: var(--text); }
 
-/* Normal-weight part inside a bold title, e.g. "SCHNEIDER WEISSE <light>TAP 1</light>" */
-.light { font-weight: normal; }
+/* Second half of a title, e.g. GROUND ZERO <span class="light">BEERS</span>.
+   Bebas Neue only has one weight, so it's done with a grey colour instead. */
+.light { font-weight: normal; color: #9d9d9d; }
 
-/* ---------- Sticky glass bars: top bar (Review + RO/EN) and Drinks/Food tabs ----------
-   Both span the full screen width with the same glass, and when scrolling the tabs stick
-   exactly under the top bar (--topbar-h, measured in script.js), so they read as one header. */
+/* ---------- Header ----------
+   The top bar and the tabs are two sticky bars with no background of their own. The glass
+   behind them is one fixed layer (.header-glass), so they always look like a single piece:
+     at the top of the page   hidden, so the header blends into the page
+     body.scrolled            fades in behind the top bar only
+     body.bars-stuck          tabs have reached the top bar, glass extends behind them too */
 .top-bar,
-.menu-tabs {
-    position: sticky;
-    background-color: var(--glass-bg);   /* glass effect: see-through + blur (values in :root) */
-    backdrop-filter: var(--glass-blur);
-    -webkit-backdrop-filter: var(--glass-blur);
-}
+.menu-tabs { position: sticky; }
 .top-bar { top: 0; z-index: 101; }
 
-/* Shared glass behind both bars. Hidden at the top of the page; when the tabs are stuck
-   under the top bar (body.bars-stuck, set in script.js) it is shown and the bars drop their
-   own glass, so the whole header blurs as ONE piece. Height = both bars (--header-h). */
 .header-glass {
     position: fixed;
     top: 0;
@@ -73,33 +99,32 @@ body {
     -webkit-backdrop-filter: var(--glass-blur);
     border-bottom: 1px solid rgba(255, 255, 255, 0.12);
     pointer-events: none;
-    visibility: hidden;
+    opacity: 0;
+    /* cut off the part behind the tabs until they're stuck */
+    clip-path: inset(0 0 calc(var(--header-h) - var(--topbar-h)) 0);
+    transition: opacity 0.35s ease, clip-path 0.3s ease;
 }
-body.bars-stuck .header-glass { visibility: visible; }
-body.bars-stuck .top-bar,
-body.bars-stuck .menu-tabs {
-    background-color: transparent;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    border-bottom-color: transparent;
-}
+body.scrolled .header-glass { opacity: 1; }
+body.bars-stuck .header-glass { clip-path: inset(0 0 0 0); }
 
 .bar-inner {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 600px;            /* same column as .container */
+    max-width: 600px;            /* line up with .container */
     margin: 0 auto;
     padding: 10px 15px;
 }
 
-/* ---------- Pill buttons: Review, RO/EN, About (flyer) buttons share one look ---------- */
+/* ---------- Pill buttons ----------
+   Review, RO/EN, the About buttons and the social links all share this look. */
 .review-btn-top,
 .language-switcher a,
-.btn-flyer {
-    border: 1px solid rgba(255, 255, 255, 0.18);
+.btn-flyer,
+.social-pill {
+    border: 1px solid var(--pill-border);
     border-radius: 999px;
-    background-color: rgba(255, 255, 255, 0.06);
+    background-color: var(--pill-bg);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     color: var(--text);
@@ -109,26 +134,39 @@ body.bars-stuck .menu-tabs {
 }
 .review-btn-top:hover,
 .language-switcher a:hover,
-.btn-flyer:hover { border-color: var(--accent); }
+.btn-flyer:hover,
+.social-pill:hover { border-color: var(--accent); }
 .review-btn-top:active,
 .language-switcher a:active,
-.btn-flyer:active { transform: scale(0.97); background-color: rgba(255, 255, 255, 0.12); }
+.btn-flyer:active,
+.social-pill:active { transform: scale(0.97); background-color: rgba(255, 255, 255, 0.12); }
 
+/* at least 40px tall so they're easy to hit with a thumb */
 .review-btn-top {
     display: flex;
     align-items: center;
-    gap: 5px;
-    padding: 6px 12px;
-    font-size: 12px;
+    gap: 6px;
+    min-height: 40px;
+    box-sizing: border-box;
+    padding: 0 16px;
+    font-size: 13px;
 }
-.review-btn-top .icon { width: 14px; height: 14px; }
+.review-btn-top .icon { width: 15px; height: 15px; }
 
-.language-switcher { display: flex; gap: 5px; }
-.language-switcher a { padding: 6px 12px; font-size: 12px; color: var(--text-faint); }
-/* Selected language: lime border + text on a light lime tint */
+.language-switcher { display: flex; gap: 6px; }
+.language-switcher a {
+    display: flex;
+    align-items: center;
+    min-height: 40px;
+    box-sizing: border-box;
+    padding: 0 15px;
+    font-size: 13px;
+    color: var(--text-faint);
+}
+/* selected language */
 .language-switcher a.active {
     border-color: var(--accent);
-    background-color: rgba(190, 243, 0, 0.12);
+    background-color: var(--accent-tint);
     color: var(--accent);
 }
 
@@ -136,107 +174,192 @@ body.bars-stuck .menu-tabs {
 .header { text-align: center; padding: 10px 15px 30px; }
 .logo { width: 160px; height: auto; display: block; margin: 0 auto; }
 
-/* ---------- Drinks / Food tabs (sticky, flush under the top bar) ---------- */
+/* ---------- Drinks / Food tabs and category chips ---------- */
 .menu-tabs {
     top: var(--topbar-h);
     z-index: 100;
-    display: flex;
-    justify-content: center;
-    gap: 15px;
     margin-bottom: 30px;
-    padding: 12px 0 10px;
+    padding: 10px 0 10px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
+.tab-row { display: flex; justify-content: center; gap: 24px; }
 .tab-btn {
     background: none;
     border: none;
     border-bottom: 2px solid transparent;
-    padding-bottom: 5px;
+    padding: 0 2px 2px;
     color: var(--text-faint);
-    font-size: 18px;
-    font-weight: bold;
-    letter-spacing: 1px;
+    font-family: var(--font-display);
+    font-size: 27px;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    line-height: 1.1;
     text-transform: uppercase;
-    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);   /* stays readable over the see-through header */
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);   /* readable on top of the glass */
     cursor: pointer;
 }
-.tab-btn.active { color: var(--text); border-bottom-color: var(--text); }
+.tab-btn.active { color: var(--text); border-bottom-color: var(--accent); }
 
-/* ---------- Section titles ---------- */
-h2 {
-    margin: 30px 0 20px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--border);
-    color: var(--text);
-    font-size: 22px;
-    letter-spacing: 1px;
-    text-align: left;
-    text-transform: uppercase;
+/* Category chips, Drinks tab only. They scroll sideways if they don't fit. */
+.section-chips {
+    display: flex;
+    gap: 8px;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 10px 15px 0;
+    overflow-x: auto;
+    scrollbar-width: none;
 }
+.section-chips::-webkit-scrollbar { display: none; }
+.section-chips[hidden] { display: none; }
+.chip:first-child { margin-left: auto; }        /* auto margins centre the row without breaking the side-scroll */
+.chip:last-child { margin-right: auto; }
+.chip {
+    flex-shrink: 0;
+    padding: 7px 13px;
+    border: 1px solid var(--pill-border);
+    border-radius: 999px;
+    background-color: var(--pill-bg);
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+    white-space: nowrap;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+    transition: border-color 0.2s, color 0.2s, background-color 0.2s;
+}
+.chip:hover { border-color: var(--accent); }
+.chip.active { border-color: var(--accent); background-color: var(--accent-tint); color: var(--accent); }
 
-/* ---------- Beer card (bottle image + info) ---------- */
+/* ---------- Section banners ----------
+   Outlined ribbon with pointed ends, like the printed menu. clip-path can't draw a border,
+   so the h2 itself is the light outline and ::before is the dark fill, inset by 2px. */
+.section-banner {
+    --notch: 16px;
+    position: relative;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 40px 0 22px;
+    padding: 11px 30px 9px;
+    background: rgba(255, 255, 255, 0.85);
+    clip-path: polygon(var(--notch) 0, calc(100% - var(--notch)) 0, 100% 50%, calc(100% - var(--notch)) 100%, var(--notch) 100%, 0 50%);
+    color: var(--text);
+    font-family: var(--font-display);
+    font-size: clamp(22px, 6.5vw, 32px);
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    line-height: 1.05;
+    text-align: center;
+    text-transform: uppercase;
+    text-wrap: balance;
+    scroll-margin-top: calc(var(--header-h) + 12px);   /* don't end up hidden under the header when jumped to */
+}
+.section-banner::before {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    z-index: -1;
+    background: var(--bg);
+    clip-path: polygon(calc(var(--notch) - 1px) 0, calc(100% - var(--notch) + 1px) 0, 100% 50%, calc(100% - var(--notch) + 1px) 100%, calc(var(--notch) - 1px) 100%, 0 50%);
+}
+.section-banner .banner-icon { width: 26px; height: 26px; }
+
+/* ---------- Beer cards ---------- */
 .beer-card {
     display: flex;
+    align-items: center;                 /* bottle vertically centred next to the text */
     margin-bottom: 35px;
     padding-bottom: 25px;
     border-bottom: 1px solid var(--border-soft);
 }
 .beer-img-col {
-    width: 80px;
+    width: 100px;
     flex-shrink: 0;
-    margin-right: 15px;
+    margin-right: 12px;
     display: flex;
-    align-items: flex-start;
     justify-content: center;
 }
-.beer-img-col img { width: 100%; height: auto; max-height: 250px; object-fit: contain; }
+.beer-img-col img { width: 100%; height: auto; object-fit: contain; cursor: zoom-in; }
+@media (min-width: 480px) {
+    .beer-img-col { width: 130px; margin-right: 18px; }
+}
 
-.beer-info-col { flex-grow: 1; display: flex; flex-direction: column; }
+.beer-info-col { flex-grow: 1; min-width: 0; display: flex; flex-direction: column; }
 .beer-header-row {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 12px;
 }
+/* Name on its own line and the prices in a row underneath, so long names don't wrap */
+.beer-card .beer-header-row { flex-direction: column; align-items: stretch; gap: 10px; }
+.beer-card .beer-price-matrix {
+    gap: 0;
+    padding: 6px 0 5px;
+    border-top: 1px solid rgba(255, 255, 255, 0.09);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+}
+.beer-card .price-col { flex: 1; }
+
 .beer-title {
     margin: 0;
     color: var(--text);
-    font-size: 19px;
-    font-weight: 900;
-    line-height: 1.1;
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    line-height: 1;
     text-transform: uppercase;
 }
 .beer-subtitle {
     margin-top: 4px;
     color: var(--text-dim);
-    font-size: 11px;
+    font-size: 12px;
     letter-spacing: 0.5px;
     text-transform: uppercase;
 }
 .beer-subtitle.spaced { margin-bottom: 10px; }
 
-/* Price matrix: price on top, volume/quantity under it */
-.beer-price-matrix { display: flex; gap: 12px; text-align: center; }
+/* "Limited edition" tag on the XperimentALE beers */
+.badge-limited {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 2px 8px;
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    color: var(--accent);
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 0.8px;
+    vertical-align: 1px;
+    white-space: nowrap;
+}
+
+/* Prices: amount on top, volume or weight under it */
+.beer-price-matrix { display: flex; gap: 14px; text-align: center; }
 .price-col { display: flex; flex-direction: column; }
-.p-val { color: var(--accent); font-size: 17px; font-weight: bold; line-height: 1; }
-.p-vol { margin-top: 4px; color: var(--text-faint); font-size: 10px; }
+.p-val { color: var(--accent); font-family: var(--font-display); font-size: 27px; font-weight: 400; letter-spacing: 0.5px; line-height: 1; }
+.p-vol { margin-top: 3px; color: var(--text-dim); font-size: 11px; }
 
 .beer-desc { margin-bottom: 15px; color: var(--text-muted); font-size: 13px; line-height: 1.5; }
 
-/* Taste bars (hops / clarity / bitterness) + food pairing icons */
+/* Taste bars and food pairing icons */
 .beer-stats-pairing { display: flex; justify-content: space-between; align-items: flex-end; }
 .beer-stats {
     flex-grow: 1;
     margin-right: 15px;
     color: var(--text-dim);
-    font-size: 10px;
+    font-size: 11px;
     font-weight: bold;
     text-transform: uppercase;
 }
-.stat-row { display: flex; align-items: center; margin-bottom: 4px; }
-.stat-row > span { width: 80px; }
+.stat-row { display: flex; align-items: center; margin-bottom: 5px; }
+.stat-row > span { width: 84px; }
 .stat-bar { flex-grow: 1; height: 6px; background: #333; border-radius: 3px; overflow: hidden; }
-.stat-bar > div { height: 100%; background: #ddd; }   /* width set inline = bar value */
+.stat-bar > div { height: 100%; background: var(--accent); border-radius: 3px; }   /* width is set inline in the HTML */
 
 .food-pairing,
 .deranj-pairing { display: flex; justify-content: flex-end; align-items: center; gap: 10px; }
@@ -244,31 +367,122 @@ h2 {
 .food-pairing img,
 .deranj-pairing img { width: 32px; height: 32px; object-fit: contain; opacity: 0.8; }
 
-/* ---------- Simple card (special beers, extras, food) ---------- */
+/* ---------- Plain cards (special beers, food) ---------- */
 .food-card { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid var(--border-soft); }
-.food-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+.food-card.filtered-out { display: none; }            /* set by the allergen filter */
+.food-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 8px; }
 .food-title {
     margin: 0;
     color: var(--text);
-    font-size: 18px;
-    font-weight: bold;
-    line-height: 1.2;
+    font-family: var(--font-display);
+    font-size: 27px;
+    font-weight: 400;
+    letter-spacing: 0.8px;
+    line-height: 1.05;
     text-transform: uppercase;
 }
 .food-desc { color: var(--text-muted); font-size: 13px; line-height: 1.5; }
 .food-desc strong,
-.food-desc b { color: var(--text); font-weight: bold; }   /* pairing label + beer names */
+.food-desc b { color: var(--text); font-weight: bold; }   /* "Pair with:" and the beer names */
 
-.chilli-icon { height: 20px; width: auto; margin-left: 4px; vertical-align: -2px; }
+.chilli-icon { height: 22px; width: auto; margin-left: 5px; vertical-align: -2px; }
 
-/* Legend at the end of the food menu (* frozen + allergen list) */
+/* Allergens under each dish (script.js turns the "Alergeni: ..." text into these) */
+.allergens { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; margin: 8px 0; }
+.allergens-label { margin-right: 2px; color: var(--text-dim); font-size: 11px; font-style: italic; }
+.a-chip {
+    padding: 2px 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 999px;
+    color: #ddd;
+    font-size: 11px;
+    line-height: 1.4;
+}
+.may-contain { flex-basis: 100%; color: var(--text-dim); font-size: 11px; font-style: italic; }
+
+/* Allergen filter at the top of the food menu */
+.allergen-filter {
+    margin: 0 0 26px;
+    padding: 12px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    background-color: rgba(255, 255, 255, 0.03);
+}
+.filter-title { margin: 0 0 8px; color: var(--text-muted); font-size: 12px; font-weight: bold; letter-spacing: 0.5px; text-transform: uppercase; }
+.filter-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.filter-chip {
+    padding: 7px 12px;
+    border: 1px solid var(--pill-border);
+    border-radius: 999px;
+    background-color: var(--pill-bg);
+    color: #ddd;
+    font: inherit;
+    font-size: 12px;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s, background-color 0.2s;
+}
+.filter-chip:hover { border-color: rgba(255, 255, 255, 0.4); }
+.filter-chip[aria-pressed="true"] {                   /* selected = dishes with this are hidden */
+    border-color: #ff7a6b;
+    background-color: rgba(255, 122, 107, 0.14);
+    color: #ff9d91;
+    text-decoration: line-through;
+}
+.filter-note { margin: 10px 0 0; color: var(--text-dim); font-size: 11px; }
+
+/* Legend at the end of the food menu */
 .food-legend { margin-top: 10px; color: var(--text-dim); font-size: 11px; line-height: 1.5; }
 .food-legend strong { color: var(--text); }
 
-/* ---------- Flyer (PDF) buttons ---------- */
-.flyer-buttons { display: flex; flex-direction: column; gap: 12px; margin: 50px 0; }
+/* ---------- Price list (Guest & Extra) ----------
+   NAME ........ 0.33L 23, with an optional small second line (.list-sub). */
+.price-list { display: flex; flex-direction: column; gap: 16px; margin-bottom: 10px; }
+.list-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto;   /* name | dotted leader | prices */
+    align-items: baseline;
+    column-gap: 8px;
+}
+.list-title {
+    min-width: 0;
+    font-family: var(--font-display);
+    font-size: 23px;
+    letter-spacing: 0.6px;
+    line-height: 1.1;
+    text-transform: uppercase;
+}
+.leader {
+    min-width: 14px;
+    border-bottom: 2px dotted rgba(255, 255, 255, 0.28);
+    transform: translateY(-5px);            /* move the dots up onto the text line */
+}
+.list-prices { display: flex; gap: 12px; }
+.list-price {
+    color: var(--accent);
+    font-family: var(--font-display);
+    font-size: 25px;
+    line-height: 1;
+    white-space: nowrap;
+}
+.list-price small {
+    margin-right: 4px;
+    color: var(--text-dim);
+    font-family: var(--font-body);
+    font-size: 11px;
+}
+.list-sub {
+    grid-column: 1 / -1;
+    margin-top: 1px;
+    color: var(--text-dim);
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
 
-/* Bigger pill for easy tapping; base look + hover come from the shared pill rules above */
+/* ---------- About buttons (PDF flyers) ---------- */
+.flyer-buttons { display: flex; flex-direction: column; gap: 12px; margin: 50px 0 30px; }
+
+/* bigger version of the shared pill */
 .btn-flyer {
     display: block;
     padding: 16px 22px;
@@ -279,18 +493,102 @@ h2 {
     text-transform: uppercase;
 }
 
-/* ---------- Floating "order at the bar" banner ---------- */
+/* ---------- Social links (Instagram, TikTok) ---------- */
+.social-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 0 0 26px; }
+.social-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    box-sizing: border-box;
+    padding: 0 18px;
+    font-size: 13px;
+}
+.social-pill .icon { width: 20px; height: 20px; }
+/* The logo file is used as a mask over a white box, so it shows up white whatever its colours.
+   script.js adds .has-logo once the file has loaded; until then the SVG icon is shown. */
+.social-logo {
+    display: none;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    background-color: var(--text);
+    /* mask-image is set from script.js, where the path can be made absolute */
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+}
+.social-pill.has-logo .social-logo { display: block; }
+.social-pill.has-logo .icon { display: none; }
+
+/* ---------- Footer ---------- */
+.site-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px 16px;
+    padding: 16px 0 6px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-dim);
+    font-size: 12px;
+    font-style: italic;
+}
+.site-footer p { margin: 0; }
+.footer-novape { font-style: normal; font-weight: bold; letter-spacing: 1px; }
+
+/* ---------- Bottle zoom ---------- */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    cursor: zoom-out;
+    animation: fadeIn 0.25s ease-out;
+}
+.lightbox[hidden] { display: none; }
+.lightbox img { max-width: min(80vw, 420px); max-height: 75vh; object-fit: contain; }
+.lightbox-caption { margin: 0; font-family: var(--font-display); font-size: 30px; letter-spacing: 1px; }
+.lightbox-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--pill-border);
+    border-radius: 50%;
+    background-color: var(--pill-bg);
+    color: var(--text);
+    font-size: 26px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+/* ---------- Floating "order at the bar / kitchen" banner ---------- */
 .service-banner {
     position: fixed;
     bottom: 25px;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
+    right: 0;
+    width: fit-content;                  /* centred, and allowed to wrap on narrow phones */
+    max-width: calc(100% - 30px);
+    box-sizing: border-box;
+    margin: 0 auto;
     z-index: 9999;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 6px;
-    max-width: 95%;
     padding: 8px 15px;
     border: 1px solid var(--accent);
     border-radius: 30px;
@@ -301,15 +599,15 @@ h2 {
     color: var(--text);
     font-size: 11px;
     font-weight: bold;
-    white-space: nowrap;
-    pointer-events: none;       /* never blocks taps on the menu */
+    text-align: center;
+    pointer-events: none;       /* taps go through to the menu underneath */
     opacity: 1;
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
-.service-banner.hidden-on-scroll { opacity: 0; transform: translate(-50%, 20px); }  /* hidden near page bottom */
-.service-banner .service-icon { width: 17px; height: 17px; }
+.service-banner.hidden-on-scroll { opacity: 0; transform: translateY(20px); }  /* near the bottom of the page */
+.service-banner .service-icon { width: 17px; height: 17px; flex-shrink: 0; }
 
-/* ---------- Tab visibility ---------- */
+/* ---------- Showing / hiding the tabs ---------- */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -317,3 +615,8 @@ h2 {
 .content-section { display: block; }
 .content-section:not(.hidden) { animation: fadeIn 0.4s ease-out forwards; }
 .content-section.hidden { display: none; }
+
+/* No animations for people who turned on "reduce motion" on their phone */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+}
