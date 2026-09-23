@@ -90,9 +90,12 @@
             font-size: 13px;
             font-weight: bold;
             z-index: 9999; 
-            white-space: nowrap;
+            white-space: normal; /* Permite textului sa treaca pe randul urmator */
+            max-width: 90%; /* Se asigura ca nu depaseste marginile telefonului */
+            text-align: center; /* Centreaza textul daca se rupe pe doua randuri */
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
             pointer-events: none; 
             transition: opacity 0.3s ease, transform 0.3s ease;
