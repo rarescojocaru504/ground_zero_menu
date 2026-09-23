@@ -54,7 +54,8 @@ const translations = {
         btn_flyer_gz: "DESPRE GAMA GROUND ZERO",
         link_flyer_gz: "assets/pdf/ground_zero_pliant_ro.pdf",
         btn_flyer_deranj: "DESPRE GAMA DERANJ",
-        link_flyer_deranj: "assets/pdf/deranj_pliant_ro.pdf"
+        link_flyer_deranj: "assets/pdf/deranj_pliant_ro.pdf",
+        service_toast: "Comanda și servirea la bar / Apreciem debarasarea"
     },
     en: {
         tab_drinks: "DRINKS",
@@ -114,6 +115,7 @@ const translations = {
         btn_flyer_gz: "ABOUT GROUND ZERO",
         link_flyer_gz: "assets/pdf/ground_zero_pliant_en.pdf",
         btn_flyer_deranj: "ABOUT DERANJ",
-        link_flyer_deranj: "assets/pdf/deranj_pliant_en.pdf"
+        link_flyer_deranj: "assets/pdf/deranj_pliant_en.pdf",
+        service_toast: "Order at the bar / We appreciate you clearing your table"
     }
 };
