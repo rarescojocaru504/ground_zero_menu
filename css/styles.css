@@ -385,6 +385,17 @@ body.bars-stuck .header-glass { clip-path: inset(0 0 0 0); }
 .food-desc strong,
 .food-desc b { color: var(--text); font-weight: bold; }   /* "Pair with:" and the beer names */
 
+/* small white bottle before "Savurează cu:" / "Pair with:", like on the printed menu */
+#section-food .food-desc > b::before {
+    content: '';
+    display: inline-block;
+    width: 7px;
+    height: 15px;
+    margin-right: 6px;
+    vertical-align: -2px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 24'%3E%3Cpath fill='%23fff' d='M3.4 0h3.2v5.2c0 1.2 3.4 2.6 3.4 5.8V22a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V11C0 7.8 3.4 6.4 3.4 5.2z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
 .chilli-icon { height: 22px; width: auto; margin-left: 5px; vertical-align: -2px; }
 
 /* Allergens under each dish (script.js turns the "Alergeni: ..." text into these) */
