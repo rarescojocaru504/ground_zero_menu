@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" href="assets/img/logo.png">
     <!-- Bebas Neue, self-hosted (licence: assets/fonts/OFL-bebas-neue.txt). Same condensed look as the printed menu. -->
     <link rel="preload" href="assets/fonts/bebas-neue-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="css/styles.css?v=20">
+    <link rel="stylesheet" href="css/styles.css?v=21">
 </head>
 <body>
 
@@ -354,8 +354,8 @@
             </div>
         </div>
 
-        <!-- SPECIAL BEERS: XperimentALE and the beer flight -->
-        <h2 id="sec-special" class="section-banner" data-i18n="cat_special">GROUND ZERO <span class='light'>SPECIAL BEERS</span></h2>
+        <!-- SPECIAL BEERS & PACKS: XperimentALE, the beer flight and the bottle discounts -->
+        <h2 id="sec-special" class="section-banner" data-i18n="cat_special">SPECIAL <span class='light'>BEERS &amp; PACKS</span></h2>
 
         <div class="food-card">
             <div class="food-header">
@@ -392,6 +392,32 @@
             </div>
             <div class="food-desc" data-i18n="desc_pachet">Easy Rider, Morning Glory, Split the Pot, Imperial Fuck, Black Hole</div>
         </div>
+
+        <!-- Bottle packs: discount on bottled beers, with "ask the bartender" underneath -->
+        <div class="food-card pack-card">
+            <div class="food-header">
+                <div class="beer-title-wrap">
+                    <h3 class="food-title" data-i18n="pack4_title">4 BERI GZ LA STICLĂ</h3>
+                    <div class="beer-subtitle" data-i18n="pack4_sub">DERANJ INCLUS</div>
+                </div>
+                <div class="beer-price-matrix">
+                    <div class="price-col"><span class="p-val bottle-price">-10%</span><span class="p-vol" data-i18n="discount_label">REDUCERE</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="food-card pack-card">
+            <div class="food-header">
+                <div class="beer-title-wrap">
+                    <h3 class="food-title" data-i18n="pack6_title">6 BERI LA STICLĂ</h3>
+                </div>
+                <div class="beer-price-matrix">
+                    <div class="price-col"><span class="p-val bottle-price">-15%</span><span class="p-vol" data-i18n="discount_label">REDUCERE</span></div>
+                </div>
+            </div>
+        </div>
+
+        <p class="packs-note" data-i18n="packs_note">ÎNTREABĂ BARMANUL</p>
 
         <!-- GUEST BEERS & EXTRA -->
         <h2 id="sec-guest" class="section-banner" data-i18n="cat_guest">GUEST <span class='light'>BEERS &amp; EXTRA</span></h2>
@@ -646,7 +672,7 @@
     <span data-i18n="service_toast">Comanda și servirea la bar / Apreciem debarasarea</span>
 </div>
 
-<script src="js/lang.js?v=8"></script>
+<script src="js/lang.js?v=9"></script>
 <script src="js/script.js?v=16"></script>
 </body>
 </html>

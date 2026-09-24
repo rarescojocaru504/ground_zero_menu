@@ -65,7 +65,7 @@ test.describe('texts', () => {
 
   test('every price is a plain number', async ({ page }) => {
     await openMenu(page);
-    const prices = await page.locator('.p-val').allTextContents();
+    const prices = await page.locator('.p-val:not(.bottle-price)').allTextContents();   // discounts are "-10%"
     const listPrices = await page.locator('.list-price').evaluateAll(els =>
       els.map(el => el.lastChild.textContent));
     expect(prices.length + listPrices.length).toBeGreaterThan(40);
@@ -309,6 +309,34 @@ test.describe('images and files', () => {
     await expect(pills.nth(1)).toHaveAttribute('href', 'https://www.tiktok.com/@ground.zero.beer');
     await expect(pills.nth(0)).toHaveClass(/has-logo/);
     await expect(pills.nth(1)).toHaveClass(/has-logo/);
+  });
+});
+
+
+test.describe('special beers & packs', () => {
+  test('bottle prices are fuchsia, the other prices stay lime', async ({ page }) => {
+    await openMenu(page);
+    const colors = await page.locator('.beer-card').first().locator('.p-val')
+      .evaluateAll(els => els.map(el => getComputedStyle(el).color));
+    expect(colors.slice(0, 3)).toEqual(Array(3).fill('rgb(190, 243, 0)'));
+    expect(colors[3]).toBe('rgb(247, 0, 212)');
+  });
+
+  test('the bottle packs and the note are there, in both languages', async ({ page }) => {
+    await openMenu(page, 'en');
+    await expect(page.locator('#sec-special')).toHaveText(/SPECIAL\s*BEERS & PACKS/);
+    const packs = page.locator('.pack-card');
+    await expect(packs).toHaveCount(2);
+    await expect(packs.nth(0)).toContainText('4 BOTTLED GZ BEERS');
+    await expect(packs.nth(0)).toContainText('DERANJ INCLUDED');
+    await expect(packs.nth(0).locator('.p-val')).toHaveText('-10%');
+    await expect(packs.nth(1)).toContainText('6 BOTTLED BEERS');
+    await expect(packs.nth(1).locator('.p-val')).toHaveText('-15%');
+    await expect(page.locator('.packs-note')).toHaveText('ASK THE BARTENDER');
+
+    await page.locator('.language-switcher a[data-lang="ro"]').click();
+    await expect(page.locator('.packs-note')).toHaveText('ÎNTREABĂ BARMANUL');
+    await expect(packs.nth(0)).toContainText('4 BERI GZ LA STICLĂ');
   });
 });
 

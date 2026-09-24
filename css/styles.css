@@ -31,6 +31,7 @@
     --text-faint: #8a8a8a;
     --accent: #bef300;
     --accent-tint: rgba(190, 243, 0, 0.12);
+    --bottle: #f700d4;           /* fuchsia from the Easy Rider label, used for bottle prices */
     --pill-border: rgba(255, 255, 255, 0.18);
     --pill-bg: rgba(255, 255, 255, 0.06);
     --font-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -306,6 +307,7 @@ body.bars-stuck .header-glass { clip-path: inset(0 0 0 0); }
     border-bottom: 1px solid rgba(255, 255, 255, 0.09);
 }
 .beer-card .price-col { flex: 1; }
+.beer-card .price-col:last-child .p-val { color: var(--bottle); }   /* last column = bottle price */
 
 .beer-title {
     margin: 0;
@@ -385,6 +387,18 @@ body.bars-stuck .header-glass { clip-path: inset(0 0 0 0); }
 .deranj-pairing { margin-top: 5px; }                   /* Deranj cards have no taste bars */
 .food-pairing img,
 .deranj-pairing img { width: 32px; height: 32px; object-fit: contain; opacity: 0.8; }
+
+/* Bottle pack discounts */
+.bottle-price { color: var(--bottle); }
+.pack-card { margin-bottom: 18px; padding-bottom: 14px; }
+.packs-note {
+    margin: 4px 0 30px;
+    color: var(--text);
+    font-family: var(--font-display);
+    font-size: 24px;
+    letter-spacing: 1.5px;
+    text-align: center;
+}
 
 /* ---------- Plain cards (special beers, food) ---------- */
 .food-card { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid var(--border-soft); }

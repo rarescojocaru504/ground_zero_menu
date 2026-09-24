@@ -22,7 +22,7 @@ const translations = {
         
         cat_gz_beers: "GROUND ZERO <span class='light'>BEERS</span>",
         cat_deranj_beers: "DERANJ <span class='light'>BEERS</span>",
-        cat_special: "GROUND ZERO <span class='light'>SPECIAL BEERS</span>",
+        cat_special: "SPECIAL <span class='light'>BEERS &amp; PACKS</span>",
         cat_guest: "GUEST <span class='light'>BEERS &amp; EXTRA</span>",
         cat_food_main: "MENIU DE BUNĂTĂȚI",
         // Labels of the taste bars
@@ -44,9 +44,13 @@ const translations = {
         desc_deranj_ipa: "O bere de tip India Pale Ale brasată cu malțuri, hamei și drojdie de cea mai înaltă calitate, pentru un echilibru perfect.",
         desc_deranj_doar: "O bere care oferă echilibrul perfect dintre malț și hamei și care, printr-o maturare îndelungată, capătă arome intense și o savoare rafinată.",
 
-        // XperimentALE and the beer flight
+        // XperimentALE, the beer flight and the bottle packs
         desc_x029: "O bere foarte apreciată în rândul cunoscătorilor. Pentru a crea un profil de malț care să echilibreze atât dulceața, cât și amărăciunea acestui stil clasic, am adăugat boabe de cacao, cafea de specialitate, vanilie de Madagascar. Aroma rezultată este atât fină, cât și nuanțată. Descoperiți note de ciocolată, aromă de sherry, boabe de cacao și fructe negre.",
         desc_x030: "Pils german nefiltrat, cu malt din regiunea Bamberg, Germania, hamei Mandarina Bavaria - arome citrice, amăreală fină, gust super răcoritor.",
+        pack4_title: "4 BERI GZ LA STICLĂ", pack4_sub: "DERANJ INCLUS",
+        pack6_title: "6 BERI LA STICLĂ",
+        discount_label: "REDUCERE",
+        packs_note: "ÎNTREABĂ BARMANUL",
         name_pachet: "PACHET DEGUSTARE", desc_pachet: "Easy Rider, Morning Glory, Split the Pot, Imperial Fuck, Black Hole",
 
         // Guest & Extra (only the names that differ between languages)
@@ -107,7 +111,7 @@ const translations = {
         
         cat_gz_beers: "GROUND ZERO <span class='light'>BEERS</span>",
         cat_deranj_beers: "DERANJ <span class='light'>BEERS</span>",
-        cat_special: "GROUND ZERO <span class='light'>SPECIAL BEERS</span>",
+        cat_special: "SPECIAL <span class='light'>BEERS &amp; PACKS</span>",
         cat_guest: "GUEST <span class='light'>BEERS &amp; EXTRA</span>",
         cat_food_main: "FOOD MENU",
         // Labels of the taste bars
@@ -129,9 +133,13 @@ const translations = {
         desc_deranj_ipa: "Top quality malts, hops and yeast for a perfect balance.",
         desc_deranj_doar: "A beer that offers the perfect balance between malt and hops and, through long maturation, develops intense aromas and a refined flavor.",
 
-        // XperimentALE and the beer flight
+        // XperimentALE, the beer flight and the bottle packs
         desc_x029: "A beer highly regarded by connoisseurs. To create a malt profile that balances both the sweetness and bitterness of this classic style, we added cocoa beans, specialty coffee, and Madagascar vanilla. The resulting flavor is both smooth and nuanced. Discover notes of chocolate, sherry, cocoa beans, and dark fruits.",
         desc_x030: "Unfiltered German Pilsner made with malt from the Bamberg region of Germany and Mandarina Bavaria hops-featuring citrus aromas, a refined bitterness, and a super-refreshing taste.",
+        pack4_title: "4 BOTTLED GZ BEERS", pack4_sub: "DERANJ INCLUDED",
+        pack6_title: "6 BOTTLED BEERS",
+        discount_label: "DISCOUNT",
+        packs_note: "ASK THE BARTENDER",
         name_pachet: "BEER FLIGHT", desc_pachet: "Easy Rider, Morning Glory, Split the Pot, Imperial Fuck, Black Hole",
 
         // Guest & Extra (only the names that differ between languages)
