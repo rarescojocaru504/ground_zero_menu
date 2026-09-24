@@ -20,6 +20,7 @@ assets/
   img/            logo
   pdf/            the Ground Zero and Deranj flyers, RO and EN
 tests/            Playwright tests
+scripts/          build-deploy.js, which makes the upload package (npm run build)
 ```
 
 ## Common changes
@@ -39,6 +40,10 @@ If you use an allergen word that isn't in the list yet, add it to `ALLERGEN_WORD
 
 **A new beer.** Copy an existing `<div class="beer-card">` block in `index.html` and change the name, style, prices, taste bars (the `width: 40%` values) and pairing icons. Give the description a new `data-i18n` key and add that key to both languages in `lang.js`.
 
+The `data-shop="..."` on the card is the page on groundzerobeer.ro/shop that the "Buy online" button opens when someone taps the bottle. If a beer isn't sold online, leave `data-shop` out and the button says "Unavailable online" instead.
+
+The last price column is the bottle price and is shown in fuchsia automatically.
+
 For the bottle photo you need two files with the same name:
 
 - `assets/bottles/<name>.webp` – 240×360
@@ -46,11 +51,17 @@ For the bottle photo you need two files with the same name:
 
 [squoosh.app](https://squoosh.app) is the easiest way to resize and convert them. Keep the original PNG next to them.
 
+**A drink that's not available.** In the Guest & Extra list, add `is-unavailable` to its `list-row` and the red tag after its small line, copied from one of the Schneider beers. Remove both when it's back.
+
+**Packs.** The BEER PACKS section (chip "Packs") has the beer flight and the two bottle discounts. The discount is the `-10%` in the price column; the names and "Ask the bartender" are in `lang.js` (`pack4_title`, `pack6_title`, `packs_note`).
+
+**A new section.** Add an `<h2 id="sec-..." class="section-banner">` and a chip with `href="#sec-..."` in the chips row at the top of the page; the chip lights up by itself when the section is in view.
+
 **A new dish.** Same idea: copy a `food-card`, add `name_...` and `desc_...` to both languages. The chilli icon for spicy dishes goes after the translated name, see "Aripioare înflăcărate".
 
 ## After changing CSS or JS: bump the version
 
-Phones keep a copy of `styles.css`, `lang.js` and `script.js`, and might not notice you uploaded new ones. That's why `index.html` loads them as `styles.css?v=18`, `lang.js?v=7` and so on. When you change one of those files, increase its number by one. The server ignores it, but the phone sees a new address and downloads the file again.
+Phones keep a copy of `styles.css`, `lang.js` and `script.js`, and might not notice you uploaded new ones. That's why `index.html` loads them as `styles.css?v=22`, `lang.js?v=11` and so on. When you change one of those files, increase its number by one. The server ignores it, but the phone sees a new address and downloads the file again.
 
 Images don't need this, as long as a new image gets a new file name.
 
@@ -71,7 +82,8 @@ The tests open the menu in a real browser, both on a phone-sized screen and a de
 
 - every text exists in both languages, and every price is a number
 - the menu opens in Romanian, can be switched to English, and remembers the choice
-- tabs, category chips, the header glass and the bottle zoom work
+- tabs, category chips, the header glass and the bottle zoom work, and every "Buy online" button goes to the right shop page
+- bottle prices are fuchsia, the packs and the "unavailable" tags are there in both languages
 - the allergen chips are right and the filter hides the right dishes
 - all images and PDFs exist and load
 - nothing sticks out sideways on a small phone
@@ -93,6 +105,19 @@ npm run test:report   open the report of the last run (screenshots of whatever f
 ```
 
 Run them before uploading a change. They take under a minute.
+
+## Publishing on groundzerobeer.ro
+
+The menu lives in `public_html/menu` on the hosting, so it opens at https://www.groundzerobeer.ro/menu/.
+
+1. `npm run build`. This puts only the files the site needs into `_deploy/menu` (no PNG originals, tests or Node files) and stops with an error if the page uses a file that's missing.
+2. Open `_deploy/menu`, select everything inside it, right-click → Send to → Compressed (zipped) folder, and call it `menu.zip`.
+3. In cPanel → File Manager → `public_html/menu`: delete the old files, upload `menu.zip`, right-click → Extract, then delete the zip. `index.html` must end up directly in `menu`, not in a subfolder.
+4. Open the menu on a phone and check it. If it still looks old, try a private tab: it's the phone's cache.
+
+For a small change you can also upload just the changed file over the old one (and bump its `?v=`).
+
+`_deploy/` is in `.gitignore`, so the package never ends up in git.
 
 ## Fonts and logos
 

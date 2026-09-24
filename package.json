@@ -4,6 +4,7 @@
   "description": "QR menu for Ground Zero. Static site; Node is only needed for the local server and the tests.",
   "scripts": {
     "start": "http-server . -p 4173 -c-1",
+    "build": "node scripts/build-deploy.js",
     "test": "playwright test",
     "test:ui": "playwright test --ui",
     "test:report": "playwright show-report"

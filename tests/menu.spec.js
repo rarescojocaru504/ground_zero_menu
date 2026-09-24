@@ -326,7 +326,10 @@ test.describe('special beers & packs', () => {
   test('the bottle packs are there, in both languages', async ({ page }) => {
     await openMenu(page, 'en');
     await expect(page.locator('#sec-special')).toHaveText(/SPECIAL\s*BEERS$/);
-    await expect(page.locator('#sec-packs')).toHaveText(/BOTTLE\s*PACKS/);
+    await expect(page.locator('#sec-packs')).toHaveText(/BEER\s*PACKS/);
+    // the beer flight is the first item of the Packs section
+    const firstInPacks = page.locator('#sec-packs + .food-card .food-title');
+    await expect(firstInPacks).toHaveText('BEER FLIGHT');
     const packs = page.locator('#sec-packs ~ .pack-card');
     await expect(packs).toHaveCount(2);
     await expect(packs.nth(0).locator('.food-title')).toHaveText('4 BOTTLED GROUND ZERO/DERANJ BEERS');
