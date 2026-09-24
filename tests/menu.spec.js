@@ -138,12 +138,13 @@ test.describe('tabs and categories', () => {
     await expect(page.locator('.service-banner')).toContainText('la bar');
   });
 
-  for (const [chip, section] of [['Deranj', '#sec-deranj'], ['Special', '#sec-special'], ['Guest & Extra', '#sec-guest']]) {
+  for (const [chip, section] of [['Deranj', '#sec-deranj'], ['Special', '#sec-special'], ['Packs', '#sec-packs'], ['Guest & Extra', '#sec-guest']]) {
     test(`"${chip}" chip scrolls to its section and lights up`, async ({ page }) => {
       await openMenu(page);
       await page.locator('.chip', { hasText: chip }).click();
 
       await expect(page.locator('.chip.active')).toHaveText(chip);
+      await expect(page.locator('.chip.active')).toBeInViewport({ ratio: 1 });
       // the section title should end up just below the sticky header, not hidden under it
       await expect.poll(async () => {
         const header = await page.evaluate(() =>
@@ -324,8 +325,9 @@ test.describe('special beers & packs', () => {
 
   test('the bottle packs are there, in both languages', async ({ page }) => {
     await openMenu(page, 'en');
-    await expect(page.locator('#sec-special')).toHaveText(/SPECIAL\s*BEERS & PACKS/);
-    const packs = page.locator('.pack-card');
+    await expect(page.locator('#sec-special')).toHaveText(/SPECIAL\s*BEERS$/);
+    await expect(page.locator('#sec-packs')).toHaveText(/BOTTLE\s*PACKS/);
+    const packs = page.locator('#sec-packs ~ .pack-card');
     await expect(packs).toHaveCount(2);
     await expect(packs.nth(0).locator('.food-title')).toHaveText('4 BOTTLED GROUND ZERO/DERANJ BEERS');
     await expect(packs.nth(0).locator('.p-val')).toHaveText('-10%');

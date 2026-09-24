@@ -22,7 +22,8 @@ const translations = {
         
         cat_gz_beers: "GROUND ZERO <span class='light'>BEERS</span>",
         cat_deranj_beers: "DERANJ <span class='light'>BEERS</span>",
-        cat_special: "SPECIAL <span class='light'>BEERS &amp; PACKS</span>",
+        cat_special: "SPECIAL <span class='light'>BEERS</span>",
+        cat_packs: "BOTTLE <span class='light'>PACKS</span>",
         cat_guest: "GUEST <span class='light'>BEERS &amp; EXTRA</span>",
         cat_food_main: "MENIU DE BUNĂTĂȚI",
         // Labels of the taste bars
@@ -44,7 +45,7 @@ const translations = {
         desc_deranj_ipa: "O bere de tip India Pale Ale brasată cu malțuri, hamei și drojdie de cea mai înaltă calitate, pentru un echilibru perfect.",
         desc_deranj_doar: "O bere care oferă echilibrul perfect dintre malț și hamei și care, printr-o maturare îndelungată, capătă arome intense și o savoare rafinată.",
 
-        // XperimentALE, the beer flight and the bottle packs
+        // XperimentALE and the beer flight; bottle packs
         desc_x029: "O bere foarte apreciată în rândul cunoscătorilor. Pentru a crea un profil de malț care să echilibreze atât dulceața, cât și amărăciunea acestui stil clasic, am adăugat boabe de cacao, cafea de specialitate, vanilie de Madagascar. Aroma rezultată este atât fină, cât și nuanțată. Descoperiți note de ciocolată, aromă de sherry, boabe de cacao și fructe negre.",
         desc_x030: "Pils german nefiltrat, cu malt din regiunea Bamberg, Germania, hamei Mandarina Bavaria - arome citrice, amăreală fină, gust super răcoritor.",
         pack4_title: "4 BERI GROUND ZERO/DERANJ LA STICLĂ",
@@ -111,7 +112,8 @@ const translations = {
         
         cat_gz_beers: "GROUND ZERO <span class='light'>BEERS</span>",
         cat_deranj_beers: "DERANJ <span class='light'>BEERS</span>",
-        cat_special: "SPECIAL <span class='light'>BEERS &amp; PACKS</span>",
+        cat_special: "SPECIAL <span class='light'>BEERS</span>",
+        cat_packs: "BOTTLE <span class='light'>PACKS</span>",
         cat_guest: "GUEST <span class='light'>BEERS &amp; EXTRA</span>",
         cat_food_main: "FOOD MENU",
         // Labels of the taste bars
@@ -133,7 +135,7 @@ const translations = {
         desc_deranj_ipa: "Top quality malts, hops and yeast for a perfect balance.",
         desc_deranj_doar: "A beer that offers the perfect balance between malt and hops and, through long maturation, develops intense aromas and a refined flavor.",
 
-        // XperimentALE, the beer flight and the bottle packs
+        // XperimentALE and the beer flight; bottle packs
         desc_x029: "A beer highly regarded by connoisseurs. To create a malt profile that balances both the sweetness and bitterness of this classic style, we added cocoa beans, specialty coffee, and Madagascar vanilla. The resulting flavor is both smooth and nuanced. Discover notes of chocolate, sherry, cocoa beans, and dark fruits.",
         desc_x030: "Unfiltered German Pilsner made with malt from the Bamberg region of Germany and Mandarina Bavaria hops-featuring citrus aromas, a refined bitterness, and a super-refreshing taste.",
         pack4_title: "4 BOTTLED GROUND ZERO/DERANJ BEERS",

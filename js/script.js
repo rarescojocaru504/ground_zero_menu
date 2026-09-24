@@ -232,7 +232,15 @@ function updateActiveChip() {
         const banner = document.querySelector(chip.getAttribute('href'));
         if (banner.getBoundingClientRect().top <= headerHeight + 40) current = chip;
     });
+    if (current.classList.contains('active')) return;
     chips.forEach(chip => chip.classList.toggle('active', chip === current));
+
+    // on narrow phones not all chips fit, so slide the row to keep the highlighted one in view
+    const row = drinkChips.getBoundingClientRect();
+    const box = current.getBoundingClientRect();
+    if (box.left < row.left || box.right > row.right) {
+        drinkChips.scrollTo({ left: drinkChips.scrollLeft + box.left - row.left - 15, behavior: 'smooth' });
+    }
 }
 
 
