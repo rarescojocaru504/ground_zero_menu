@@ -47,8 +47,8 @@ const translations = {
         // XperimentALE, the beer flight and the bottle packs
         desc_x029: "O bere foarte apreciată în rândul cunoscătorilor. Pentru a crea un profil de malț care să echilibreze atât dulceața, cât și amărăciunea acestui stil clasic, am adăugat boabe de cacao, cafea de specialitate, vanilie de Madagascar. Aroma rezultată este atât fină, cât și nuanțată. Descoperiți note de ciocolată, aromă de sherry, boabe de cacao și fructe negre.",
         desc_x030: "Pils german nefiltrat, cu malt din regiunea Bamberg, Germania, hamei Mandarina Bavaria - arome citrice, amăreală fină, gust super răcoritor.",
-        pack4_title: "4 BERI GZ LA STICLĂ", pack4_sub: "DERANJ INCLUS",
-        pack6_title: "6 BERI LA STICLĂ",
+        pack4_title: "4 BERI GROUND ZERO/DERANJ LA STICLĂ",
+        pack6_title: "6 BERI GROUND ZERO/DERANJ LA STICLĂ",
         discount_label: "REDUCERE",
         packs_note: "ÎNTREABĂ BARMANUL",
         name_pachet: "PACHET DEGUSTARE", desc_pachet: "Easy Rider, Morning Glory, Split the Pot, Imperial Fuck, Black Hole",
@@ -136,8 +136,8 @@ const translations = {
         // XperimentALE, the beer flight and the bottle packs
         desc_x029: "A beer highly regarded by connoisseurs. To create a malt profile that balances both the sweetness and bitterness of this classic style, we added cocoa beans, specialty coffee, and Madagascar vanilla. The resulting flavor is both smooth and nuanced. Discover notes of chocolate, sherry, cocoa beans, and dark fruits.",
         desc_x030: "Unfiltered German Pilsner made with malt from the Bamberg region of Germany and Mandarina Bavaria hops-featuring citrus aromas, a refined bitterness, and a super-refreshing taste.",
-        pack4_title: "4 BOTTLED GZ BEERS", pack4_sub: "DERANJ INCLUDED",
-        pack6_title: "6 BOTTLED BEERS",
+        pack4_title: "4 BOTTLED GROUND ZERO/DERANJ BEERS",
+        pack6_title: "6 BOTTLED GROUND ZERO/DERANJ BEERS",
         discount_label: "DISCOUNT",
         packs_note: "ASK THE BARTENDER",
         name_pachet: "BEER FLIGHT", desc_pachet: "Easy Rider, Morning Glory, Split the Pot, Imperial Fuck, Black Hole",

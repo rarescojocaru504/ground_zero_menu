@@ -391,14 +391,6 @@ body.bars-stuck .header-glass { clip-path: inset(0 0 0 0); }
 /* Bottle pack discounts */
 .bottle-price { color: var(--bottle); }
 .pack-card { margin-bottom: 18px; padding-bottom: 14px; }
-.packs-note {
-    margin: 4px 0 30px;
-    color: var(--text);
-    font-family: var(--font-display);
-    font-size: 24px;
-    letter-spacing: 1.5px;
-    text-align: center;
-}
 
 /* ---------- Plain cards (special beers, food) ---------- */
 .food-card { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid var(--border-soft); }

@@ -322,21 +322,20 @@ test.describe('special beers & packs', () => {
     expect(colors[3]).toBe('rgb(247, 0, 212)');
   });
 
-  test('the bottle packs and the note are there, in both languages', async ({ page }) => {
+  test('the bottle packs are there, in both languages', async ({ page }) => {
     await openMenu(page, 'en');
     await expect(page.locator('#sec-special')).toHaveText(/SPECIAL\s*BEERS & PACKS/);
     const packs = page.locator('.pack-card');
     await expect(packs).toHaveCount(2);
-    await expect(packs.nth(0)).toContainText('4 BOTTLED GZ BEERS');
-    await expect(packs.nth(0)).toContainText('DERANJ INCLUDED');
+    await expect(packs.nth(0).locator('.food-title')).toHaveText('4 BOTTLED GROUND ZERO/DERANJ BEERS');
     await expect(packs.nth(0).locator('.p-val')).toHaveText('-10%');
-    await expect(packs.nth(1)).toContainText('6 BOTTLED BEERS');
+    await expect(packs.nth(1).locator('.food-title')).toHaveText('6 BOTTLED GROUND ZERO/DERANJ BEERS');
     await expect(packs.nth(1).locator('.p-val')).toHaveText('-15%');
-    await expect(page.locator('.packs-note')).toHaveText('ASK THE BARTENDER');
+    await expect(packs.locator('.beer-subtitle')).toHaveText(['ASK THE BARTENDER', 'ASK THE BARTENDER']);
 
     await page.locator('.language-switcher a[data-lang="ro"]').click();
-    await expect(page.locator('.packs-note')).toHaveText('ÎNTREABĂ BARMANUL');
-    await expect(packs.nth(0)).toContainText('4 BERI GZ LA STICLĂ');
+    await expect(packs.locator('.beer-subtitle')).toHaveText(['ÎNTREABĂ BARMANUL', 'ÎNTREABĂ BARMANUL']);
+    await expect(packs.nth(0).locator('.food-title')).toHaveText('4 BERI GROUND ZERO/DERANJ LA STICLĂ');
   });
 });
 
