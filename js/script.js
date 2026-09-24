@@ -22,17 +22,15 @@ let currentLang = null;
 let targetLang = null;             // set while a switch is fading
 let langFadeTimer = null;
 
-// A language picked earlier on this phone wins. Otherwise Romanian if the phone lists
-// Romanian among its languages, English for everyone else.
+// Romanian by default. If the guest switched to English on an earlier visit, keep that.
 function detectLanguage() {
     try {
         const saved = localStorage.getItem(LANG_STORAGE_KEY);
         if (saved && translations[saved]) return saved;
     } catch (e) {
-        // localStorage can throw in private mode; just detect it again
+        // localStorage can throw in private mode; fall back to the default
     }
-    const langs = navigator.languages || [navigator.language || 'ro'];
-    return langs.some(l => String(l).toLowerCase().startsWith('ro')) ? 'ro' : 'en';
+    return 'ro';
 }
 
 function highlightLanguageButton(lang) {

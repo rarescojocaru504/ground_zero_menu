@@ -86,10 +86,10 @@ test.describe('language', () => {
 
   test.describe('on a phone set to English', () => {
     test.use({ locale: 'en-US' });
-    test('opens in English', async ({ page }) => {
+    test('still opens in Romanian', async ({ page }) => {
       await page.goto('/');
-      await expect(page.locator('html')).toHaveAttribute('lang', 'en');
-      await expect(page.locator('#btn-drinks')).toHaveText('DRINKS');
+      await expect(page.locator('html')).toHaveAttribute('lang', 'ro');
+      await expect(page.locator('#btn-drinks')).toHaveText('BĂUTURI');
     });
   });
 

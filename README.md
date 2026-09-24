@@ -70,7 +70,7 @@ and open http://localhost:4173.
 The tests open the menu in a real browser, both on a phone-sized screen and a desktop one, and check that:
 
 - every text exists in both languages, and every price is a number
-- the language is picked from the phone, can be switched, and is remembered
+- the menu opens in Romanian, can be switched to English, and remembers the choice
 - tabs, category chips, the header glass and the bottle zoom work
 - the allergen chips are right and the filter hides the right dishes
 - all images and PDFs exist and load
