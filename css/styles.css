@@ -121,7 +121,8 @@ body.bars-stuck .header-glass { clip-path: inset(0 0 0 0); }
 .review-btn-top,
 .language-switcher a,
 .btn-flyer,
-.social-pill {
+.social-pill,
+.lightbox-shop {
     border: 1px solid var(--pill-border);
     border-radius: 999px;
     background-color: var(--pill-bg);
@@ -135,11 +136,13 @@ body.bars-stuck .header-glass { clip-path: inset(0 0 0 0); }
 .review-btn-top:hover,
 .language-switcher a:hover,
 .btn-flyer:hover,
-.social-pill:hover { border-color: var(--accent); }
+.social-pill:hover,
+.lightbox-shop:hover { border-color: var(--accent); }
 .review-btn-top:active,
 .language-switcher a:active,
 .btn-flyer:active,
-.social-pill:active { transform: scale(0.97); background-color: rgba(255, 255, 255, 0.12); }
+.social-pill:active,
+.lightbox-shop:active { transform: scale(0.97); background-color: rgba(255, 255, 255, 0.12); }
 
 /* at least 40px tall so they're easy to hit with a thumb */
 .review-btn-top {
@@ -337,6 +340,22 @@ body.bars-stuck .header-glass { clip-path: inset(0 0 0 0); }
     vertical-align: 1px;
     white-space: nowrap;
 }
+
+/* "Unavailable" tag (Schneider beers). The row's name and prices are dimmed too. */
+.badge-unavailable {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 2px 8px;
+    border: 1px solid #ff7a6b;
+    border-radius: 999px;
+    color: #ff9d91;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 0.8px;
+    white-space: nowrap;
+}
+.list-row.is-unavailable .list-title,
+.list-row.is-unavailable .list-prices { opacity: 0.45; }
 
 /* Prices: amount on top, volume or weight under it */
 .beer-price-matrix { display: flex; gap: 14px; text-align: center; }
@@ -570,6 +589,22 @@ body.bars-stuck .header-glass { clip-path: inset(0 0 0 0); }
 .lightbox[hidden] { display: none; }
 .lightbox img { max-width: min(80vw, 420px); max-height: 75vh; object-fit: contain; }
 .lightbox-caption { margin: 0; font-family: var(--font-display); font-size: 30px; letter-spacing: 1px; }
+/* shop button under the zoomed bottle, same pill as the other buttons */
+.lightbox-shop {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    box-sizing: border-box;
+    padding: 0 26px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.lightbox-shop[hidden] { display: none; }
+.lightbox-shop.is-disabled { opacity: 0.5; cursor: default; }
+.lightbox-shop.is-disabled:hover { border-color: var(--pill-border); }
+
 .lightbox-close {
     position: absolute;
     top: 14px;

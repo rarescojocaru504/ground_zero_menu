@@ -267,14 +267,23 @@ function updateHeaderState() {
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = lightbox.querySelector('img');
 const lightboxCaption = lightbox.querySelector('.lightbox-caption');
+const shopLink = lightbox.querySelector('a.lightbox-shop');
+const shopUnavailable = lightbox.querySelector('.lightbox-shop.is-disabled');
 let zoomedBottle = null;
 
 function openLightbox(img) {
     // assets/bottles/x.webp -> assets/bottles/large/x.webp, only downloaded when someone taps
     lightboxImg.src = img.getAttribute('src').replace('/bottles/', '/bottles/large/');
     lightboxImg.alt = img.alt;
-    const title = img.closest('.beer-card').querySelector('.beer-title');
+    const card = img.closest('.beer-card');
+    const title = card.querySelector('.beer-title');
     lightboxCaption.textContent = title ? title.textContent : img.alt;
+
+    // "Buy online" if the card has a shop page, otherwise "Unavailable online"
+    const shopUrl = card.dataset.shop;
+    shopLink.hidden = !shopUrl;
+    shopUnavailable.hidden = !!shopUrl;
+    if (shopUrl) shopLink.href = shopUrl;
 
     zoomedBottle = img;
     lightbox.hidden = false;
@@ -300,8 +309,12 @@ document.querySelectorAll('.beer-img-col img').forEach(img => {
     });
 });
 
-// a tap anywhere closes it, the × button included
-lightbox.addEventListener('click', closeLightbox);
+// a tap anywhere closes it, the × button included. Tapping "Buy online" opens the shop
+// in a new tab and closes the zoom too; tapping "Unavailable online" does nothing.
+lightbox.addEventListener('click', e => {
+    if (e.target === shopUnavailable) return;
+    closeLightbox();
+});
 document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && !lightbox.hidden) closeLightbox();
 });

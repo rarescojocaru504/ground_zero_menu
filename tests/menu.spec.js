@@ -253,6 +253,42 @@ test.describe('images and files', () => {
     await expect(lightbox).toBeHidden();
   });
 
+  test('the zoom has a "Buy online" link to the shop page of that beer', async ({ page }) => {
+    await openMenu(page, 'ro');
+    const expected = {
+      'EASY RIDER': 'easy-rider', 'MORNING GLORY': 'morning-glory', 'SPLIT THE POT': 'split-the-pot',
+      'IMPERIAL FUCK': 'imperial-fuck', 'AMBER GUERRE': 'amber-guerre', 'BLACK HOLE': 'gipsy-porter',
+      'DERANJ BLONDĂ': 'deranj-blonda', 'DERANJ ORANJ': 'deranj-oranj', 'DERANJ IPA': 'deranj-IPA',
+      'DOAR O BERE': 'deranj-doar-o-bere',
+    };
+    const lightbox = page.locator('#lightbox');
+    for (const [name, slug] of Object.entries(expected)) {
+      const card = page.locator('.beer-card', { has: page.locator('.beer-title', { hasText: name }) });
+      await card.locator('.beer-img-col img').click();
+      const link = lightbox.locator('a.lightbox-shop');
+      await expect(link).toBeVisible();
+      await expect(link).toHaveText('Cumpără online');
+      await expect(link).toHaveAttribute('href', `https://www.groundzerobeer.ro/shop/ground-zero-beer-${slug}`);
+      await expect(link).toHaveAttribute('target', '_blank');
+      await expect(lightbox.locator('.lightbox-shop.is-disabled')).toBeHidden();
+      await page.keyboard.press('Escape');
+    }
+  });
+
+  test('a beer without a shop page shows "unavailable" instead of the link', async ({ page }) => {
+    await openMenu(page, 'en');
+    // every beer has a shop page right now, so take one away to test the fallback
+    const card = page.locator('.beer-card').first();
+    await card.evaluate(el => el.removeAttribute('data-shop'));
+    await card.locator('.beer-img-col img').click();
+    const lightbox = page.locator('#lightbox');
+    await expect(lightbox.locator('a.lightbox-shop')).toBeHidden();
+    await expect(lightbox.locator('.lightbox-shop.is-disabled')).toHaveText('Unavailable online');
+    // tapping it doesn't close the zoom
+    await lightbox.locator('.lightbox-shop.is-disabled').click();
+    await expect(lightbox).toBeVisible();
+  });
+
   test('the About buttons point to PDFs that exist, in both languages', async ({ page, request }) => {
     for (const lang of ['ro', 'en']) {
       await openMenu(page, lang);
@@ -273,6 +309,21 @@ test.describe('images and files', () => {
     await expect(pills.nth(1)).toHaveAttribute('href', 'https://www.tiktok.com/@ground.zero.beer');
     await expect(pills.nth(0)).toHaveClass(/has-logo/);
     await expect(pills.nth(1)).toHaveClass(/has-logo/);
+  });
+});
+
+
+test.describe('availability', () => {
+  test('the Schneider beers are marked unavailable, in both languages', async ({ page }) => {
+    await openMenu(page, 'ro');
+    const rows = page.locator('.list-row.is-unavailable');
+    await expect(rows).toHaveCount(3);
+    for (const row of await rows.all()) {
+      await expect(row.locator('.list-title')).toContainText('SCHNEIDER WEISSE');
+      await expect(row.locator('.badge-unavailable')).toHaveText('INDISPONIBIL');
+    }
+    await page.locator('.language-switcher a[data-lang="en"]').click();
+    await expect(page.locator('.badge-unavailable').first()).toHaveText('UNAVAILABLE');
   });
 });
 

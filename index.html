@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" href="assets/img/logo.png">
     <!-- Bebas Neue, self-hosted (licence: assets/fonts/OFL-bebas-neue.txt). Same condensed look as the printed menu. -->
     <link rel="preload" href="assets/fonts/bebas-neue-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="css/styles.css?v=19">
+    <link rel="stylesheet" href="css/styles.css?v=20">
 </head>
 <body>
 
@@ -70,7 +70,7 @@
         <h2 id="sec-gz" class="section-banner" data-i18n="cat_gz_beers">GROUND ZERO <span class='light'>BEERS</span></h2>
 
         <!-- Easy Rider -->
-        <div class="beer-card">
+        <div class="beer-card" data-shop="https://www.groundzerobeer.ro/shop/ground-zero-beer-easy-rider">
             <div class="beer-img-col"><img src="assets/bottles/easyrider.webp" alt="Easy Rider" width="240" height="360" loading="lazy" decoding="async"></div>
             <div class="beer-info-col">
                 <div class="beer-header-row">
@@ -101,7 +101,7 @@
         </div>
 
         <!-- Morning Glory -->
-        <div class="beer-card">
+        <div class="beer-card" data-shop="https://www.groundzerobeer.ro/shop/ground-zero-beer-morning-glory">
             <div class="beer-img-col"><img src="assets/bottles/morningglory.webp" alt="Morning Glory" width="240" height="360" loading="lazy" decoding="async"></div>
             <div class="beer-info-col">
                 <div class="beer-header-row">
@@ -132,7 +132,7 @@
         </div>
 
         <!-- Split the Pot -->
-        <div class="beer-card">
+        <div class="beer-card" data-shop="https://www.groundzerobeer.ro/shop/ground-zero-beer-split-the-pot">
             <div class="beer-img-col"><img src="assets/bottles/splittheepot.webp" alt="Split the Pot" width="240" height="360" loading="lazy" decoding="async"></div>
             <div class="beer-info-col">
                 <div class="beer-header-row">
@@ -163,7 +163,7 @@
         </div>
 
         <!-- Imperial Fuck -->
-        <div class="beer-card">
+        <div class="beer-card" data-shop="https://www.groundzerobeer.ro/shop/ground-zero-beer-imperial-fuck">
             <div class="beer-img-col"><img src="assets/bottles/imperialfuck.webp" alt="Imperial Fuck" width="240" height="360" loading="lazy" decoding="async"></div>
             <div class="beer-info-col">
                 <div class="beer-header-row">
@@ -194,7 +194,7 @@
         </div>
 
         <!-- Amber Guerre -->
-        <div class="beer-card">
+        <div class="beer-card" data-shop="https://www.groundzerobeer.ro/shop/ground-zero-beer-amber-guerre">
             <div class="beer-img-col"><img src="assets/bottles/amberguerre.webp" alt="Amber Guerre" width="240" height="360" loading="lazy" decoding="async"></div>
             <div class="beer-info-col">
                 <div class="beer-header-row">
@@ -225,7 +225,7 @@
         </div>
 
         <!-- Black Hole -->
-        <div class="beer-card">
+        <div class="beer-card" data-shop="https://www.groundzerobeer.ro/shop/ground-zero-beer-gipsy-porter">
             <div class="beer-img-col"><img src="assets/bottles/blackhole.webp" alt="Black Hole" width="240" height="360" loading="lazy" decoding="async"></div>
             <div class="beer-info-col">
                 <div class="beer-header-row">
@@ -259,7 +259,7 @@
         <h2 id="sec-deranj" class="section-banner" data-i18n="cat_deranj_beers">DERANJ <span class='light'>BEERS</span></h2>
 
         <!-- Deranj Blondă -->
-        <div class="beer-card">
+        <div class="beer-card" data-shop="https://www.groundzerobeer.ro/shop/ground-zero-beer-deranj-blonda">
             <div class="beer-img-col"><img src="assets/bottles/deranjblonda.webp" alt="Deranj Blondă" width="240" height="360" loading="lazy" decoding="async"></div>
             <div class="beer-info-col">
                 <div class="beer-header-row">
@@ -283,7 +283,7 @@
         </div>
 
         <!-- Deranj Oranj -->
-        <div class="beer-card">
+        <div class="beer-card" data-shop="https://www.groundzerobeer.ro/shop/ground-zero-beer-deranj-oranj">
             <div class="beer-img-col"><img src="assets/bottles/deranjoranj.webp" alt="Deranj Oranj" width="240" height="360" loading="lazy" decoding="async"></div>
             <div class="beer-info-col">
                 <div class="beer-header-row">
@@ -307,7 +307,7 @@
         </div>
 
         <!-- Deranj IPA -->
-        <div class="beer-card">
+        <div class="beer-card" data-shop="https://www.groundzerobeer.ro/shop/ground-zero-beer-deranj-IPA">
             <div class="beer-img-col"><img src="assets/bottles/deranjipa.webp" alt="Deranj IPA" width="240" height="360" loading="lazy" decoding="async"></div>
             <div class="beer-info-col">
                 <div class="beer-header-row">
@@ -331,7 +331,7 @@
         </div>
 
         <!-- Deranj Doar O Bere -->
-        <div class="beer-card">
+        <div class="beer-card" data-shop="https://www.groundzerobeer.ro/shop/ground-zero-beer-deranj-doar-o-bere">
             <div class="beer-img-col"><img src="assets/bottles/deranjdoarobere.webp" alt="Doar O Bere" width="240" height="360" loading="lazy" decoding="async"></div>
             <div class="beer-info-col">
                 <div class="beer-header-row">
@@ -396,19 +396,20 @@
         <!-- GUEST BEERS & EXTRA -->
         <h2 id="sec-guest" class="section-banner" data-i18n="cat_guest">GUEST <span class='light'>BEERS &amp; EXTRA</span></h2>
 
-        <!-- Dotted price list like the printed menu. .list-sub is the small line under the name. -->
+        <!-- Dotted price list like the printed menu. .list-sub is the small line under the name.
+             To mark a drink as not available, add "is-unavailable" to its row and the badge (see Schneider). -->
         <div class="price-list">
-            <div class="list-row">
+            <div class="list-row is-unavailable">
                 <span class="list-title">SCHNEIDER WEISSE <span class="light">TAP 1</span></span><span class="leader"></span><span class="list-prices"><span class="list-price"><small>0.5L</small>22</span></span>
-                <span class="list-sub">HELLE WEISSE 4.9%</span>
+                <span class="list-sub">HELLE WEISSE 4.9% <span class="badge-unavailable" data-i18n="badge_unavailable">INDISPONIBIL</span></span>
             </div>
-            <div class="list-row">
+            <div class="list-row is-unavailable">
                 <span class="list-title">SCHNEIDER WEISSE <span class="light">TAP 3</span></span><span class="leader"></span><span class="list-prices"><span class="list-price"><small>0.5L</small>25</span></span>
-                <span class="list-sub">ALKOHOLFREE &lt;0.5%</span>
+                <span class="list-sub">ALKOHOLFREE &lt;0.5% <span class="badge-unavailable" data-i18n="badge_unavailable">INDISPONIBIL</span></span>
             </div>
-            <div class="list-row">
+            <div class="list-row is-unavailable">
                 <span class="list-title">SCHNEIDER WEISSE <span class="light">TAP 5</span></span><span class="leader"></span><span class="list-prices"><span class="list-price"><small>0.5L</small>27</span></span>
-                <span class="list-sub">HOPFENWEISSE 8.2%</span>
+                <span class="list-sub">HOPFENWEISSE 8.2% <span class="badge-unavailable" data-i18n="badge_unavailable">INDISPONIBIL</span></span>
             </div>
             <div class="list-row">
                 <span class="list-title" data-i18n="name_sprit">ȘPRIȚ CAII DE LA LETEA</span><span class="leader"></span><span class="list-prices"><span class="list-price"><small>0.2L</small>19</span><span class="list-price"><small>0.4L</small>37</span></span>
@@ -628,11 +629,15 @@
 
 </div>
 
-<!-- Bottle zoom. script.js fills in the image (from assets/bottles/large/) when a bottle is tapped. -->
+<!-- Bottle zoom. script.js fills in the image (from assets/bottles/large/) when a bottle is tapped.
+     The shop link comes from data-shop on the beer card; leave it out if the beer isn't sold online. -->
 <div class="lightbox" id="lightbox" hidden>
     <button class="lightbox-close" type="button" aria-label="Close">&times;</button>
     <img alt="">
     <p class="lightbox-caption"></p>
+    <!-- Shop link from the card's data-shop; beers without one show "unavailable online" instead -->
+    <a class="lightbox-shop" href="#" target="_blank" rel="noopener" data-i18n="shop_buy">Cumpără online</a>
+    <span class="lightbox-shop is-disabled" data-i18n="shop_unavailable">Indisponibil online</span>
 </div>
 
 <!-- Floating "order at the bar/kitchen" banner. Hides near the bottom of the page. -->
@@ -641,7 +646,7 @@
     <span data-i18n="service_toast">Comanda și servirea la bar / Apreciem debarasarea</span>
 </div>
 
-<script src="js/lang.js?v=7"></script>
-<script src="js/script.js?v=15"></script>
+<script src="js/lang.js?v=8"></script>
+<script src="js/script.js?v=16"></script>
 </body>
 </html>

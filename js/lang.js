@@ -78,7 +78,7 @@ const translations = {
         // Legend under the food menu
         food_legend: "<strong>Legendă:</strong> *produs / din produs congelat<br>Listă Alergeni: nuci, gluten, lactate, lupin, muștar, ou, pește, soia, sulfiți, susan, țelină",
 
-        // Food tab banner, allergen filter, "limited edition" tag, footer
+        // Food tab banner, allergen filter, tags, shop button in the bottle zoom, footer
         food_service: "Comanda și servirea la bucătărie / Apreciem debarasarea",
         filter_title: "Ascunde produsele cu:",
         filter_note: "Informativ – dacă ai o alergie, te rugăm să întrebi la bar.",
@@ -88,6 +88,9 @@ const translations = {
         allergen_sesame: "susan", allergen_soy: "soia", allergen_celery: "țelină", allergen_sulphites: "sulfiți",
         allergen_nuts: "nuci", allergen_lupin: "lupin",
         badge_limited: "EDIȚIE LIMITATĂ",
+        badge_unavailable: "INDISPONIBIL",
+        shop_buy: "Cumpără online",
+        shop_unavailable: "Indisponibil online",
         footer_tips: "Tips nu este inclus / Dar foarte apreciat",
 
         // About buttons (text + PDF link) and the drinks banner
@@ -160,7 +163,7 @@ const translations = {
         // Legend under the food menu
         food_legend: "<strong>Legend:</strong> *frozen or from frozen product<br>Allergens: nuts, gluten, dairy, lupine, mustard, egg, fish, soya, sulphites, sesame, celery",
 
-        // Food tab banner, allergen filter, "limited edition" tag, footer
+        // Food tab banner, allergen filter, tags, shop button in the bottle zoom, footer
         food_service: "Order &amp; service @ the counter / We appreciate you clearing your table",
         filter_title: "Hide items containing:",
         filter_note: "For guidance only – if you have an allergy, please ask at the bar.",
@@ -170,6 +173,9 @@ const translations = {
         allergen_sesame: "sesame", allergen_soy: "soy", allergen_celery: "celery", allergen_sulphites: "sulphites",
         allergen_nuts: "nuts", allergen_lupin: "lupine",
         badge_limited: "LIMITED EDITION",
+        badge_unavailable: "UNAVAILABLE",
+        shop_buy: "Buy online",
+        shop_unavailable: "Unavailable online",
         footer_tips: "Service not included / But very welcome",
 
         // About buttons (text + PDF link) and the drinks banner
