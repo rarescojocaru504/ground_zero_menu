@@ -1,0 +1,65 @@
+/* The "despre" pages (despre_gz_ro.html, despre_deranj_en.html, ...): one flyer each, shown as
+   images. Loaded after styles.css and reuses its colours, fonts, pills and section banners. */
+
+/* The flyers are wide spreads, so these pages get a wider column than the menu. */
+.despre-page .container,
+.despre-page .bar-inner { max-width: 1100px; }
+
+/* Top bar: back to the menu + RO/EN. Always glass, since the flyer scrolls under it. */
+.despre-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: rgba(17, 17, 17, 0.6);
+    backdrop-filter: blur(6px) saturate(160%);
+    -webkit-backdrop-filter: blur(6px) saturate(160%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+.back-link .icon { width: 16px; height: 16px; }
+
+/* Flyer pages */
+.flyer { display: flex; flex-direction: column; gap: 14px; }
+.flyer-page {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    background-color: #222;               /* placeholder colour while the image loads */
+    cursor: zoom-in;
+}
+.flyer-hint {
+    margin: 10px 0 0;
+    color: var(--text-dim);
+    font-size: 12px;
+    text-align: center;
+}
+
+/* Big view of one page. On a phone the image is wider than the screen, so the text is
+   readable and you scroll sideways to move around; on a computer it fits the window. */
+.page-viewer {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background-color: rgba(0, 0, 0, 0.92);
+    animation: fadeIn 0.25s ease-out;
+}
+.page-viewer[hidden] { display: none; }
+.page-viewer-scroll {
+    position: absolute;
+    inset: 0;
+    overflow: auto;
+    display: flex;
+    align-items: safe center;
+}
+.page-viewer-scroll img {
+    display: block;
+    width: max(100%, 950px);
+    max-width: none;
+    height: auto;
+    margin: auto;
+}
+.page-viewer .lightbox-close {
+    position: fixed;
+    z-index: 1;
+    background-color: rgba(17, 17, 17, 0.7);
+}

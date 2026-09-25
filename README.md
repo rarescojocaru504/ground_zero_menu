@@ -8,6 +8,8 @@ It's a plain static site: one HTML page, one CSS file and two JS files, with no 
 
 ```
 index.html        the page: every beer, drink and dish, with prices
+despre_*.html     the flyers behind the "Despre gama ..." buttons, one page per brand and language
+                  (despre_gz_ro, despre_gz_en, despre_deranj_ro, despre_deranj_en)
 css/styles.css    all the styling (colours and fonts are at the top, in :root)
 js/lang.js        every text that exists in both RO and EN
 js/script.js      language switch, tabs, allergen filter, header glass, bottle zoom
@@ -18,7 +20,8 @@ assets/
   icons/          Instagram / TikTok logos
   fonts/          Bebas Neue (the condensed font from the printed menu)
   img/            logo
-  pdf/            the Ground Zero and Deranj flyers, RO and EN
+  despre/         the flyer pages as images (despre_gz_ro-1.webp, ...), used by despre_*.html
+  pdf/            the original flyer PDFs (no longer linked from the menu, kept for old links)
 tests/            Playwright tests
 scripts/          build-deploy.js, which makes the upload package (npm run build)
 ```
@@ -57,6 +60,12 @@ For the bottle photo you need two files with the same name:
 
 **A new section.** Add an `<h2 id="sec-..." class="section-banner">` and a chip with `href="#sec-..."` in the chips row at the top of the page; the chip lights up by itself when the section is in view.
 
+**New flyers.** The "Despre" buttons don't open the PDFs, because Android phones download a PDF
+instead of showing it. Instead each flyer page is an image in `assets/despre/`. For a new flyer, export
+its pages as images (about 1600px wide, .webp) with the same names, e.g. `despre_gz_en-1.webp` and
+`despre_gz_en-2.webp`, and replace the old ones. If the size of the pages changes, update the `width`
+and `height` of the images in the matching `despre_*.html`.
+
 **A new dish.** Same idea: copy a `food-card`, add `name_...` and `desc_...` to both languages. The chilli icon for spicy dishes goes after the translated name, see "Aripioare înflăcărate".
 
 ## After changing CSS or JS: bump the version
@@ -85,7 +94,7 @@ The tests open the menu in a real browser, both on a phone-sized screen and a de
 - tabs, category chips, the header glass and the bottle zoom work, and every "Buy online" button goes to the right shop page
 - bottle prices are fuchsia, the packs and the "unavailable" tags are there in both languages
 - the allergen chips are right and the filter hides the right dishes
-- all images and PDFs exist and load
+- all images exist and load, and each "Despre" button opens the right flyer page in the right language
 - nothing sticks out sideways on a small phone
 - no JavaScript errors show up anywhere
 

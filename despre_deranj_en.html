@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#111111">
+    <title>About Deranj</title>
+    <link rel="icon" type="image/png" href="assets/img/logo.png">
+    <link rel="preload" href="assets/fonts/bebas-neue-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="css/styles.css?v=22">
+    <link rel="stylesheet" href="css/despre.css?v=1">
+</head>
+<body class="despre-page">
+
+<!--
+    Deranj flyer (EN), shown as images so phones don't have to download a PDF.
+    There are four of these pages: despre_gz_ro/en.html and despre_deranj_ro/en.html, opened by the
+    "Despre gama ..." buttons at the bottom of the menu. The images are assets/despre/despre_deranj_en-1.webp and -2.webp.
+-->
+
+<header class="despre-bar">
+    <div class="bar-inner">
+        <a href="./" class="review-btn-top back-link">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+            <span>Menu</span>
+        </a>
+        <!-- RO/EN: the same flyer in the other language -->
+        <div class="language-switcher">
+            <a href="despre_deranj_ro.html" data-lang="ro">RO</a>
+            <a href="despre_deranj_en.html" data-lang="en" class="active">EN</a>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+
+    <div class="header">
+        <a href="./"><img src="assets/img/logo.webp" alt="Ground Zero" class="logo" width="480" height="480"></a>
+    </div>
+
+    <h2 class="section-banner">DERANJ <span class="light">BEERS</span></h2>
+    <div class="flyer">
+        <img class="flyer-page" src="assets/despre/despre_deranj_en-1.webp" width="1600" height="1534" alt="Deranj flyer, page 1">
+        <img class="flyer-page" src="assets/despre/despre_deranj_en-2.webp" width="1600" height="1534" alt="Deranj flyer, page 2" loading="lazy">
+    </div>
+    <p class="flyer-hint">Tap a page to see it bigger.</p>
+
+    <div class="flyer-buttons">
+        <a href="./" class="btn-flyer">Back to the menu</a>
+    </div>
+
+</div>
+
+<!-- Big view of one page, filled by js/despre.js when a page is tapped -->
+<div class="page-viewer" id="page-viewer" hidden>
+    <button class="lightbox-close" type="button" aria-label="Close">&times;</button>
+    <div class="page-viewer-scroll">
+        <img alt="">
+    </div>
+</div>
+
+<script src="js/despre.js?v=1"></script>
+</body>
+</html>

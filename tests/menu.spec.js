@@ -103,7 +103,7 @@ test.describe('language', () => {
       await expect(page.locator('#btn-food')).toHaveText('FOOD');
       await expect(page.locator('html')).toHaveAttribute('lang', 'en');
       await expect(page.locator('.language-switcher a.active')).toHaveText('EN');
-      await expect(page.locator('.btn-flyer').first()).toHaveAttribute('href', /_en\.pdf$/);
+      await expect(page.locator('.btn-flyer').first()).toHaveAttribute('href', 'despre_gz_en.html');
 
       await page.reload();
       await expect(page.locator('html')).toHaveAttribute('lang', 'en');
@@ -290,16 +290,11 @@ test.describe('images and files', () => {
     await expect(lightbox).toBeVisible();
   });
 
-  test('the About buttons point to PDFs that exist, in both languages', async ({ page, request }) => {
+  test('the About buttons open the flyer page for that brand and language', async ({ page }) => {
     for (const lang of ['ro', 'en']) {
       await openMenu(page, lang);
       const links = await page.locator('.btn-flyer').evaluateAll(as => as.map(a => a.getAttribute('href')));
-      expect(links).toHaveLength(2);
-      for (const href of links) {
-        expect(href).toContain(`_${lang}.pdf`);
-        const res = await request.get(href);
-        expect(res.ok(), href).toBe(true);
-      }
+      expect(links).toEqual([`despre_gz_${lang}.html`, `despre_deranj_${lang}.html`]);
     }
   });
 
@@ -356,6 +351,67 @@ test.describe('availability', () => {
     }
     await page.locator('.language-switcher a[data-lang="en"]').click();
     await expect(page.locator('.badge-unavailable').first()).toHaveText('UNAVAILABLE');
+  });
+});
+
+
+test.describe('flyer pages (despre)', () => {
+  const PAGES = [
+    { file: 'despre_gz_ro.html', lang: 'ro', banner: /GROUND ZERO\s*BEERS/, img: 'despre_gz_ro' },
+    { file: 'despre_gz_en.html', lang: 'en', banner: /GROUND ZERO\s*BEERS/, img: 'despre_gz_en' },
+    { file: 'despre_deranj_ro.html', lang: 'ro', banner: /DERANJ\s*BEERS/, img: 'despre_deranj_ro' },
+    { file: 'despre_deranj_en.html', lang: 'en', banner: /DERANJ\s*BEERS/, img: 'despre_deranj_en' },
+  ];
+
+  for (const p of PAGES) {
+    test(`${p.file} shows only its own flyer, and both pages load`, async ({ page }) => {
+      await page.goto('/' + p.file);
+      await expect(page.locator('html')).toHaveAttribute('lang', p.lang);
+      await expect(page.locator('.section-banner')).toHaveText(p.banner);
+
+      const pages = page.locator('.flyer-page');
+      await expect(pages).toHaveCount(2);
+      const srcs = await pages.evaluateAll(imgs => imgs.map(i => i.getAttribute('src')));
+      expect(srcs).toEqual([`assets/despre/${p.img}-1.webp`, `assets/despre/${p.img}-2.webp`]);
+
+      await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+      await expect.poll(() => pages.evaluateAll(imgs => imgs.every(i => i.complete && i.naturalWidth > 0))).toBe(true);
+    });
+  }
+
+  test('clicking a menu button lands on the flyer, RO/EN keeps the same flyer, back returns to the menu', async ({ page }) => {
+    // plain page.goto (not openMenu), because openMenu would force RO again on every page load
+    await page.goto('/');
+    await page.locator('.btn-flyer').nth(1).click();
+    await expect(page).toHaveURL(/despre_deranj_ro\.html$/);
+
+    await page.locator('.language-switcher a[data-lang="en"]').click();
+    await expect(page).toHaveURL(/despre_deranj_en\.html$/);
+
+    // the language picked on the flyer page carries over to the menu
+    await page.locator('.back-link').click();
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+    await expect(page.locator('#btn-drinks')).toHaveText('DRINKS');
+  });
+
+  test('tapping a page opens it big, × closes it', async ({ page }) => {
+    await page.goto('/despre_gz_ro.html');
+    await page.locator('.flyer-page').first().click();
+    const viewer = page.locator('#page-viewer');
+    await expect(viewer).toBeVisible();
+    await expect(viewer.locator('img')).toHaveAttribute('src', /despre_gz_ro-1\.webp$/);
+    await viewer.locator('.lightbox-close').click();
+    await expect(viewer).toBeHidden();
+  });
+
+  test('nothing sticks out sideways on a small phone', async ({ page }) => {
+    await page.setViewportSize({ width: 360, height: 740 });
+    for (const p of PAGES) {
+      await page.goto('/' + p.file);
+      const overflow = await page.evaluate(() =>
+        document.documentElement.scrollWidth - document.documentElement.clientWidth);
+      expect(overflow, p.file).toBeLessThanOrEqual(0);
+    }
   });
 });
 

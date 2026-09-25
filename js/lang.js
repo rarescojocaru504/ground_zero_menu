@@ -98,11 +98,11 @@ const translations = {
         shop_unavailable: "Indisponibil online",
         footer_tips: "Tips nu este inclus / Dar foarte apreciat",
 
-        // About buttons (text + PDF link) and the drinks banner
+        // About buttons (text + link to the flyer page in that language) and the drinks banner
         btn_flyer_gz: "DESPRE GAMA GROUND ZERO",
-        link_flyer_gz: "assets/pdf/ground_zero_pliant_ro.pdf",
+        link_flyer_gz: "despre_gz_ro.html",
         btn_flyer_deranj: "DESPRE GAMA DERANJ",
-        link_flyer_deranj: "assets/pdf/deranj_pliant_ro.pdf",
+        link_flyer_deranj: "despre_deranj_ro.html",
         service_toast: "Comanda și servirea la bar / Apreciem debarasarea"
     },
     en: {
@@ -188,11 +188,11 @@ const translations = {
         shop_unavailable: "Unavailable online",
         footer_tips: "Service not included / But very welcome",
 
-        // About buttons (text + PDF link) and the drinks banner
+        // About buttons (text + link to the flyer page in that language) and the drinks banner
         btn_flyer_gz: "ABOUT GROUND ZERO",
-        link_flyer_gz: "assets/pdf/ground_zero_pliant_en.pdf",
+        link_flyer_gz: "despre_gz_en.html",
         btn_flyer_deranj: "ABOUT DERANJ",
-        link_flyer_deranj: "assets/pdf/deranj_pliant_en.pdf",
+        link_flyer_deranj: "despre_deranj_en.html",
         service_toast: "Order at the bar / We appreciate you clearing your table"
     }
 };
