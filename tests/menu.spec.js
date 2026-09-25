@@ -386,7 +386,7 @@ test.describe('flyer pages (despre)', () => {
       const pages = page.locator('.flyer-page');
       await expect(pages).toHaveCount(2);
       const srcs = await pages.evaluateAll(imgs => imgs.map(i => i.getAttribute('src')));
-      expect(srcs).toEqual([`assets/despre/${p.img}-1.webp`, `assets/despre/${p.img}-2.webp`]);
+      expect(srcs).toEqual([`assets/despre/${p.img}-1.webp?v=2`, `assets/despre/${p.img}-2.webp?v=2`]);
 
       await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
       await expect.poll(() => pages.evaluateAll(imgs => imgs.every(i => i.complete && i.naturalWidth > 0))).toBe(true);
@@ -413,7 +413,7 @@ test.describe('flyer pages (despre)', () => {
     await page.locator('.flyer-page').first().click();
     const viewer = page.locator('#page-viewer');
     await expect(viewer).toBeVisible();
-    await expect(viewer.locator('img')).toHaveAttribute('src', /despre_gz_ro-1\.webp$/);
+    await expect(viewer.locator('img')).toHaveAttribute('src', /despre_gz_ro-1\.webp\?v=2$/);
     await viewer.locator('.lightbox-close').click();
     await expect(viewer).toBeHidden();
   });
