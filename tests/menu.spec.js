@@ -408,6 +408,30 @@ test.describe('flyer pages (despre)', () => {
     await expect(page.locator('#btn-drinks')).toHaveText('DRINKS');
   });
 
+  test('RO/EN on a flyer fades out, and the other language fades back in', async ({ page }) => {
+    await page.goto('/despre_gz_ro.html');
+    const content = page.locator('.container');
+    await page.locator('.language-switcher a[data-lang="en"]').click();
+    // the old page fades out before leaving
+    await expect(page.locator('body')).toHaveClass(/lang-fading/);
+    await expect(page).toHaveURL(/despre_gz_en\.html$/);
+    // the new page ends up fully visible
+    await expect(page.locator('body')).not.toHaveClass(/lang-fading/);
+    await expect.poll(() => content.evaluate(el => getComputedStyle(el).opacity)).toBe('1');
+
+    // back: the RO page must not stay faded out
+    await page.goBack();
+    await expect(page).toHaveURL(/despre_gz_ro\.html$/);
+    await expect.poll(() => content.evaluate(el => getComputedStyle(el).opacity)).toBe('1');
+  });
+
+  test('tapping the language you are already on does nothing', async ({ page }) => {
+    await page.goto('/despre_gz_ro.html');
+    await page.locator('.language-switcher a[data-lang="ro"]').click();
+    await expect(page.locator('body')).not.toHaveClass(/lang-fading/);
+    await expect(page).toHaveURL(/despre_gz_ro\.html$/);
+  });
+
   test('tapping a page opens it big, × closes it', async ({ page }) => {
     await page.goto('/despre_gz_ro.html');
     await page.locator('.flyer-page').first().click();
