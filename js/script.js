@@ -3,7 +3,7 @@
  *
  *  1. Language (RO / EN)
  *  2. Allergens: chips under each dish + the filter
- *  3. Drinks / Food tabs and the category chips
+ *  3. Food / Drinks tabs (Food opens first) and the category chips
  *  4. Header glass
  *  5. Bottle zoom
  *  6. "Order at the bar" banner
@@ -186,9 +186,10 @@ function applyAllergenFilter() {
 
 /* ---------- 3. Tabs and category chips ---------- */
 
+// Food is first and opens by default (set in index.html); Drinks is the second tab.
 const tabs = [
-    { button: document.getElementById('btn-drinks'), section: document.getElementById('section-drinks') },
-    { button: document.getElementById('btn-food'),   section: document.getElementById('section-food') }
+    { button: document.getElementById('btn-food'),   section: document.getElementById('section-food') },
+    { button: document.getElementById('btn-drinks'), section: document.getElementById('section-drinks') }
 ];
 const drinkChips = document.getElementById('drink-chips');
 const bannerText = document.querySelector('.service-banner [data-i18n]');
@@ -200,7 +201,7 @@ function showTab(activeButton) {
         section.classList.toggle('hidden', !isActive);
     });
 
-    const drinksActive = activeButton === tabs[0].button;
+    const drinksActive = activeButton.id === 'btn-drinks';
     drinkChips.hidden = !drinksActive;
 
     // drinks are ordered at the bar, food at the kitchen

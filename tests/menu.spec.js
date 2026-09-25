@@ -29,6 +29,12 @@ async function openFoodTab(page) {
   await expect(page.locator('#section-food')).toBeVisible();
 }
 
+// The menu opens on Food, so tests about the drinks switch to that tab first.
+async function openDrinksTab(page) {
+  await page.locator('#btn-drinks').click();
+  await expect(page.locator('#section-drinks')).toBeVisible();
+}
+
 // Scrolls through the whole page so every lazy-loaded image gets requested.
 async function scrollThrough(page) {
   await page.evaluate(async () => {
@@ -123,24 +129,29 @@ test.describe('language', () => {
 
 
 test.describe('tabs and categories', () => {
-  test('Food tab shows the food, hides the drink chips and changes the banner', async ({ page }) => {
+  test('opens on Food (first tab); Drinks shows the drink chips and changes the banner', async ({ page }) => {
     await openMenu(page, 'ro');
-    await expect(page.locator('#drink-chips')).toBeVisible();
-    await expect(page.locator('.service-banner')).toContainText('la bar');
-
-    await openFoodTab(page);
+    await expect(page.locator('.tab-btn')).toHaveText(['MÂNCARE', 'BĂUTURI']);
+    await expect(page.locator('#btn-food')).toHaveClass(/active/);
+    await expect(page.locator('#section-food')).toBeVisible();
     await expect(page.locator('#section-drinks')).toBeHidden();
     await expect(page.locator('#drink-chips')).toBeHidden();
     await expect(page.locator('.service-banner')).toContainText('bucătărie');
 
-    await page.locator('#btn-drinks').click();
-    await expect(page.locator('#section-drinks')).toBeVisible();
+    await openDrinksTab(page);
+    await expect(page.locator('#section-food')).toBeHidden();
+    await expect(page.locator('#drink-chips')).toBeVisible();
     await expect(page.locator('.service-banner')).toContainText('la bar');
+
+    await openFoodTab(page);
+    await expect(page.locator('#drink-chips')).toBeHidden();
+    await expect(page.locator('.service-banner')).toContainText('bucătărie');
   });
 
   for (const [chip, section] of [['Deranj', '#sec-deranj'], ['Special', '#sec-special'], ['Packs', '#sec-packs'], ['Guest & Extra', '#sec-guest']]) {
     test(`"${chip}" chip scrolls to its section and lights up`, async ({ page }) => {
       await openMenu(page);
+      await openDrinksTab(page);
       await page.locator('.chip', { hasText: chip }).click();
 
       await expect(page.locator('.chip.active')).toHaveText(chip);
@@ -229,7 +240,7 @@ test.describe('images and files', () => {
   test('every image loads', async ({ page }) => {
     await openMenu(page);
     await scrollThrough(page);
-    await openFoodTab(page);
+    await openDrinksTab(page);
     await scrollThrough(page);
 
     const broken = await page.evaluate(async () => {
@@ -242,6 +253,7 @@ test.describe('images and files', () => {
 
   test('tapping a bottle shows the large image, Escape closes it', async ({ page }) => {
     await openMenu(page);
+    await openDrinksTab(page);
     await page.locator('.beer-img-col img').first().click();
 
     const lightbox = page.locator('#lightbox');
@@ -256,6 +268,7 @@ test.describe('images and files', () => {
 
   test('the zoom has a "Buy online" link to the shop page of that beer', async ({ page }) => {
     await openMenu(page, 'ro');
+    await openDrinksTab(page);
     const expected = {
       'EASY RIDER': 'easy-rider', 'MORNING GLORY': 'morning-glory', 'SPLIT THE POT': 'split-the-pot',
       'IMPERIAL FUCK': 'imperial-fuck', 'AMBER GUERRE': 'amber-guerre', 'BLACK HOLE': 'gipsy-porter',
@@ -278,6 +291,7 @@ test.describe('images and files', () => {
 
   test('a beer without a shop page shows "unavailable" instead of the link', async ({ page }) => {
     await openMenu(page, 'en');
+    await openDrinksTab(page);
     // every beer has a shop page right now, so take one away to test the fallback
     const card = page.locator('.beer-card').first();
     await card.evaluate(el => el.removeAttribute('data-shop'));
